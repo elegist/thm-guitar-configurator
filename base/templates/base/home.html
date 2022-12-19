@@ -1,5 +1,17 @@
-{% extends 'index.html' %} 
+{% extends 'index.html' %}
 
 {% block content %}
+
 <h1>Home</h1>
+
+<div>
+    <div>
+        {% for step in configurators %}
+        <div>
+            <h5>{{step.id}} -- {{step.name}}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock content %}
