@@ -29,9 +29,11 @@
     <body>
         <!-- navbar -->
         {% include 'navbar.html' %}
-            <!-- main content area -->
-            {% block content %} {% endblock %}
-        </div>
+        <!-- main content area -->
+        {% block content %} 
+        {% endblock %}
+        <!-- footer -->
+        {% include 'footer.html' %}
 
         <!-- scripts -->
         <!-- <script src="{% static 'scripts/main.js' %}"></script> -->
