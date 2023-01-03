@@ -1,12 +1,43 @@
-<div class="nav">
-    <a href="/" class="logo">LOGO</a>
+{% load static %}
 
-    <ul class="nav-items">
-        <li class="nav-item">Hello Guest!</li>
-        <li class="nav-item"><a href="#">Account</a></li>
-        <li class="nav-item"><a href="#">Card</a></li>
-    </ul>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom-dark">
+    <div class="container">
+        <a href="#" class="navbar-brand">
+            <img
+                src="{% static 'images/guitar-configurator-logo.svg' %}"
+                width="64"
+                height="64"
+                alt="logo"
+                srcset=""
+            />
+        </a>
 
-<hr>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-3">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-person fs-1"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item mx-3">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-cart fs-1"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

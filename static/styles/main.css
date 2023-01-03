@@ -1,23 +1,8 @@
-body {
-    background-color: rgb(230, 230, 230);
+.bg-custom-dark {
+    background-color: #252525;
 }
 
-a:link {
-    text-decoration: none;
-    color: black;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-items {
-    display: flex;
-    list-style-type: none;
-}
-
-.nav-item {
-    margin: auto 10px;
+.bg-custom-light {
+    background-color: #555555;
+    color: white;
 }

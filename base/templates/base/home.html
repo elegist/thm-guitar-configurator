@@ -1,17 +1,7 @@
-{% extends 'index.html' %}
-
-{% block content %}
-
-<h1>Home</h1>
-
-<div>
-    <div>
-        {% for step in configurators %}
-        <div>
-            <h5>{{step.id}} -- {{step.name}}</h5>
-        </div>
-        {% endfor %}
-    </div>
+{% extends 'index.html' %} {% block content %}
+<div class="container-fluid bg-custom-light">
+    <div class="container pt-3">{% include 'base/staff-picks.html' %}</div>
+    <div class="container pt-5">{% include 'base/configure-your-own.html' %}</div>
 </div>
 
 {% endblock content %}
