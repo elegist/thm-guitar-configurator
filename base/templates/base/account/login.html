@@ -1,0 +1,33 @@
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Login</h1>
+                <button
+                    class="btn-close"
+                    type="button"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="">
+                    <div class="mb-3">
+                        <input class="form-control" type="email" name="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Email">
+                        <div id="emailHelp" class="form-text">We'll never share personal data with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="password" name="password" id="inputPassword" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <p class="fw-light">Don't have an account yet?</p>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
