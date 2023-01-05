@@ -11,3 +11,9 @@
 .text-color-black {
     color: black;
 }
+
+.carousel-item {
+    height: 24rem;
+    background: #252525;
+    border-radius: .7rem;
+}
