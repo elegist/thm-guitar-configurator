@@ -25,23 +25,11 @@
 
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="container py-5">
-                    <h3>Guitarname 1</h3>
-                    <img src="https://via.placeholder.com/274x145" alt="" srcset="">
-                    <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-success shadow-sm mt-3">Add to cart</button>
-                    </div>
-                </div>
+                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with guitarName="Guitar 1" %}
             </div>
 
             <div class="carousel-item">
-                <div class="container py-5">
-                    <h3>Guitarname 2</h3>
-                    <img src="https://via.placeholder.com/274x145" alt="" srcset="">
-                    <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-success shadow-sm mt-3">Add to cart</button>
-                    </div>
-                </div>
+                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with guitarName="Guitar 2" %}
             </div>
         </div>
 
