@@ -11,3 +11,8 @@
 .text-color-black {
     color: black;
 }
+
+.configurator-option {
+    width: 10rem;
+    height: 5rem;
+}
