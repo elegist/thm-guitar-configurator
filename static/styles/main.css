@@ -1,34 +1,94 @@
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url(../fonts/Rubik-VariableFont_wght.ttf);
+}
+
 :root {
-    --navbar-gradient: linear-gradient(-90deg, #fd5e55, #ffbf42);
+    --color-neutral-400: hsl(0, 0%, 9%);
+    --color-neutral-200: hsl(0, 0%, 15%);
+    --color-primary-400: hsl(3, 88%, 62%);
+    --color-primary-300: hsl(17, 88%, 59%);
+    --color-secondary-400: hsl(37, 89%, 54%);
+    --color-secondary-300: hsl(51, 85%, 66%);
+    --color-accent-400: hsl(139, 74%, 44%);
+    --color-accent-300: hsl(139, 87%, 61%);
+
+    --navbar-gradient: linear-gradient(
+        -90deg,
+        var(--color-primary-400),
+        var(--color-secondary-300)
+    );
     --background-gradient: linear-gradient(
         45deg,
-        #ffea76,
-        #fea923,
-        #fd7744,
-        #fd5e55,
-        #202020
+        var(--color-secondary-300),
+        var(--color-secondary-400),
+        var(--color-primary-300),
+        var(--color-primary-400)
     );
-    --dark: #202020;
-    --lighter: #303030;
+
+    --font-family-primary: PlayfairDisplay;
+    --font-family-heading: var(--font-family-primary);
+    --font-family-body: var(--font-family-primary);
+
+    --font-weight-regular: 400;
+    --font-weight-semi-bold: 500;
+    --font-weight-bold: 700;
+
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.75rem;
+    --font-size-h4: 1.5rem;
+    --font-size-regular: 1rem;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     background: var(--background-gradient);
+    font-family: var(--font-family-primary) !important;
+}
+
+.text-color-primary {
+    color: var(--color-primary-400);
+}
+
+.text-color-secondary {
+    color: var(--color-secondary-400);
+}
+
+.text-color-accent {
+    color: var(--color-accent-400);
+}
+
+.btn-primary {
+    background-color: var(--color-accent-400);
+    border: none;
+}
+
+.btn-primary:is(:hover, :active) {
+    background-color: var(--color-accent-300);
+    color: black;
 }
 
 .bg-custom-dark {
-    background: var(--dark);
+    background: var(--color-neutral-400);
     color: white;
 }
 
 .bg-custom-light {
-    background: var(--lighter);
+    background: var(--color-neutral-200);
     color: white;
 }
 
 .nav-link,
 .navbar-toggler-icon {
     color: white !important;
+}
+
+.nav-link:is(:hover) {
+    color: var(--color-accent-400) !important;
 }
 
 .navbar-nav {
@@ -41,11 +101,11 @@ body {
 
 .carousel-item {
     height: 24rem;
-    background: var(--dark);
+    background: var(--color-neutral-400);
     border-radius: 0.7rem;
 }
 
 .guitar-card {
-    background-color: var(--dark) !important;
+    background-color: var(--color-neutral-400) !important;
     color: white;
 }
