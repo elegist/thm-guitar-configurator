@@ -9,7 +9,7 @@
     --color-primary-400: hsl(3, 88%, 62%);
     --color-primary-300: hsl(17, 88%, 59%);
     --color-secondary-400: hsl(37, 89%, 54%);
-    --color-secondary-300: hsl(51, 85%, 66%);
+    --color-secondary-300: hsl(50, 82%, 63%);
     --color-accent-400: hsl(139, 74%, 44%);
     --color-accent-300: hsl(139, 87%, 61%);
 
@@ -19,7 +19,7 @@
         var(--color-secondary-300)
     );
     --background-gradient: linear-gradient(
-        45deg,
+        -45deg,
         var(--color-secondary-300),
         var(--color-secondary-400),
         var(--color-primary-300),
