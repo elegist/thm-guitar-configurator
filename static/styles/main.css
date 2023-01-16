@@ -1,11 +1,38 @@
+:root {
+    --navbar-gradient: linear-gradient(-90deg, #fd5e55, #ffbf42);
+    --background-gradient: linear-gradient(
+        45deg,
+        #ffea76,
+        #fea923,
+        #fd7744,
+        #fd5e55,
+        #202020
+    );
+    --dark: #202020;
+    --lighter: #303030;
+}
+
+body {
+    background: var(--background-gradient);
+}
+
 .bg-custom-dark {
-    background-color: #252525;
+    background: var(--dark);
     color: white;
 }
 
 .bg-custom-light {
-    background-color: #555555;
+    background: var(--lighter);
     color: white;
+}
+
+.nav-link,
+.navbar-toggler-icon {
+    color: white !important;
+}
+
+.navbar-nav {
+    text-align: right;
 }
 
 .text-color-black {
@@ -14,6 +41,11 @@
 
 .carousel-item {
     height: 24rem;
-    background: #252525;
-    border-radius: .7rem;
+    background: var(--dark);
+    border-radius: 0.7rem;
+}
+
+.guitar-card {
+    background-color: var(--dark) !important;
+    color: white;
 }
