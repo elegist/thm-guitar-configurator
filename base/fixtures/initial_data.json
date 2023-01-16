@@ -1,0 +1,477 @@
+[
+    {
+        "model": "base.category",
+        "pk": 1,
+        "fields": {
+            "name": "model",
+            "categoryDesc": "the base model of the guitar"
+        }
+    },
+
+
+    {
+        "model": "base.category",
+        "pk": 2,
+        "fields": {
+            "name": "frets",
+            "categoryDesc": "fret count for a guitar"
+        }
+    },
+
+
+    {
+        "model": "base.category",
+        "pk": 3,
+        "fields": {
+            "name": "wood",
+            "categoryDesc": "the type of wood for the body or neck"
+        }
+    },
+
+
+    {
+        "model": "base.category",
+        "pk": 4,
+        "fields": {
+            "name": "color",
+            "categoryDesc": "wood paint/varnish"
+        }
+    },
+
+
+    {
+        "model": "base.category",
+        "pk": 5,
+        "fields": {
+            "name": "electronics",
+            "categoryDesc": "electronic parts"
+        }
+    },
+
+
+    {
+        "model": "base.category",
+        "pk": 6,
+        "fields": {
+            "name": "hardware",
+            "categoryDesc": "strings, bags, tremolo, potis"
+        }
+    },
+
+
+    {
+        "model": "base.item",
+        "pk": 1,
+        "fields": {
+            "name": "strat-style",
+            "categoryId": 1,
+            "price": 0,
+            "description":"stratocaster base"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 2,
+        "fields": {
+            "name": "tele-style",
+            "categoryId": 1,
+            "price": 0,
+            "description":"telecaster base"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 3,
+        "fields": {
+            "name": "les paul",
+            "categoryId": 1,
+            "price": 0,
+            "description":"les paul base"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 4,
+        "fields": {
+            "name": "flying v",
+            "categoryId": 1,
+            "price": 0,
+            "description":"flying v base"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 5,
+        "fields": {
+            "name": "flying v",
+            "categoryId": 1,
+            "price": 0,
+            "description":"explorer base"
+        }
+    },
+
+    {
+        "model": "base.item",
+        "pk": 6,
+        "fields": {
+            "name": "21-Fret",
+            "categoryId": 2,
+            "price": 0,
+            "description":"21-Frets for a selected guitar"
+        }
+    },
+
+
+    {
+        "model": "base.item",
+        "pk": 7,
+        "fields": {
+            "name": "24-Fret",
+            "categoryId": 2,
+            "price": 0,
+            "description": "24-Frets for a selected guitar"
+        }
+    },
+
+
+    {
+        "model": "base.item",
+        "pk": 8,
+        "fields": {
+            "name": "mahagony",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "straight-grained, reddish-brown"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 9,
+        "fields": {
+            "name": "maple",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "white with some reddish-brown hues"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 10,
+        "fields": {
+            "name": "birch",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "white birch"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 11,
+        "fields": {
+            "name": "lacewood",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "reddish brown with grey or light brown rays"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 12,
+        "fields": {
+            "name": "koa",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "golden and reddish brown. Wavy grain"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 13,
+        "fields": {
+            "name": "spalted maple",
+            "categoryId": 3,
+            "price": 999.99,
+            "description": "light colored sapwood with dark contrasting lines and streaks"
+        }
+    },
+
+    {
+        "model": "base.item",
+        "pk": 14,
+        "fields": {
+            "name": "black",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#000000"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 15,
+        "fields": {
+            "name": "blue",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#0000FF"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 16,
+        "fields": {
+            "name": "green",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#00FF00"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 17,
+        "fields": {
+            "name": "red",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#FF0000"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 18,
+        "fields": {
+            "name": "maroon",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#800000"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 19,
+        "fields": {
+            "name": "brown",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#9A6324"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 20,
+        "fields": {
+            "name": "teal",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#469990"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 21,
+        "fields": {
+            "name": "navy",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#000075"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 22,
+        "fields": {
+            "name": "orange",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#f58231"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 23,
+        "fields": {
+            "name": "yellow",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#ffe119"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 24,
+        "fields": {
+            "name": "cyan",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#42d4f4"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 25,
+        "fields": {
+            "name": "magenta",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#f032e6"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 26,
+        "fields": {
+            "name": "pink",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#fabed4"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 27,
+        "fields": {
+            "name": "beige",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#fffac8"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 28,
+        "fields": {
+            "name": "mint",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#aaffc3"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 29,
+        "fields": {
+            "name": "lavender",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#dcbeff"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 30,
+        "fields": {
+            "name": "white",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#ffffff"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 31,
+        "fields": {
+            "name": "mauve taupe",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#7C5869"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 32,
+        "fields": {
+            "name": "columbia blue",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#AFD2E9"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 33,
+        "fields": {
+            "name": "alablaster",
+            "categoryId": 4,
+            "price": 19.99,
+            "description": "#F1E9DB"
+        }
+    },
+
+
+
+
+
+
+
+
+
+    {
+        "model": "base.item",
+        "pk": 34,
+        "fields": {
+            "name": "humbucker",
+            "categoryId": 5,
+            "price": 9.99,
+            "description": "a twin-coil guitar pick-up"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 35,
+        "fields": {
+            "name": "single coil",
+            "categoryId": 5,
+            "price": 9.99,
+            "description": "a single-coil guitar pick-up"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 36,
+        "fields": {
+            "name": "trembucker",
+            "categoryId": 5,
+            "price": 9.99,
+            "description": "pickup designed for a tremolo guitar"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 37,
+        "fields": {
+            "name": "tremolo",
+            "categoryId": 6,
+            "price": 19.99,
+            "description": "tremolo arm for a guitar"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 38,
+        "fields": {
+            "name": "mini-pot",
+            "categoryId": 6,
+            "price": 19.99,
+            "description": "mini-pot"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 39,
+        "fields": {
+            "name": "full-size pot",
+            "categoryId": 6,
+            "price": 19.99,
+            "description": "full-size pot"
+        }
+    },
+    {
+        "model": "base.item",
+        "pk": 40,
+        "fields": {
+            "name": "bag",
+            "categoryId": 6,
+            "price": 49.99,
+            "description": "Guitar bag. Hard case"
+        }
+    }
+  ]
