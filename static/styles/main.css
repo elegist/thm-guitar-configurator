@@ -263,12 +263,14 @@ body {
 /* Modal */
 
 .modal-dark {
-    background: var(--color-dark-400);
+    background: var(--color-dark-200);
     color: white;
 }
 
+.modal-body > form input:is(:focus),
 .modal-body > form input {
     background-color: var(--color-dark-200);
+    color: white;
 }
 
 .progress {
