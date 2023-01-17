@@ -59,7 +59,7 @@
         "pk": 1,
         "fields": {
             "name": "strat-style",
-            "categoryId": 1,
+            "category": 1,
             "price": 0,
             "description":"stratocaster base"
         }
@@ -69,7 +69,7 @@
         "pk": 2,
         "fields": {
             "name": "tele-style",
-            "categoryId": 1,
+            "category": 1,
             "price": 0,
             "description":"telecaster base"
         }
@@ -79,7 +79,7 @@
         "pk": 3,
         "fields": {
             "name": "les paul",
-            "categoryId": 1,
+            "category": 1,
             "price": 0,
             "description":"les paul base"
         }
@@ -89,7 +89,7 @@
         "pk": 4,
         "fields": {
             "name": "flying v",
-            "categoryId": 1,
+            "category": 1,
             "price": 0,
             "description":"flying v base"
         }
@@ -99,7 +99,7 @@
         "pk": 5,
         "fields": {
             "name": "flying v",
-            "categoryId": 1,
+            "category": 1,
             "price": 0,
             "description":"explorer base"
         }
@@ -110,7 +110,7 @@
         "pk": 6,
         "fields": {
             "name": "21-Fret",
-            "categoryId": 2,
+            "category": 2,
             "price": 0,
             "description":"21-Frets for a selected guitar"
         }
@@ -121,7 +121,7 @@
         "pk": 7,
         "fields": {
             "name": "24-Fret",
-            "categoryId": 2,
+            "category": 2,
             "price": 0,
             "description": "24-Frets for a selected guitar"
         }
@@ -133,7 +133,7 @@
         "pk": 8,
         "fields": {
             "name": "mahagony",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "straight-grained, reddish-brown"
         }
@@ -143,7 +143,7 @@
         "pk": 9,
         "fields": {
             "name": "maple",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "white with some reddish-brown hues"
         }
@@ -153,7 +153,7 @@
         "pk": 10,
         "fields": {
             "name": "birch",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "white birch"
         }
@@ -163,7 +163,7 @@
         "pk": 11,
         "fields": {
             "name": "lacewood",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "reddish brown with grey or light brown rays"
         }
@@ -173,7 +173,7 @@
         "pk": 12,
         "fields": {
             "name": "koa",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "golden and reddish brown. Wavy grain"
         }
@@ -183,7 +183,7 @@
         "pk": 13,
         "fields": {
             "name": "spalted maple",
-            "categoryId": 3,
+            "category": 3,
             "price": 999.99,
             "description": "light colored sapwood with dark contrasting lines and streaks"
         }
@@ -194,7 +194,7 @@
         "pk": 14,
         "fields": {
             "name": "black",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#000000"
         }
@@ -204,7 +204,7 @@
         "pk": 15,
         "fields": {
             "name": "blue",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#0000FF"
         }
@@ -214,7 +214,7 @@
         "pk": 16,
         "fields": {
             "name": "green",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#00FF00"
         }
@@ -224,7 +224,7 @@
         "pk": 17,
         "fields": {
             "name": "red",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#FF0000"
         }
@@ -234,7 +234,7 @@
         "pk": 18,
         "fields": {
             "name": "maroon",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#800000"
         }
@@ -244,7 +244,7 @@
         "pk": 19,
         "fields": {
             "name": "brown",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#9A6324"
         }
@@ -254,7 +254,7 @@
         "pk": 20,
         "fields": {
             "name": "teal",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#469990"
         }
@@ -264,7 +264,7 @@
         "pk": 21,
         "fields": {
             "name": "navy",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#000075"
         }
@@ -274,7 +274,7 @@
         "pk": 22,
         "fields": {
             "name": "orange",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#f58231"
         }
@@ -284,7 +284,7 @@
         "pk": 23,
         "fields": {
             "name": "yellow",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#ffe119"
         }
@@ -294,7 +294,7 @@
         "pk": 24,
         "fields": {
             "name": "cyan",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#42d4f4"
         }
@@ -304,7 +304,7 @@
         "pk": 25,
         "fields": {
             "name": "magenta",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#f032e6"
         }
@@ -314,7 +314,7 @@
         "pk": 26,
         "fields": {
             "name": "pink",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#fabed4"
         }
@@ -324,7 +324,7 @@
         "pk": 27,
         "fields": {
             "name": "beige",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#fffac8"
         }
@@ -334,7 +334,7 @@
         "pk": 28,
         "fields": {
             "name": "mint",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#aaffc3"
         }
@@ -344,7 +344,7 @@
         "pk": 29,
         "fields": {
             "name": "lavender",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#dcbeff"
         }
@@ -354,7 +354,7 @@
         "pk": 30,
         "fields": {
             "name": "white",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#ffffff"
         }
@@ -364,7 +364,7 @@
         "pk": 31,
         "fields": {
             "name": "mauve taupe",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#7C5869"
         }
@@ -374,7 +374,7 @@
         "pk": 32,
         "fields": {
             "name": "columbia blue",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#AFD2E9"
         }
@@ -384,7 +384,7 @@
         "pk": 33,
         "fields": {
             "name": "alablaster",
-            "categoryId": 4,
+            "category": 4,
             "price": 19.99,
             "description": "#F1E9DB"
         }
@@ -395,7 +395,7 @@
         "pk": 34,
         "fields": {
             "name": "humbucker",
-            "categoryId": 5,
+            "category": 5,
             "price": 9.99,
             "description": "a twin-coil guitar pick-up"
         }
@@ -405,7 +405,7 @@
         "pk": 35,
         "fields": {
             "name": "single coil",
-            "categoryId": 5,
+            "category": 5,
             "price": 9.99,
             "description": "a single-coil guitar pick-up"
         }
@@ -415,7 +415,7 @@
         "pk": 36,
         "fields": {
             "name": "trembucker",
-            "categoryId": 5,
+            "category": 5,
             "price": 9.99,
             "description": "pickup designed for a tremolo guitar"
         }
@@ -425,7 +425,7 @@
         "pk": 37,
         "fields": {
             "name": "tremolo",
-            "categoryId": 6,
+            "category": 6,
             "price": 19.99,
             "description": "tremolo arm for a guitar"
         }
@@ -435,7 +435,7 @@
         "pk": 38,
         "fields": {
             "name": "mini-pot",
-            "categoryId": 6,
+            "category": 6,
             "price": 19.99,
             "description": "mini-pot"
         }
@@ -445,7 +445,7 @@
         "pk": 39,
         "fields": {
             "name": "full-size pot",
-            "categoryId": 6,
+            "category": 6,
             "price": 19.99,
             "description": "full-size pot"
         }
@@ -455,7 +455,7 @@
         "pk": 40,
         "fields": {
             "name": "bag",
-            "categoryId": 6,
+            "category": 6,
             "price": 49.99,
             "description": "Guitar bag. Hard case"
         }
