@@ -21,10 +21,10 @@
 
     --background-gradient: linear-gradient(
         -45deg,
-        hsl(50, 82%, 63%),
-        hsl(37, 89%, 54%),
-        hsl(17, 88%, 59%),
-        hsl(3, 88%, 62%)
+        hsl(50, 78%, 63%),
+        hsl(37, 85%, 54%),
+        hsl(17, 84%, 59%),
+        hsl(3, 84%, 62%)
     );
 
     --font-family-primary: PlayfairDisplay;
