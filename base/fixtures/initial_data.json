@@ -8,7 +8,6 @@
         }
     },
 
-
     {
         "model": "base.category",
         "pk": 2,
@@ -17,7 +16,6 @@
             "categoryDesc": "fret count for a guitar"
         }
     },
-
 
     {
         "model": "base.category",
@@ -28,7 +26,6 @@
         }
     },
 
-
     {
         "model": "base.category",
         "pk": 4,
@@ -38,7 +35,6 @@
         }
     },
 
-
     {
         "model": "base.category",
         "pk": 5,
@@ -47,7 +43,6 @@
             "categoryDesc": "electronic parts"
         }
     },
-
 
     {
         "model": "base.category",
@@ -120,7 +115,6 @@
             "description":"21-Frets for a selected guitar"
         }
     },
-
 
     {
         "model": "base.item",
@@ -395,14 +389,6 @@
             "description": "#F1E9DB"
         }
     },
-
-
-
-
-
-
-
-
 
     {
         "model": "base.item",
