@@ -1,4 +1,5 @@
-{% extends 'index.html' %} {% block content %} {% load static %}
+{% extends 'index.html' %} 
+{% block content %} 
 <!-- account -->
 {% include 'base/account/login.html' %} {% include 'base/account/register.html' %}
 {% include 'base/cart/cart-offcanvas.html' with cartItem=None %}
@@ -13,40 +14,7 @@
 
 <!-- page content -->
 <div class="container bg-custom-light shadow-lg">
-    <div class="container py-5">
-        <div class="row pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
-            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                <h1 class="display-4 fw-bold lh-1">Your <span class="text-color-warning">own</span> dream <span class="text-color-danger">Guitar</span></h1>
-                <p class="lead">
-                    Configure your own guitar in just a few simple steps or
-                    choose from one of our premade custom builds!
-                </p>
-                <div
-                    class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
-                >
-                    <button
-                        type="button"
-                        class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
-                    >
-                        Build your own!
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary btn-lg px-4"
-                    >
-                        Our premade selection
-                    </button>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img
-                    class="img-fluid"
-                    src="{% static 'images/guitar.png' %}"
-                    alt=""
-                />
-            </div>
-        </div>
-    </div>
+    {% include 'base/hero.html' %}
 
     <div class="container py-3">
         {% include 'base/staff-picks-carousel/staff-picks.html' %}
