@@ -10,13 +10,13 @@
     <div
         class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-lg-down"
     >
-        <div class="modal-content">
+        <div class="modal-content modal-dark">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="configuratorModalLabel">
                     Configure your own {guitar-type}
                 </h1>
                 <button
-                    class="btn-close"
+                    class="btn-close btn-close-white"
                     type="button"
                     data-bs-dismiss="modal"
                     aria-label="Close"
@@ -30,11 +30,11 @@
             <!--TODO: replace aria-valuemax with a dynamic value from the database-->
             <div class="modal-footer d-flex justify-content-center">
                 {% if step == 1 %}
-                <button type="button" class="btn btn-outline-primary" disabled>
+                <button type="button" class="btn btn-outline-info" disabled>
                     <i class="bi bi-caret-left-fill"></i>
                 </button>
                 {% else %}
-                <button type="button" class="btn btn-outline-primary" data-bs-target="#configuratorModalStep{{ step|add:-1 }}" data-bs-toggle="modal">
+                <button type="button" class="btn btn-outline-info" data-bs-target="#configuratorModalStep{{ step|add:-1 }}" data-bs-toggle="modal">
                     <i class="bi bi-caret-left-fill"></i>
                 </button>
                 {% endif %}
@@ -52,11 +52,11 @@
                     </div>
                 </div>
                 {% if step == maxSteps %}
-                <button type="button" class="btn btn-outline-primary" disabled>
+                <button type="button" class="btn btn-outline-info" disabled>
                     <i class="bi bi-caret-right-fill"></i>
                 </button>
                 {% else %}
-                <button type="button" class="btn btn-outline-primary" data-bs-target="#configuratorModalStep{{ step|add:1 }}" data-bs-toggle="modal">
+                <button type="button" class="btn btn-outline-info" data-bs-target="#configuratorModalStep{{ step|add:1 }}" data-bs-toggle="modal">
                     <i class="bi bi-caret-right-fill"></i>
                 </button>
                 {% endif %}

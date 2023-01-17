@@ -4,26 +4,27 @@
 }
 
 :root {
-    --color-neutral-400: hsl(0, 0%, 9%);
-    --color-neutral-200: hsl(0, 0%, 15%);
-    --color-primary-400: hsl(3, 88%, 62%);
-    --color-primary-300: hsl(17, 88%, 59%);
-    --color-secondary-400: hsl(37, 89%, 54%);
-    --color-secondary-300: hsl(50, 82%, 63%);
-    --color-accent-400: hsl(139, 74%, 44%);
-    --color-accent-300: hsl(139, 87%, 61%);
+    --color-dark-400: hsl(0, 0%, 9%);
+    --color-dark-200: hsl(0, 0%, 17%);
+    --color-primary-400: hsl(295, 55%, 40%);
+    --color-primary-200: hsl(295, 55%, 60%);
+    --color-secondary-400: hsl(220, 5%, 65%);
+    --color-secondary-200: hsl(220, 5%, 85%);
+    --color-success-400: hsl(139, 74%, 44%);
+    --color-success-200: hsl(139, 87%, 61%);
+    --color-danger-400: hsl(3, 88%, 62%);
+    --color-danger-200: hsl(3, 88%, 72%);
+    --color-warning-400: hsl(50, 82%, 63%);
+    --color-warning-200: hsl(50, 82%, 73%);
+    --color-info-400: hsl(17, 88%, 59%);
+    --color-info-200: hsl(17, 88%, 79%);
 
-    --navbar-gradient: linear-gradient(
-        -90deg,
-        var(--color-primary-400),
-        var(--color-secondary-300)
-    );
     --background-gradient: linear-gradient(
         -45deg,
-        var(--color-secondary-300),
-        var(--color-secondary-400),
-        var(--color-primary-300),
-        var(--color-primary-400)
+        hsl(50, 82%, 63%),
+        hsl(37, 89%, 54%),
+        hsl(17, 88%, 59%),
+        hsl(3, 88%, 62%)
     );
 
     --font-family-primary: PlayfairDisplay;
@@ -50,35 +51,184 @@ body {
     font-family: var(--font-family-primary) !important;
 }
 
+/* Text */
+.text-color-black {
+    color: black;
+}
 .text-color-primary {
     color: var(--color-primary-400);
 }
-
 .text-color-secondary {
     color: var(--color-secondary-400);
 }
-
-.text-color-accent {
-    color: var(--color-accent-400);
+.text-color-success {
+    color: var(--color-success-400);
 }
+.text-color-danger {
+    color: var(--color-danger-400);
+}
+.text-color-warning {
+    color: var(--color-warning-400);
+}
+.text-color-info {
+    color: var(--color-info-400);
+}
+
+/* Button */
 
 .btn-primary {
-    background-color: var(--color-accent-400);
+    background-color: var(--color-primary-400);
+    color: white;
     border: none;
 }
-
 .btn-primary:is(:hover, :active) {
-    background-color: var(--color-accent-300);
+    background-color: var(--color-primary-200);
     color: black;
 }
+.btn-outline-primary {
+    border-color: var(--color-primary-400);
+    color: white;
+}
+.btn-outline-primary:is(:hover, :active) {
+    background-color: var(--color-primary-200);
+    border-color: var(--color-primary-200);
+    color: black;
+}
+.btn-outline-primary:is(:disabled) {
+    border-color: var(--color-primary-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary-400);
+    color: white;
+    border: none;
+}
+.btn-secondary:is(:hover, :active) {
+    background-color: var(--color-secondary-200);
+    color: black;
+}
+.btn-outline-secondary {
+    border-color: var(--color-secondary-400);
+    color: white;
+}
+.btn-outline-secondary:is(:hover, :active) {
+    background-color: var(--color-secondary-200);
+    border-color: var(--color-secondary-200);
+    color: black;
+}
+.btn-outline-secondary:is(:disabled) {
+    border-color: var(--color-secondary-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-success {
+    background-color: var(--color-success-400);
+    color: white;
+    border: none;
+}
+.btn-success:is(:hover, :active) {
+    background-color: var(--color-success-200);
+    color: black;
+}
+.btn-outline-success {
+    border-color: var(--color-success-400);
+    color: white;
+}
+.btn-outline-success:is(:hover, :active) {
+    background-color: var(--color-success-200);
+    border-color: var(--color-success-200);
+    color: black;
+}
+.btn-outline-success:is(:disabled) {
+    border-color: var(--color-success-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-danger {
+    background-color: var(--color-danger-400);
+    color: white;
+    border: none;
+}
+.btn-danger:is(:hover, :active) {
+    background-color: var(--color-danger-200);
+    color: black;
+}
+.btn-outline-danger {
+    border-color: var(--color-danger-400);
+    color: white;
+}
+.btn-outline-danger:is(:hover, :active) {
+    background-color: var(--color-danger-200);
+    border-color: var(--color-danger-200);
+    color: black;
+}
+.btn-outline-danger:is(:disabled) {
+    border-color: var(--color-danger-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-warning {
+    background-color: var(--color-warning-400);
+    color: white;
+    border: none;
+}
+.btn-warning:is(:hover, :active) {
+    background-color: var(--color-warning-200);
+    color: black;
+}
+.btn-outline-warning {
+    border-color: var(--color-warning-400);
+    color: white;
+}
+.btn-outline-warning:is(:hover, :active) {
+    background-color: var(--color-warning-200);
+    border-color: var(--color-warning-200);
+    color: black;
+}
+.btn-outline-warning:is(:disabled) {
+    border-color: var(--color-warning-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-info {
+    background-color: var(--color-info-400);
+    color: white;
+    border: none;
+}
+.btn-info:is(:hover, :active) {
+    background-color: var(--color-info-200);
+    color: black;
+}
+.btn-outline-info {
+    border-color: var(--color-info-400);
+    color: white;
+}
+.btn-outline-info:is(:hover, :active) {
+    background-color: var(--color-info-200);
+    border-color: var(--color-info-200);
+    color: black;
+}
+.btn-outline-info:is(:disabled) {
+    border-color: var(--color-info-400);
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Navigation */
 
 .bg-custom-dark {
-    background: var(--color-neutral-400);
+    background: var(--color-dark-400);
     color: white;
 }
 
 .bg-custom-light {
-    background: var(--color-neutral-200);
+    background: var(--color-dark-200);
     color: white;
 }
 
@@ -88,24 +238,43 @@ body {
 }
 
 .nav-link:is(:hover) {
-    color: var(--color-accent-400) !important;
+    color: var(--color-primary-400) !important;
 }
 
 .navbar-nav {
     text-align: right;
 }
 
-.text-color-black {
-    color: black;
-}
+/* Carousel */
 
 .carousel-item {
     height: 24rem;
-    background: var(--color-neutral-400);
+    background: var(--color-dark-400);
     border-radius: 0.7rem;
 }
 
+/* Card */
+
 .guitar-card {
-    background-color: var(--color-neutral-400) !important;
+    background-color: var(--color-dark-400) !important;
     color: white;
+}
+
+/* Modal */
+
+.modal-dark {
+    background: var(--color-dark-400);
+    color: white;
+}
+
+.modal-body > form input {
+    background-color: var(--color-dark-200);
+}
+
+.progress {
+    background: var(--color-dark-200);
+}
+
+.progress-bar {
+    background: var(--color-info-400);
 }
