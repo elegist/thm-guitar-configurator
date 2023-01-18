@@ -4,31 +4,11 @@
         <img src="{% static 'images/guitar-models/strat-design.svg' %}" alt="" class="col-lg-4 img-fluid img-guitar-preview">
         <div class="col-lg-8 input-col">
             <div class="options-container overflow-auto my-2">
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
-                {% include 'base/configurator/radio-button.html' %}
+                {% if step == 1 %}
+                    {% for x in frets %}
+                        {% include 'base/configurator/radio-button.html' with x %}
+                    {% endfor%}
+                {% endif%}
             </div>
             <button class="btn btn-info my-2">Save configuration and quit</button>
             <button class="btn btn-success my-2" {% if step != maxSteps %} disabled {% endif %}>Complete and add to cart</button>
