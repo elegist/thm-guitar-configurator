@@ -274,9 +274,48 @@ body {
 }
 
 .progress {
-    background: var(--color-dark-200);
+    background: var(--color-dark-400);
 }
 
 .progress-bar {
     background: var(--color-info-400);
+}
+
+
+.configurator-body {
+    min-height: 80vh;
+    height: 100%;
+}
+
+.configurator-body > .input-col {
+    height: 50%;
+}
+
+.configurator-body > .img-guitar-preview {
+    height: 30%;
+}
+
+.configurator-body > .input-col > .options-container {
+    max-height: 100%;
+    background: var(--color-dark-400);
+}
+
+@media (min-width: 992px) {
+    .configurator-body {
+        min-height: 0;
+        height: 60vh;
+    }
+
+    .configurator-body > .img-guitar-preview {
+        height: 100%;
+    }
+
+    .configurator-body > .input-col {
+        margin: auto;
+        height: inherit;
+    }
+
+    .configurator-body > .input-col > .options-container {
+        max-height: 85%;
+    }
 }

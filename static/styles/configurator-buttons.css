@@ -1,0 +1,46 @@
+@import url("./main.css");
+
+.radio-input {
+    display: none;
+}
+
+.radio-btn {
+    margin: 1rem;
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    position: relative;
+    text-align: center;
+    background: var(--color-dark-200);
+    box-shadow: 0 0 0.25rem #10101067;
+    cursor: pointer;
+}
+
+.radio-btn > i {
+    color: var(--color-success-400);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.radio-btn > .radio-content {
+    position: relative;
+}
+
+.radio-btn > .radio-content > .radio-title {
+    margin-top: 0.5rem;
+    font-size: var(--font-size-h4);
+}
+
+/* .radio-btn > .radio-content > .radio-price-text {
+    position: absolute;
+    top: -1.5rem;
+    right: -1rem;
+} */
+
+.radio-input:checked + .radio-btn {
+    border: 2px solid var(--color-success-400);
+}
+
+.radio-input:checked + .radio-btn > i {
+    opacity: 1;
+}
