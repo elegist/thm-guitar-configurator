@@ -7,30 +7,27 @@
         data-bs-touch="true"
     >
         <div class="carousel-indicators">
+            {% for index in staffPicksIndex %}
             <button
-                class="active"
+                {% if index == staffPicksIndex|first %} class="active" {% endif %}
                 type="button"
                 data-bs-target="#carouselStaffPicks"
-                data-bs-slide-to="0"
-                aria-current="true"
-                aria-label="Slide 1"
+                data-bs-slide-to="{{index}}"
+                {% if index == staffPicksIndex|first %} aria-current="true" {% endif %}
+                aria-label="Slide {{index|add:1}}"
             ></button>
-            <button
-                type="button"
-                data-bs-target="#carouselStaffPicks"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-            ></button>
+            {% endfor %}
         </div>
 
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with guitarName="Guitar 1" %}
-            </div>
-
-            <div class="carousel-item">
-                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with guitarName="Guitar 2" %}
-            </div>
+            {% comment %} <div class="carousel-item active">
+                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with pickInfo="Guitar 1" %}
+            </div> {% endcomment %}
+            {% for pick in staffPicks %}
+                <div class="carousel-item {% if pick == staffPicks|first %} active {% endif %}">
+                    {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' %}
+                </div>
+            {% endfor %}
         </div>
 
         <button

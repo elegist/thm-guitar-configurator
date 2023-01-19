@@ -14,10 +14,12 @@ def home(request):
     electronics = Item.objects.filter(category=5)
     hardware = Item.objects.filter(category=6)
 
-    StatocasterStaff = StaffPickItem.objects.filter(staffPick = 1)
+    StratocasterStaff = StaffPickItem.objects.filter(staffPick = 1)
     TelecasterStaff = StaffPickItem.objects.filter(staffPick = 2)
     LesPaulStaff = StaffPickItem.objects.filter(staffPick = 3)
     FlyingVStaff = StaffPickItem.objects.filter(staffPick = 4)
+    staffPicks = [StaffPickItem.objects.filter(staffPick = 1), StaffPickItem.objects.filter(staffPick = 2), StaffPickItem.objects.filter(staffPick = 3), StaffPickItem.objects.filter(staffPick = 4)]
+    staffPicksIndex = range(len(staffPicks))
 
     context = {
         'steps': steps,
@@ -27,10 +29,12 @@ def home(request):
         'colors': colors,
         'electronics': electronics,
         'hardware': hardware,
-        'StatocasterStaff': StatocasterStaff,
+        'StratocasterStaff': StratocasterStaff,
         'TelecasterStaff': TelecasterStaff,
         'LesPaulStaff': LesPaulStaff, 
-        'FlyingVStaff': FlyingVStaff
+        'FlyingVStaff': FlyingVStaff,
+        'staffPicks': staffPicks,
+        'staffPicksIndex': staffPicksIndex
     }
     return render(request, 'base/home.html', context)
 
