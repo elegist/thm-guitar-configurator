@@ -3,7 +3,8 @@
         <div class="col">
             <h3>{{ pick.0.staffPick.name }}</h3>
             <img class="img-fluid" src="https://via.placeholder.com/274x145" alt="" srcset="">
-            <p class="text-color-success pt-3">{{pick.2.item.price}}€</p>
+            {% load total_filter %}
+            <p class="text-color-success pt-3">{{pick|total}}€</p>
             <div class="d-grid gap-2 col-sm mx-auto">
                 <button class="btn btn-success shadow-sm mt-2 mt-md-0">Add to cart</button>
             </div>

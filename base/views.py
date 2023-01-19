@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Sum
 from .models import Category
 from .models import Item
 from .models import StaffPickItem
@@ -20,7 +21,11 @@ def home(request):
     FlyingVStaff = StaffPickItem.objects.filter(staffPick = 4)
     staffPicks = [StaffPickItem.objects.filter(staffPick = 1), StaffPickItem.objects.filter(staffPick = 2), StaffPickItem.objects.filter(staffPick = 3), StaffPickItem.objects.filter(staffPick = 4)]
     staffPicksIndex = range(len(staffPicks))
-    staffPicksTotals = []
+    stratIndex = range(len(StratocasterStaff))
+
+    stratocasterTotal = 0
+    for index in stratIndex:
+        stratocasterTotal += StratocasterStaff[index].item.price
 
     context = {
         'steps': steps,
@@ -35,7 +40,8 @@ def home(request):
         'LesPaulStaff': LesPaulStaff, 
         'FlyingVStaff': FlyingVStaff,
         'staffPicks': staffPicks,
-        'staffPicksIndex': staffPicksIndex
+        'staffPicksIndex': staffPicksIndex,
+        'stratocasterTotal': stratocasterTotal
     }
     return render(request, 'base/home.html', context)
 
