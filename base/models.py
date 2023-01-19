@@ -28,11 +28,23 @@ class Cart(models.Model):
     def __str__(self):
         return self.user
 
-
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, verbose_name="fk_cart", on_delete=models.CASCADE, null=True)
     item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)
 
-    def __str__(self):
-        return self.item
 
+class StaffPick(models.Model):
+    name = models.CharField(max_length = 150)
+    
+    def __str__(self):
+        return self.name
+
+class StaffPickItem(models.Model):
+    staffPick = models.ForeignKey(StaffPick, verbose_name="fk_StaffPick", on_delete=models.CASCADE, null=True)
+    item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)    
+
+    def __str__(self):
+        item = str(self.item)
+        staffPick = str(self.staffPick)
+        name = staffPick + " " + item
+        return name

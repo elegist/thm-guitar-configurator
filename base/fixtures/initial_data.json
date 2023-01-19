@@ -449,5 +449,34 @@
             "price": 49.99,
             "description": "Guitar bag. Hard case"
         }
+    },
+
+    {
+        "model": "base.staffPick",
+        "pk": 1,
+        "fields": {
+            "name": "Stratocaster"
+        }
+    },
+    {
+        "model": "base.staffPick",
+        "pk": 2,
+        "fields": {
+            "name": "Telecaster"
+        }
+    },
+    {
+        "model": "base.staffPick",
+        "pk": 3,
+        "fields": {
+            "name": "Les-Paul"
+        }
+    },
+    {
+        "model": "base.staffPick",
+        "pk": 4,
+        "fields": {
+            "name": "Flying V"
+        }
     }
   ]

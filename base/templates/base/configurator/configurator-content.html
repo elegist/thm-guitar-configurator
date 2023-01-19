@@ -5,8 +5,28 @@
         <div class="col-lg-8 input-col">
             <div class="options-container overflow-auto my-2">
                 {% if step == 1 %}
-                    {% for x in frets %}
-                        {% include 'base/configurator/radio-button.html' with x %}
+                    {% for configuratorItem in frets %}
+                        {% include 'base/configurator/radio-button.html'%}
+                    {% endfor%}
+                
+                {% elif step == 2 %}
+                    {% for configuratorItem in woods %}
+                        {% include 'base/configurator/radio-button.html'%}
+                    {% endfor%}
+
+                {% elif step == 3 %}
+                    {% for configuratorItem in colors %}
+                        {% include 'base/configurator/radio-button.html'%}
+                    {% endfor%}
+
+                {% elif step == 4 %}
+                    {% for configuratorItem in electronics %}
+                        {% include 'base/configurator/radio-button.html'%}
+                    {% endfor%}
+
+                {% elif step == 5 %}
+                    {% for configuratorItem in hardware %}
+                        {% include 'base/configurator/radio-button.html'%}
                     {% endfor%}
                 {% endif%}
             </div>
