@@ -36,3 +36,6 @@ def home(request):
 
 def loginView(request):
     return render(request, 'base/account/login.html')
+
+def registerView(request):
+    return render(request, 'base/account/register.html')
