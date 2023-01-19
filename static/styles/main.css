@@ -47,8 +47,19 @@ html {
 }
 
 body {
+    min-height: 100vh;
     background: var(--background-gradient);
     font-family: var(--font-family-primary) !important;
+}
+
+.form-container {
+    width: 75%;
+}
+
+@media (min-width: 992px) {
+    .form-container {
+        width: 50%;
+    }
 }
 
 /* Text */
