@@ -34,4 +34,5 @@ def home(request):
     }
     return render(request, 'base/home.html', context)
 
-
+def loginView(request):
+    return render(request, 'base/account/login.html')
