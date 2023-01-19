@@ -1,51 +1,49 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} 
+{% block content %}
+<div class="container bg-custom-light shadow-lg text-center vh-100">
+    {% if not request.user.is_authenticated %}
+    <h1 class="py-4">Login</h1>
 
-{% block content %} 
-<div class="container bg-custom-light shadow-lg h-100">
-        {% if not request.user.is_authenticated %}
-        <h1>Login</h1>
-
-        <form action="." method="POST">
-            {% csrf_token %}
+    <form class="form-container row g-3 mx-auto p-3 border rounded" action="">
+        {% csrf_token %}
             {% if error %}
                 <p class="text-danger"> {{error}}</p>
             {% endif %}
-            <div class="mb-3">
-                <input
-                    class="form-control"
-                    type="username"
-                    name="username"
-                    id="inputUsername"
-                    aria-describedby="usernameHelp"
-                    placeholder="Username"
-                />
-                <div id="usernameHelp" class="form-text">
-                    We'll never share personal data with anyone else.
-                </div>
+        <div class="mb-3">
+            <input
+                class="form-control"
+                type="username"
+                name="username"
+                id="inputUsername"
+                aria-describedby="usernameHelp"
+                placeholder="Username"
+        />
+            <div id="usernameHelp" class="form-text">
+                We'll never share personal data with anyone else.
             </div>
-            <div class="mb-3">
-                <input
-                    class="form-control"
-                    type="password"
-                    name="password"
-                    id="inputPassword"
-                    placeholder="Password"
-                />
-            </div>
-            <button type="submit" class="btn btn-success">Login</button>
-        </form>
-    
-        <p class="fw-light">Don't have an account yet?</p>
-        <button
-            class="btn btn-primary"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#registerModal"
-        >
-            Register
-        </button>
-        {% else %}
-        <p> You are already logged in. Would you like to <a class="btn btn-primary" href='/logout'>Logout</a>?</p>
-        {% endif %}
+        </div>
+        <div class="mb-3">
+            <input
+                class="form-control"
+                type="password"
+                name="password"
+                id="inputPassword"
+                placeholder="Password"
+            />
+        </div>
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+
+    <p class="fw-light py-4">Don't have an account yet?</p>
+    <a
+        class="btn btn-primary"
+        type="button"
+        href="{% url 'register' %}"
+    >
+        Register
+    </a>
+    {% else %}
+    <p> You are already logged in. Would you like to <a class="btn btn-primary" href='/logout'>Logout</a>?</p>
+    {% endif %}
 </div>
 {% endblock content %}

@@ -47,8 +47,19 @@ html {
 }
 
 body {
+    min-height: 100vh;
     background: var(--background-gradient);
     font-family: var(--font-family-primary) !important;
+}
+
+.form-container {
+    width: 75%;
+}
+
+@media (min-width: 992px) {
+    .form-container {
+        width: 50%;
+    }
 }
 
 /* Text */
@@ -243,6 +254,17 @@ body {
 
 .navbar-nav {
     text-align: right;
+}
+
+.dropdown-menu {
+    background: var(--color-dark-400);
+}
+.dropdown-menu > li > .dropdown-item:is(:hover, :focus) {
+    color: black !important; 
+    background: var(--color-primary-200) !important;
+}
+.dropdown-menu > li > .dropdown-item {
+    color: white !important;
 }
 
 /* Carousel */
