@@ -2,19 +2,24 @@
 
 {% block content %} 
 <div class="container bg-custom-light shadow-lg h-100">
+        {% if not request.user.is_authenticated %}
         <h1>Login</h1>
-    
-        <form action="">
+
+        <form action="." method="POST">
+            {% csrf_token %}
+            {% if error %}
+                <p class="text-danger"> {{error}}</p>
+            {% endif %}
             <div class="mb-3">
                 <input
                     class="form-control"
-                    type="email"
-                    name="email"
-                    id="inputEmail"
-                    aria-describedby="emailHelp"
-                    placeholder="Email"
+                    type="username"
+                    name="username"
+                    id="inputUsername"
+                    aria-describedby="usernameHelp"
+                    placeholder="Username"
                 />
-                <div id="emailHelp" class="form-text">
+                <div id="usernameHelp" class="form-text">
                     We'll never share personal data with anyone else.
                 </div>
             </div>
@@ -39,5 +44,8 @@
         >
             Register
         </button>
+        {% else %}
+        <p> You are already logged in. Would you like to <a class="btn btn-primary" href='/logout'>Logout</a>?</p>
+        {% endif %}
 </div>
 {% endblock content %}

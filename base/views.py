@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 from .models import Category
 from .models import Item
 from .models import StaffPickItem
@@ -34,5 +36,23 @@ def home(request):
     }
     return render(request, 'base/home.html', context)
 
-def loginView(request):
-    return render(request, 'base/account/login.html')
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'base/account/login.html', {'error': 'Invalid login credentials'})
+    else:
+        return render(request, 'base/account/login.html')
+
+def register_view(request):
+    return render(request, '/')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+    
