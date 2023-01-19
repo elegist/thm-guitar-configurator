@@ -245,6 +245,17 @@ body {
     text-align: right;
 }
 
+.dropdown-menu {
+    background: var(--color-dark-400);
+}
+.dropdown-menu > li > .dropdown-item:is(:hover, :focus) {
+    color: black !important; 
+    background: var(--color-primary-200) !important;
+}
+.dropdown-menu > li > .dropdown-item {
+    color: white !important;
+}
+
 /* Carousel */
 
 .carousel-item {
