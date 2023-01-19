@@ -20,6 +20,7 @@ def home(request):
     FlyingVStaff = StaffPickItem.objects.filter(staffPick = 4)
     staffPicks = [StaffPickItem.objects.filter(staffPick = 1), StaffPickItem.objects.filter(staffPick = 2), StaffPickItem.objects.filter(staffPick = 3), StaffPickItem.objects.filter(staffPick = 4)]
     staffPicksIndex = range(len(staffPicks))
+    staffPicksTotals = []
 
     context = {
         'steps': steps,
