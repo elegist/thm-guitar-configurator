@@ -1,8 +1,11 @@
 {% load static %}
 <div class="container-fluid text-center h-100">
     <div class="configurator-body row d-block d-lg-flex text-center">
-        <img src="{% static 'images/guitar-models/strat-design.svg' %}" alt="" class="col-lg-4 img-fluid img-guitar-preview">
-        <div class="col-lg-8 input-col">
+        <div class="img-container col-lg-3">
+            <img src="{% static model.image_path|add:'-horizontal.png' %}" alt="" class="img-fluid img-guitar-preview d-none d-lg-block">
+            <img src="{% static model.image_path|add:'.png' %}" alt="" class="img-fluid img-guitar-preview d-lg-none">
+        </div>
+        <div class="col-lg-9 input-col">
             <div class="options-container overflow-auto my-2">
                 <form id="configuratorForm" method="POST">
                 {% if step == 1 %}
