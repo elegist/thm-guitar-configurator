@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
 from .models import Category
 from .models import Item
 from .models import StaffPickItem
@@ -16,10 +15,17 @@ def home(request):
     electronics = Item.objects.filter(category=5)
     hardware = Item.objects.filter(category=6)
 
-    StatocasterStaff = StaffPickItem.objects.filter(staffPick = 1)
+    StratocasterStaff = StaffPickItem.objects.filter(staffPick = 1)
     TelecasterStaff = StaffPickItem.objects.filter(staffPick = 2)
     LesPaulStaff = StaffPickItem.objects.filter(staffPick = 3)
     FlyingVStaff = StaffPickItem.objects.filter(staffPick = 4)
+    staffPicks = [StaffPickItem.objects.filter(staffPick = 1), StaffPickItem.objects.filter(staffPick = 2), StaffPickItem.objects.filter(staffPick = 3), StaffPickItem.objects.filter(staffPick = 4)]
+    staffPicksIndex = range(len(staffPicks))
+    stratIndex = range(len(StratocasterStaff))
+
+    stratocasterTotal = 0
+    for index in stratIndex:
+        stratocasterTotal += StratocasterStaff[index].item.price
 
     context = {
         'steps': steps,
@@ -29,10 +35,13 @@ def home(request):
         'colors': colors,
         'electronics': electronics,
         'hardware': hardware,
-        'StatocasterStaff': StatocasterStaff,
+        'StratocasterStaff': StratocasterStaff,
         'TelecasterStaff': TelecasterStaff,
         'LesPaulStaff': LesPaulStaff, 
-        'FlyingVStaff': FlyingVStaff
+        'FlyingVStaff': FlyingVStaff,
+        'staffPicks': staffPicks,
+        'staffPicksIndex': staffPicksIndex,
+        'stratocasterTotal': stratocasterTotal
     }
     return render(request, 'base/home.html', context)
 

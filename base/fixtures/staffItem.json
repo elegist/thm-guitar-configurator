@@ -124,7 +124,7 @@
     "pk": 17,
     "fields": {
         "staffPick": 3,
-        "item": 28
+        "item": 11
     }
 },
 {
@@ -132,7 +132,7 @@
     "pk": 18,
     "fields": {
         "staffPick": 3,
-        "item": 33
+        "item": 28
     }
 },
 {
@@ -140,20 +140,12 @@
     "pk": 19,
     "fields": {
         "staffPick": 3,
-        "item": 36
-    }
-},
-{
-    "model": "base.staffpickitem",
-    "pk": 20,
-    "fields": {
-        "staffPick": 3,
         "item": 38
     }
 },
 {
     "model": "base.staffpickitem",
-    "pk": 21,
+    "pk": 20,
     "fields": {
         "staffPick": 3,
         "item": 39

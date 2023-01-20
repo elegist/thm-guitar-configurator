@@ -1,0 +1,75 @@
+<svg class="img-fluid" width="100%" height="100%" viewBox="0 0 1000 400">
+    <defs>
+        <pattern id="birch-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/birch.jpg' %}"></image>
+        </pattern>
+        <pattern id="ebony-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/ebony.jpg' %}"></image>
+        </pattern>
+        <pattern id="koa-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/koa.jpg' %}"></image>
+        </pattern>
+        <pattern id="lacewood-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/lacewood.jpg' %}"></image>
+        </pattern>
+        <pattern id="mahagony-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/mahagony.jpg' %}"></image>
+        </pattern>
+        <pattern id="maple-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/maple.jpg' %}"></image>
+        </pattern>
+        <pattern id="rosewood-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/rosewood.jpg' %}"></image>
+        </pattern>
+        <pattern id="spalted-maple-{{pick.0.item.name}}" patternUnits="userSpaceOnUse" height="500" width="500">
+            <image x="0" y="0" height="500" width="500" href="{% static 'images/wood/spalted-map.jpg' %}"></image>
+        </pattern>
+    </defs>
+
+    <g transform="matrix(1,0,0,1,-5.01541,0)">
+        <g id="Strat" transform="matrix(1.002,0,0,2.23464,3.0114,-811.173)">
+            <rect x="2" y="363" width="998" height="179" style="fill:none;" />
+            <g id="stratBodyPath" transform="matrix(1.07879,0,0,0.483727,-54.3809,251.999)">
+                <path
+                    d="M381,441C381,441 363.779,453.248 367,471C370.221,488.752 377.347,504.028 413,508C426.784,509.535 425.285,523.609 425,525C424.33,528.273 420.135,545.754 385,546C349.865,546.246 318.985,522.763 293,523C250.017,523.391 209.039,565.885 150,566C98.952,566.1 60.461,537.953 55,476C54.045,401.418 55,371 55,371C55,371 58.69,272.223 130,263C228.732,262.048 264.703,307.212 298,307C365.295,306.572 362.703,282.453 430,282C478.282,281.675 486,306.944 486,310C486,313.056 485.361,322.445 476,324C466.639,325.555 431.686,322.148 415,353C407.229,367.368 410.526,385.916 427,389C431.07,389.762 429.357,411.746 428,439C427.938,440.254 381,441 381,441Z"
+                    fill="url(#{{}}-{{pick.0.item.name}})" />
+            </g>
+            <g id="stratNeckPath" transform="matrix(1.07879,0,0,0.483727,-54.3809,251.999)">
+                <path
+                    d="M366,441L804,434L804,395L366,388C366,388 356.82,384.157 357,414.493C357.18,444.828 366,441 366,441Z"
+                    fill="url(#{{}}-{{pick.0.item.name}})" />
+            </g>
+            <g id="stratHeadPath" transform="matrix(1.07879,0,0,0.483727,-54.3809,251.999)">
+                <path
+                    d="M804,435L804,395C804,395 808.287,394.049 811,392C813.713,389.951 818.715,379.908 826,380C833.285,380.092 964,422 964,422C964,422 975.993,427.717 975,446C974.117,462.259 954.36,467.146 950,467C933.648,466.452 930.158,456.059 923,447C922.19,445.975 849,459 849,459C849,459 837.771,436.285 804,435Z"
+                    fill="url(#{{}}-{{pick.0.item.name}})" />
+            </g>
+
+            <g id="singleCoilBridge" transform="matrix(0.780991,0.060405,-0.163125,0.424051,66.7028,365.178)">
+                <path
+                    d="M206,145.542C206,143.035 203.536,141 200.5,141L189.5,141C186.464,141 184,143.035 184,145.542L184,208.458C184,210.965 186.464,213 189.5,213L200.5,213C203.536,213 206,210.965 206,208.458L206,145.542Z"
+                    style="fill:rgb(166,166,166);" />
+            </g>
+            <g id="singleCoilMiddle" transform="matrix(0.792524,-1.24206e-17,-1.108e-16,0.430313,93.4647,375.848)">
+                <path
+                    d="M206,145.542C206,143.035 203.536,141 200.5,141L189.5,141C186.464,141 184,143.035 184,145.542L184,208.458C184,210.965 186.464,213 189.5,213L200.5,213C203.536,213 206,210.965 206,208.458L206,145.542Z"
+                    style="fill:rgb(166,166,166);" />
+            </g>
+            <g id="singleCoilNeck" transform="matrix(0.792524,-1.24206e-17,-1.108e-16,0.430313,153.345,375.848)">
+                <path
+                    d="M206,145.542C206,143.035 203.536,141 200.5,141L189.5,141C186.464,141 184,143.035 184,145.542L184,208.458C184,210.965 186.464,213 189.5,213L200.5,213C203.536,213 206,210.965 206,208.458L206,145.542Z"
+                    style="fill:rgb(166,166,166);" />
+            </g>
+            <g id="humbuckerBridge" transform="matrix(0.954609,0,0,0.39092,11.3725,382.999)">
+                <path
+                    d="M216,144.592C216,137.642 210.847,132 204.5,132L181.5,132C175.153,132 170,137.642 170,144.592L170,206.408C170,213.358 175.153,219 181.5,219L204.5,219C210.847,219 216,213.358 216,206.408L216,144.592Z"
+                    style="fill:rgb(166,166,166);" />
+            </g>
+            <g id="humbuckerNeck" transform="matrix(0.954609,0,0,0.39092,121.153,382.999)">
+                <path
+                    d="M216,144.592C216,137.642 210.847,132 204.5,132L181.5,132C175.153,132 170,137.642 170,144.592L170,206.408C170,213.358 175.153,219 181.5,219L204.5,219C210.847,219 216,213.358 216,206.408L216,144.592Z"
+                    style="fill:rgb(166,166,166);" />
+            </g>
+        </g>
+    </g>
+</svg>
