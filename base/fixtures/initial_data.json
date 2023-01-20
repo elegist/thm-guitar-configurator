@@ -78,7 +78,7 @@
         "model": "base.item",
         "pk": 3,
         "fields": {
-            "name": "les paul",
+            "name": "les-paul",
             "category": 1,
             "price": 0,
             "description":"les paul base"
@@ -88,7 +88,7 @@
         "model": "base.item",
         "pk": 4,
         "fields": {
-            "name": "flying v",
+            "name": "flying-v",
             "category": 1,
             "price": 0,
             "description":"flying v base"
