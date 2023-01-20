@@ -258,7 +258,15 @@ body {
 
 .dropdown-menu {
     background: var(--color-dark-400);
+    text-align: right;
 }
+
+@media (min-width: 992px) {
+    .dropdown-menu {
+        text-align: initial;
+    }
+}
+
 .dropdown-menu > li > .dropdown-item:is(:hover, :focus) {
     color: black !important; 
     background: var(--color-primary-200) !important;
