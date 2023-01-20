@@ -1,6 +1,32 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 # Create your models here.
+
+class RegisterForm(UserCreationForm):
+    address = forms.CharField(label="Address", max_length=50)
+    city = forms.CharField(label="City", max_length=60)
+    state = forms.CharField(label="State", max_length=30)
+    zip = forms.CharField(label="Zip Code", max_length=6)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username', 'address', 'city', 'state', 'zip', 'password1', 'password2']
+    
+    def __init__(self, *args, **kwargs) -> None:
+        super(RegisterForm, self).__init__(*args, **kwargs)
+
+        self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
+        self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'})
+        self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'})
+        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name'})
+        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address'})
+        self.fields['city'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'})
+        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State'})
+        self.fields['zip'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Zip'})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Choose a password'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repeat the password'})
 
 ## color, wood, frets, pickup, hardware##
 class Category(models.Model):

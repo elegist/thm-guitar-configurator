@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 from .models import Category
 from .models import Item
 from .models import StaffPickItem
 from .models import StaffPick
+from .models import RegisterForm
+from django.contrib import messages
 # Create your views here.
 
 def home(request):
@@ -54,12 +57,24 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'base/account/login.html', {'error': 'Invalid login credentials'})
-    else:
-        return render(request, 'base/account/login.html')
+            messages.info(request, 'Username OR password is incorrect')
+    
+    context = {}
+    return render(request, 'base/account/login.html', context)
 
 def register_view(request):
-    return render(request, 'base/account/register.html')
+    form = RegisterForm()
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+            return redirect('login')
+    
+    context = {'form': form}
+    return render(request, 'base/account/register.html', context)
 
 def logout_user(request):
     logout(request)

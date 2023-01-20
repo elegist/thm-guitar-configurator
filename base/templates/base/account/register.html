@@ -3,88 +3,60 @@
 <div class="container bg-custom-light shadow-lg text-center vh-100">
     <h1 class="py-4">Register</h1>
 
-    <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST'>
+    <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
+        {% csrf_token %}
+
         <div class="col-md-6">
-            <input
-                class="form-control"
-                type="text"
-                name="inputFirstName"
-                id="inputFirstName"
-                placeholder="First Name"
-            />
+            {{ form.first_name }}
         </div>
         <div class="col-md-6">
-            <input
-                class="form-control"
-                type="text"
-                name="inputLastName"
-                id="inputLastName"
-                placeholder="Last Name"
-            />
+            {{ form.last_name }}
         </div>
 
         <div class="col-md-12">
-            <input
-                class="form-control"
-                type="email"
-                name="inputEmail"
-                id="inputEmail"
-                placeholder="Email"
-            />
+            {{ form.email }}
         </div>
 
         <div class="col-md-12">
-            <input
-                class="form-control"
-                type="username"
-                name="inputUsername"
-                id="inputUsername"
-                placeholder="Username"
-            />
+            {{ form.username }}
         </div>
 
         <div class="col-md-12">
-            <input
-                class="form-control"
-                type="text"
-                name="inputAddress"
-                id="inputAddress"
-                placeholder="Address &amp; Number"
-            />
+            {{ form.address }}
         </div>
 
         <div class="col-md-6">
-            <input
-                class="form-control"
-                type="text"
-                name="inputCity"
-                id="inputCity"
-                placeholder="City"
-            />
+            {{ form.city }}
         </div>
         <div class="col-md-3">
-            <input
-                class="form-control"
-                type="text"
-                name="inputState"
-                id="inputState"
-                placeholder="State"
-            />
+            {{ form.state }}
         </div>
         <div class="col-md-3">
-            <input
-                class="form-control"
-                type="text"
-                name="inputZip"
-                id="inputZip"
-                placeholder="Zip"
-            />
+            {{ form.zip }}
+        </div>
+        <div class="col-md-6">
+            {{ form.password1 }}
+        </div>
+        <div class="col-md-6">
+            {{ form.password2 }}
         </div>
 
         <div class="col-12">
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <input type="submit" class="btn btn-success" value="Register"></input>
         </div>
     </form>
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger w-50 mx-auto my-4" role="alert"><strong>{{ error|escape }}</strong></div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger w-50 mx-auto my-4" role="alert"><strong>{{ error|escape }}</strong></div>
+        {% endfor %}
+    {% endif %}
+    
 
     <p class="fw-light py-4">Already have an account?</p>
     <a
