@@ -26,6 +26,10 @@
     position: relative;
 }
 
+.config-btn > .config-content > .config-img {
+    width: 200px;
+}
+
 .config-btn > .config-content > .config-title {
     margin-top: 0.5rem;
     font-size: var(--font-size-h4);
