@@ -17,16 +17,16 @@ class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs) -> None:
         super(RegisterForm, self).__init__(*args, **kwargs)
 
-        self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
-        self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'})
-        self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'})
-        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name'})
-        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address'})
-        self.fields['city'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'})
-        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State'})
-        self.fields['zip'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Zip'})
-        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Choose a password'})
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repeat the password'})
+        self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True})
+        self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True})
+        self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email', 'required': True})
+        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name', 'required': True})
+        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address', 'required': True})
+        self.fields['city'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City', 'required': True})
+        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State', 'required': True})
+        self.fields['zip'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Zip', 'required': True})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Choose a password', 'required': True})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repeat the password', 'required': True})
 
 ## color, wood, frets, pickup, hardware##
 class Category(models.Model):
