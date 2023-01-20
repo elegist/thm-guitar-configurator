@@ -1,10 +1,10 @@
 @import url("./main.css");
 
-.radio-input {
+.config-input {
     display: none;
 }
 
-.radio-btn {
+.config-btn {
     margin: 1rem;
     display: inline-block;
     border: 2px solid transparent;
@@ -16,17 +16,17 @@
     cursor: pointer;
 }
 
-.radio-btn > i {
+.config-btn > i {
     color: var(--color-success-400);
     pointer-events: none;
     opacity: 0;
 }
 
-.radio-btn > .radio-content {
+.config-btn > .config-content {
     position: relative;
 }
 
-.radio-btn > .radio-content > .radio-title {
+.config-btn > .config-content > .config-title {
     margin-top: 0.5rem;
     font-size: var(--font-size-h4);
 }
@@ -37,10 +37,10 @@
     right: -1rem;
 } */
 
-.radio-input:checked + .radio-btn {
+.config-input:checked + .config-btn {
     border: 2px solid var(--color-success-400);
 }
 
-.radio-input:checked + .radio-btn > i {
+.config-input:checked + .config-btn > i {
     opacity: 1;
 }
