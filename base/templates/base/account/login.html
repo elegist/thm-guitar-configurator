@@ -1,10 +1,10 @@
 {% extends 'index.html' %} 
 {% block content %}
 <div class="container bg-custom-light shadow-lg text-center vh-100">
-    {% if not request.user.is_authenticated %}
+    {% if not user.is_authenticated %}
     <h1 class="py-4">Login</h1>
 
-    <form class="form-container row g-3 mx-auto p-3 border rounded" action="">
+    <form class="form-container row g-3 mx-auto p-3 border rounded" method='POST'>
         {% csrf_token %}
             {% if error %}
                 <p class="text-danger"> {{error}}</p>
@@ -43,7 +43,7 @@
         Register
     </a>
     {% else %}
-    <p> You are already logged in. Would you like to <a class="btn btn-primary" href='/logout'>Logout</a>?</p>
+    <p> You are already logged in. Would you like to <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>?</p>
     {% endif %}
 </div>
 {% endblock content %}

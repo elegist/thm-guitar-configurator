@@ -4,33 +4,37 @@
         <img src="{% static 'images/guitar-models/strat-design.svg' %}" alt="" class="col-lg-4 img-fluid img-guitar-preview">
         <div class="col-lg-8 input-col">
             <div class="options-container overflow-auto my-2">
+                <form id="configuratorForm" method="POST">
                 {% if step == 1 %}
                     {% for configuratorItem in frets %}
                         {% include 'base/configurator/radio-button.html'%}
-                    {% endfor%}
+                    {% endfor %}
                 
                 {% elif step == 2 %}
                     {% for configuratorItem in woods %}
                         {% include 'base/configurator/radio-button.html'%}
-                    {% endfor%}
+                    {% endfor %}
 
                 {% elif step == 3 %}
                     {% for configuratorItem in colors %}
                         {% include 'base/configurator/radio-button.html'%}
-                    {% endfor%}
+                    {% endfor %}
 
                 {% elif step == 4 %}
                     {% for configuratorItem in electronics %}
                         {% include 'base/configurator/radio-button.html'%}
-                    {% endfor%}
+                    {% endfor %}
 
                 {% elif step == 5 %}
                     {% for configuratorItem in hardware %}
                         {% include 'base/configurator/radio-button.html'%}
-                    {% endfor%}
-                {% endif%}
+                    {% endfor %}
+                {% endif %}
+                </form>
             </div>
+            {% if user.is_authenticated %}
             <button class="btn btn-info my-2">Save configuration and quit</button>
+            {% endif %}
             <button class="btn btn-success my-2" {% if step != maxSteps %} disabled {% endif %}>Complete and add to cart</button>
             <p class="text-color-success my-2">Total: {price}€</p>
         </div>

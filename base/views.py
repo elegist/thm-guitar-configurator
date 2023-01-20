@@ -50,9 +50,9 @@ def login_view(request):
         return render(request, 'base/account/login.html')
 
 def register_view(request):
-    return render(request, '/')
+    return render(request, 'base/account/register.html')
 
-def logout_view(request):
+def logout_user(request):
     logout(request)
     return redirect('home')
     
