@@ -1,0 +1,707 @@
+[
+{
+    "model": "base.category",
+    "pk": 1,
+    "fields": {
+        "name": "model",
+        "categoryDesc": "the base model of the guitar"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 2,
+    "fields": {
+        "name": "frets",
+        "categoryDesc": "fret count for a guitar"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 3,
+    "fields": {
+        "name": "wood",
+        "categoryDesc": "the type of wood for the body or neck"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 4,
+    "fields": {
+        "name": "color",
+        "categoryDesc": "wood paint/varnish"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 5,
+    "fields": {
+        "name": "electronics",
+        "categoryDesc": "electronic parts"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 6,
+    "fields": {
+        "name": "hardware",
+        "categoryDesc": "strings, bags, tremolo, potis"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 1,
+    "fields": {
+        "name": "strat-style",
+        "category": 1,
+        "price": "0.00",
+        "description": "stratocaster base",
+        "image_path": "images\\guitar-models\\strat"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 2,
+    "fields": {
+        "name": "tele-style",
+        "category": 1,
+        "price": "0.00",
+        "description": "telecaster base",
+        "image_path": "images\\guitar-models\\tele"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 3,
+    "fields": {
+        "name": "les-paul",
+        "category": 1,
+        "price": "0.00",
+        "description": "les paul base",
+        "image_path": "images\\guitar-models\\paul"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 4,
+    "fields": {
+        "name": "flying-v",
+        "category": 1,
+        "price": "0.00",
+        "description": "flying v base",
+        "image_path": "images\\guitar-models\\v"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 5,
+    "fields": {
+        "name": "21-Fret",
+        "category": 2,
+        "price": "0.00",
+        "description": "21-Frets for a selected guitar",
+        "image_path": "images\\options\\frets.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 6,
+    "fields": {
+        "name": "24-Fret",
+        "category": 2,
+        "price": "0.00",
+        "description": "24-Frets for a selected guitar",
+        "image_path": "images\\options\\frets.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 7,
+    "fields": {
+        "name": "mahagony",
+        "category": 3,
+        "price": "999.99",
+        "description": "straight-grained, reddish-brown",
+        "image_path": "images\\wood\\mahagony.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 8,
+    "fields": {
+        "name": "maple",
+        "category": 3,
+        "price": "999.99",
+        "description": "white with some reddish-brown hues",
+        "image_path": "images\\wood\\maple.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 9,
+    "fields": {
+        "name": "birch",
+        "category": 3,
+        "price": "999.99",
+        "description": "white birch",
+        "image_path": "images\\wood\\birch.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 10,
+    "fields": {
+        "name": "lacewood",
+        "category": 3,
+        "price": "999.99",
+        "description": "reddish brown with grey or light brown rays",
+        "image_path": "images\\wood\\lacewood.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 11,
+    "fields": {
+        "name": "koa",
+        "category": 3,
+        "price": "999.99",
+        "description": "golden and reddish brown. Wavy grain",
+        "image_path": "images\\wood\\koa.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 12,
+    "fields": {
+        "name": "spalted maple",
+        "category": 3,
+        "price": "999.99",
+        "description": "light colored sapwood with dark contrasting lines and streaks",
+        "image_path": "images\\wood\\spalted-maple.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 13,
+    "fields": {
+        "name": "black",
+        "category": 4,
+        "price": "19.99",
+        "description": "#000000",
+        "image_path": "images\\colors\\black.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 14,
+    "fields": {
+        "name": "blue",
+        "category": 4,
+        "price": "19.99",
+        "description": "#0000FF",
+        "image_path": "images\\colors\\blue.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 15,
+    "fields": {
+        "name": "green",
+        "category": 4,
+        "price": "19.99",
+        "description": "#00FF00",
+        "image_path": "images\\colors\\green.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 16,
+    "fields": {
+        "name": "red",
+        "category": 4,
+        "price": "19.99",
+        "description": "#FF0000",
+        "image_path": "images\\colors\\red.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 17,
+    "fields": {
+        "name": "maroon",
+        "category": 4,
+        "price": "19.99",
+        "description": "#800000",
+        "image_path": "images\\colors\\maroon.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 18,
+    "fields": {
+        "name": "brown",
+        "category": 4,
+        "price": "19.99",
+        "description": "#9A6324",
+        "image_path": "images\\colors\\brown.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 19,
+    "fields": {
+        "name": "teal",
+        "category": 4,
+        "price": "19.99",
+        "description": "#469990",
+        "image_path": "images\\colors\\teal.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 20,
+    "fields": {
+        "name": "navy",
+        "category": 4,
+        "price": "19.99",
+        "description": "#000075",
+        "image_path": "images\\colors\\navy.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 21,
+    "fields": {
+        "name": "orange",
+        "category": 4,
+        "price": "19.99",
+        "description": "#f58231",
+        "image_path": "images\\colors\\orange.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 22,
+    "fields": {
+        "name": "yellow",
+        "category": 4,
+        "price": "19.99",
+        "description": "#ffe119",
+        "image_path": "images\\colors\\yellow.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 23,
+    "fields": {
+        "name": "cyan",
+        "category": 4,
+        "price": "19.99",
+        "description": "#42d4f4",
+        "image_path": "images\\colors\\cyan.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 24,
+    "fields": {
+        "name": "magenta",
+        "category": 4,
+        "price": "19.99",
+        "description": "#f032e6",
+        "image_path": "images\\colors\\magenta.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 25,
+    "fields": {
+        "name": "pink",
+        "category": 4,
+        "price": "19.99",
+        "description": "#fabed4",
+        "image_path": "images\\colors\\pink.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 26,
+    "fields": {
+        "name": "beige",
+        "category": 4,
+        "price": "19.99",
+        "description": "#fffac8",
+        "image_path": "images\\colors\\beige.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 27,
+    "fields": {
+        "name": "mint",
+        "category": 4,
+        "price": "19.99",
+        "description": "#aaffc3",
+        "image_path": "images\\colors\\mint.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 28,
+    "fields": {
+        "name": "lavender",
+        "category": 4,
+        "price": "19.99",
+        "description": "#dcbeff",
+        "image_path": "images\\colors\\lavender.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 29,
+    "fields": {
+        "name": "white",
+        "category": 4,
+        "price": "19.99",
+        "description": "#ffffff",
+        "image_path": "images\\colors\\white.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 30,
+    "fields": {
+        "name": "mauve taupe",
+        "category": 4,
+        "price": "19.99",
+        "description": "#7C5869",
+        "image_path": "images\\colors\\mauve-taupe.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 31,
+    "fields": {
+        "name": "columbia blue",
+        "category": 4,
+        "price": "19.99",
+        "description": "#AFD2E9",
+        "image_path": "images\\colors\\columbia-blue.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 32,
+    "fields": {
+        "name": "alablaster",
+        "category": 4,
+        "price": "19.99",
+        "description": "#F1E9DB",
+        "image_path": "images\\colors\\alabaster.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 33,
+    "fields": {
+        "name": "humbucker",
+        "category": 5,
+        "price": "9.99",
+        "description": "a twin-coil guitar pick-up",
+        "image_path": "images\\options\\humbucker.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 34,
+    "fields": {
+        "name": "single coil",
+        "category": 5,
+        "price": "9.99",
+        "description": "a single-coil guitar pick-up",
+        "image_path": "images\\options\\single-coil.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 35,
+    "fields": {
+        "name": "trembucker",
+        "category": 5,
+        "price": "9.99",
+        "description": "pickup designed for a tremolo guitar",
+        "image_path": "images\\options\\humbucker.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 36,
+    "fields": {
+        "name": "tremolo",
+        "category": 6,
+        "price": "19.99",
+        "description": "tremolo arm for a guitar",
+        "image_path": "images\\options\\tremolo.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 37,
+    "fields": {
+        "name": "mini-pot",
+        "category": 6,
+        "price": "19.99",
+        "description": "mini-pot",
+        "image_path": "images\\options\\pot.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 38,
+    "fields": {
+        "name": "full-size pot",
+        "category": 6,
+        "price": "19.99",
+        "description": "full-size pot",
+        "image_path": "images\\options\\pot.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 39,
+    "fields": {
+        "name": "bag",
+        "category": 6,
+        "price": "49.99",
+        "description": "Guitar bag. Hard case",
+        "image_path": "images\\options\\bag.jpg"
+    }
+},
+{
+    "model": "base.staffpick",
+    "pk": 1,
+    "fields": {
+        "name": "Stratocaster"
+    }
+},
+{
+    "model": "base.staffpick",
+    "pk": 2,
+    "fields": {
+        "name": "Telecaster"
+    }
+},
+{
+    "model": "base.staffpick",
+    "pk": 3,
+    "fields": {
+        "name": "Les-Paul"
+    }
+},
+{
+    "model": "base.staffpick",
+    "pk": 4,
+    "fields": {
+        "name": "Flying V"
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 2,
+    "fields": {
+        "staffPick": 1,
+        "item": 1
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 3,
+    "fields": {
+        "staffPick": 1,
+        "item": 6
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 4,
+    "fields": {
+        "staffPick": 1,
+        "item": 7
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 5,
+    "fields": {
+        "staffPick": 1,
+        "item": 16
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 6,
+    "fields": {
+        "staffPick": 1,
+        "item": 33
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 7,
+    "fields": {
+        "staffPick": 1,
+        "item": 38
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 8,
+    "fields": {
+        "staffPick": 1,
+        "item": 39
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 9,
+    "fields": {
+        "staffPick": 2,
+        "item": 2
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 10,
+    "fields": {
+        "staffPick": 2,
+        "item": 5
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 11,
+    "fields": {
+        "staffPick": 2,
+        "item": 9
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 12,
+    "fields": {
+        "staffPick": 2,
+        "item": 29
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 13,
+    "fields": {
+        "staffPick": 2,
+        "item": 37
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 14,
+    "fields": {
+        "staffPick": 2,
+        "item": 34
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 15,
+    "fields": {
+        "staffPick": 3,
+        "item": 3
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 16,
+    "fields": {
+        "staffPick": 3,
+        "item": 6
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 17,
+    "fields": {
+        "staffPick": 3,
+        "item": 11
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 18,
+    "fields": {
+        "staffPick": 3,
+        "item": 28
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 19,
+    "fields": {
+        "staffPick": 3,
+        "item": 38
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 20,
+    "fields": {
+        "staffPick": 3,
+        "item": 39
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 22,
+    "fields": {
+        "staffPick": 4,
+        "item": 4
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 23,
+    "fields": {
+        "staffPick": 4,
+        "item": 25
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 24,
+    "fields": {
+        "staffPick": 4,
+        "item": 12
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 25,
+    "fields": {
+        "staffPick": 4,
+        "item": 35
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 26,
+    "fields": {
+        "staffPick": 4,
+        "item": 38
+    }
+},
+{
+    "model": "base.staffpickitem",
+    "pk": 27,
+    "fields": {
+        "staffPick": 4,
+        "item": 39
+    }
+}
+]
