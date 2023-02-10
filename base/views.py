@@ -76,6 +76,10 @@ def register_view(request):
     context = {'form': form}
     return render(request, 'base/account/register.html', context)
 
+def account_view(request):
+    context = {}
+    return render(request, 'base/account/account.html', context)
+
 def logout_user(request):
     logout(request)
     return redirect('home')

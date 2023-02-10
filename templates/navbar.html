@@ -63,6 +63,11 @@
                                 >Register</a
                             >
                         </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'account' %}" class="dropdown-item">My Account</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </li>
 
