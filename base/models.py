@@ -5,14 +5,9 @@ from django import forms
 # Create your models here.
 
 class RegisterForm(UserCreationForm):
-    address = forms.CharField(label="Address", max_length=50)
-    city = forms.CharField(label="City", max_length=60)
-    state = forms.CharField(label="State", max_length=30)
-    zip = forms.CharField(label="Zip Code", max_length=6)
-
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'address', 'city', 'state', 'zip', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2']
     
     def __init__(self, *args, **kwargs) -> None:
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -21,10 +16,6 @@ class RegisterForm(UserCreationForm):
         self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True})
         self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email', 'required': True})
         self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name', 'required': True})
-        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address', 'required': True})
-        self.fields['city'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City', 'required': True})
-        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State', 'required': True})
-        self.fields['zip'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Zip', 'required': True})
         self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Choose a password', 'required': True})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repeat the password', 'required': True})
 
