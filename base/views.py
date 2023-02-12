@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Category
 from .models import Item
@@ -76,6 +77,7 @@ def register_view(request):
     context = {'form': form}
     return render(request, 'base/account/register.html', context)
 
+@login_required(login_url='login')
 def account_view(request):
     context = {}
     return render(request, 'base/account/account.html', context)

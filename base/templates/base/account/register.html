@@ -5,7 +5,6 @@
 
     <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
         {% csrf_token %}
-
         <div class="col-md-6">
             {{ form.first_name }}
         </div>
@@ -16,34 +15,15 @@
         <div class="col-md-12">
             {{ form.email }}
         </div>
-
         <div class="col-md-12">
             {{ form.username }}
         </div>
-
-        {% comment %} 
-        <div class="col-md-12">
-            {{ form.address }}
-        </div>
-
-        <div class="col-md-6">
-            {{ form.city }}
-        </div>
-        <div class="col-md-3">
-            {{ form.state }}
-        </div>
-        <div class="col-md-3">
-            {{ form.zip }}
-        </div> 
-        {% endcomment %}
-        
         <div class="col-md-6">
             {{ form.password1 }}
         </div>
         <div class="col-md-6">
             {{ form.password2 }}
         </div>
-
         <div class="col-12">
             <input type="submit" class="btn btn-success" value="Register"></input>
         </div>
