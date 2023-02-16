@@ -4,30 +4,34 @@
 <div class="container bg-custom-light shadow-lg text-center">
     <section class="account-information pt-3">
         <h2 class="p-3">Account Information</h2>
-        <div class="mb-3 row">
-            <label for="userName" class="col-4">User Name</label>
-            <div class="col-8">
-                <input id="userName" type="text" class="form-control" aria-label="readonly user name" value="{{user}}" readonly>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3 row">
+                <label for="userName" class="col-4">User Name</label>
+                <div class="col-8">
+                    {{update_user_form.username}}
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="firstName" class="col-4">First Name</label>
-            <div class="col-8">
-                <input id="firstName" type="text" class="form-control" aria-label="readonly first name" value="{{user.first_name}}" readonly>
+            <div class="mb-3 row">
+                <label for="firstName" class="col-4">First Name</label>
+                <div class="col-8">
+                    {{update_user_form.first_name}}
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="lastName" class="col-4">Last Name</label>
-            <div class="col-8">
-                <input id="lastName" type="text" class="form-control" aria-label="readonly last name" value="{{user.last_name}}" readonly>
+            <div class="mb-3 row">
+                <label for="lastName" class="col-4">Last Name</label>
+                <div class="col-8">
+                    {{update_user_form.last_name}}
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="email" class="col-4">Email Address</label>
-            <div class="col-8">
-                <input id="email" type="text" class="form-control" aria-label="readonly email address" value="{{user.email}}" readonly>
+            <div class="mb-3 row">
+                <label for="email" class="col-4">Email Address</label>
+                <div class="col-8">
+                    {{update_user_form.email}}
+                </div>
             </div>
-        </div>
+            <button class="btn btn-outline-info" type="submit">Update Information</button>
+        </form>
     </section>
 
     <section class="saved-presets pt-3">

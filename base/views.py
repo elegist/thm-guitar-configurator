@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Category, Item, StaffPickItem, StaffPick
-from .forms import RegisterForm
+from .forms import RegisterForm, UpdateUserForm
 from django.contrib import messages
 # Create your views here.
 
@@ -76,7 +76,18 @@ def register_view(request):
 
 @login_required(login_url='login')
 def account_view(request):
-    context = {}
+    update_user_form = UpdateUserForm(instance=request.user)
+    if request.method == 'POST':
+        update_user_form = UpdateUserForm(request.POST, instance=request.user)
+        if update_user_form.is_valid():
+            update_user_form.save()
+            user = update_user_form.cleaned_data.get('username')
+            messages.success(request, 'Account informations changed for ' + user)
+            return redirect('account')
+
+    context = {
+        'update_user_form': update_user_form,
+    }
     return render(request, 'base/account/account.html', context)
 
 def logout_user(request):
