@@ -2,11 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Category
-from .models import Item
-from .models import StaffPickItem
-from .models import StaffPick
-from .models import RegisterForm
+from .models import Category, Item, StaffPickItem, StaffPick
+from .forms import RegisterForm
 from django.contrib import messages
 # Create your views here.
 
