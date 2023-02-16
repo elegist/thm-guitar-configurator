@@ -1,30 +1,54 @@
 {% extends 'index.html' %} 
+{% load static %}
 {% block content %}
-<div class="container bg-custom-light shadow-lg text-center vh-100">
-    <h2 class="p-3">Account Information</h2>
-    <div class="mb-3 row">
-        <label for="userName" class="col-4">User Name</label>
-        <div class="col-8">
-            <input id="userName" type="text" class="form-control" aria-label="readonly user name" value="{{user}}" readonly>
+<div class="container bg-custom-light shadow-lg text-center">
+    <section class="account-information pt-3">
+        <h2 class="p-3">Account Information</h2>
+        <div class="mb-3 row">
+            <label for="userName" class="col-4">User Name</label>
+            <div class="col-8">
+                <input id="userName" type="text" class="form-control" aria-label="readonly user name" value="{{user}}" readonly>
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="firstName" class="col-4">First Name</label>
-        <div class="col-8">
-            <input id="firstName" type="text" class="form-control" aria-label="readonly first name" value="{{user.first_name}}" readonly>
+        <div class="mb-3 row">
+            <label for="firstName" class="col-4">First Name</label>
+            <div class="col-8">
+                <input id="firstName" type="text" class="form-control" aria-label="readonly first name" value="{{user.first_name}}" readonly>
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="lastName" class="col-4">Last Name</label>
-        <div class="col-8">
-            <input id="lastName" type="text" class="form-control" aria-label="readonly last name" value="{{user.last_name}}" readonly>
+        <div class="mb-3 row">
+            <label for="lastName" class="col-4">Last Name</label>
+            <div class="col-8">
+                <input id="lastName" type="text" class="form-control" aria-label="readonly last name" value="{{user.last_name}}" readonly>
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="email" class="col-4">Email Address</label>
-        <div class="col-8">
-            <input id="email" type="text" class="form-control" aria-label="readonly email address" value="{{user.email}}" readonly>
+        <div class="mb-3 row">
+            <label for="email" class="col-4">Email Address</label>
+            <div class="col-8">
+                <input id="email" type="text" class="form-control" aria-label="readonly email address" value="{{user.email}}" readonly>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="saved-presets pt-3">
+        <h2 class="p-3">Saved Presets</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 my-2">
+                {% include 'base/account/account-page/saved-preset-card.html' %}
+            </div>
+            <div class="col-md-6 col-lg-3 my-2">
+                {% include 'base/account/account-page/saved-preset-card.html' %}
+            </div>
+            <div class="col-md-6 col-lg-3 my-2">
+                {% include 'base/account/account-page/saved-preset-card.html' %}
+            </div>
+            <div class="col-md-6 col-lg-3 my-2">
+                {% include 'base/account/account-page/saved-preset-card.html' %}
+            </div>
+            <div class="col-md-6 col-lg-3 my-2">
+                {% include 'base/account/account-page/saved-preset-card.html' %}
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock content %}
