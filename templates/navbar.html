@@ -29,7 +29,7 @@
                 {% if user.is_authenticated %}
                 <p class="my-auto">
                     Welcome back,
-                    <span class="text-color-info">{{user}}</span>
+                    <a href="{% url 'account' %}" class="link-info">{{user}}</a>
                     <a
                         href="{% url 'logout' %}"
                         type="button"
@@ -40,7 +40,7 @@
                 </p>
                 {% else %}
                 <p class="my-auto">
-                    Hello, <span class="text-color-info">Guest</span>
+                    Hello, <a href="{% url 'login' %}" class="link-info">Guest</a>
                 </p>
                 {% endif %}
                 <li class="nav-item dropdown mx-3">
