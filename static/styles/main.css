@@ -52,6 +52,10 @@ body {
     font-family: var(--font-family-primary) !important;
 }
 
+form label {
+    color: hsl(230, 22%, 53%)
+}
+
 .form-container {
     width: 75%;
 }

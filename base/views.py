@@ -8,7 +8,7 @@ def home(request):
     context = {}
     return render(request, 'base/home.html', context)
 
-def login_view(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -22,24 +22,24 @@ def login_view(request):
     context = {}
     return render(request, 'base/account/login.html', context)
 
-def register_view(request):
-    user_form = RegisterForm()
+def register(request):
+    register_form = RegisterForm()
 
     if request.method == 'POST':
-        user_form = RegisterForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            user = user_form.cleaned_data.get('username')
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            user = register_form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user)
             return redirect('login')
     
     context = {
-        'user_form': user_form,
+        'register_form': register_form,
     }
     return render(request, 'base/account/register.html', context)
 
 @login_required(login_url='login')
-def account_view(request):
+def account(request):
     # update_user_form = UpdateUserForm(instance=request.user)
     # if request.method == 'POST':
     #     update_user_form = UpdateUserForm(request.POST, instance=request.user)

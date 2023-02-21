@@ -5,27 +5,24 @@
 
     <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
         {% csrf_token %}
-        <div class="col-md-6">
-            {{ user_form.first_name }}
+        <div class="form-floating col-md-12">
+            {{ register_form.username }}
+            <label for="usernameInput">Username</label>
         </div>
-        <div class="col-md-6">
-            {{ user_form.last_name }}
+        <div class="form-floating col-md-12">
+            {{ register_form.email }}
+            <label for="emailInput">Email</label>
         </div>
-
-        <div class="col-md-12">
-            {{ user_form.email }}
+        <div class="form-floating col-md-6">
+            {{ register_form.password1 }}
+            <label for="password1Input">Choose a password</label>
         </div>
-        <div class="col-md-12">
-            {{ user_form.username }}
+        <div class="form-floating col-md-6">
+            {{ register_form.password2 }}
+            <label for="password2Input">Repeat the password</label>
         </div>
-        <div class="col-md-6">
-            {{ user_form.password1 }}
-        </div>
-        <div class="col-md-6">
-            {{ user_form.password2 }}
-        </div>
-        <div class="col-12">
-            <input type="submit" class="btn btn-success" value="Register"></input>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-lg btn-success" value="Register">Register</button>
         </div>
     </form>
 
@@ -41,13 +38,6 @@
     {% endif %}
     
 
-    <p class="fw-light py-4">Already have an account?</p>
-    <a
-        class="btn btn-primary"
-        type="button"
-        href="{% url 'login' %}"
-    >
-        Login
-    </a>
+    <p class="fw-light mt-2">Already have an account? <i class="bi bi-arrow-right"></i> <a class="link-primary fw-bold" type="button" href="{% url 'login' %}">Login</a></p>
 </div>
 {% endblock content %}
