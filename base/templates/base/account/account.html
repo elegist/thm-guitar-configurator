@@ -5,32 +5,7 @@
     <section class="account-information pt-3">
         <h2 class="p-3">Account Information</h2>
         <form action="" method="POST">
-            {% csrf_token %}
-            <div class="mb-3 row">
-                <label for="userName" class="col-4">User Name</label>
-                <div class="col-8">
-                    {{update_user_form.username}}
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="firstName" class="col-4">First Name</label>
-                <div class="col-8">
-                    {{update_user_form.first_name}}
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="lastName" class="col-4">Last Name</label>
-                <div class="col-8">
-                    {{update_user_form.last_name}}
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="email" class="col-4">Email Address</label>
-                <div class="col-8">
-                    {{update_user_form.email}}
-                </div>
-            </div>
-            <button class="btn btn-outline-info" type="submit">Update Information</button>
+            
         </form>
     </section>
 

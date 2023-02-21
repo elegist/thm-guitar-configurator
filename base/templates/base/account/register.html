@@ -6,23 +6,23 @@
     <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
         {% csrf_token %}
         <div class="col-md-6">
-            {{ form.first_name }}
+            {{ user_form.first_name }}
         </div>
         <div class="col-md-6">
-            {{ form.last_name }}
+            {{ user_form.last_name }}
         </div>
 
         <div class="col-md-12">
-            {{ form.email }}
+            {{ user_form.email }}
         </div>
         <div class="col-md-12">
-            {{ form.username }}
+            {{ user_form.username }}
         </div>
         <div class="col-md-6">
-            {{ form.password1 }}
+            {{ user_form.password1 }}
         </div>
         <div class="col-md-6">
-            {{ form.password2 }}
+            {{ user_form.password2 }}
         </div>
         <div class="col-12">
             <input type="submit" class="btn btn-success" value="Register"></input>
