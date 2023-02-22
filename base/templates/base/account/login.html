@@ -16,10 +16,7 @@
             id="inputUsername"
             aria-describedby="usernameHelp"
             placeholder="Username"
-    />
-        <div id="usernameHelp" class="form-text">
-            We'll never share personal data with anyone else.
-        </div>
+        />
     </div>
     <div class="mb-3">
         <input
@@ -37,14 +34,8 @@
     <div class="alert alert-warning w-50 mx-auto my-4">{{ message }}</div>
 {% endfor %}
 
-<p class="fw-light py-4">Don't have an account yet?</p>
-<a
-    class="btn btn-primary"
-    type="button"
-    href="{% url 'register' %}"
->
-    Register
-</a>
+<p class="fw-light mt-2">Don't have an account yet? <i class="bi bi-arrow-right"></i> <a class="link-primary fw-bold" type="button" href="{% url 'register' %}">Register</a></p>
+
 {% else %}
 <p> You are already logged in. Would you like to <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>?</p>
 {% endif %}
