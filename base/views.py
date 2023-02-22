@@ -23,15 +23,15 @@ def login_user(request):
     return render(request, 'base/account/login.html', context)
 
 def register(request):
-    register_form = RegisterForm()
-
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             register_form.save()
-            user = register_form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
+            user_name = register_form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user_name)
             return redirect('login')
+    else:
+        register_form = RegisterForm()
     
     context = {
         'register_form': register_form,

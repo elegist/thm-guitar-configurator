@@ -16,6 +16,19 @@ class RegisterForm(UserCreationForm):
         self.fields['password1'].widget = forms.PasswordInput(attrs={'id': 'password1Input', 'class': 'form-control', 'placeholder': 'Choose a password', 'required': True})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'id': 'password2Input', 'class': 'form-control', 'placeholder': 'Repeat the password', 'required': True})
 
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs) -> None:
+        super(CustomerForm, self).__init__(*args, **kwargs)
+
+        self.fields['street'].widget = forms.TextInput(attrs={'id': 'streetInput', 'class': 'form-control', 'placeholder': 'Street'})
+        self.fields['city'].widget = forms.TextInput(attrs={'id': 'cityInput', 'class': 'form-control', 'placeholder': 'City'})
+        self.fields['state'].widget = forms.TextInput(attrs={'id': 'stateInput', 'class': 'form-control', 'placeholder': 'State'})
+        self.fields['zip_code'].widget = forms.TextInput(attrs={'id': 'zip_codeInput', 'class': 'form-control', 'placeholder': 'Zip Code'})
+
 # class UpdateUserForm(forms.ModelForm):
 #     class Meta:
 #         model = User

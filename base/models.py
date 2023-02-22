@@ -10,7 +10,7 @@ class Customer(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.user
+        return self.user.username
 
 # ## color, wood, frets, pickup, hardware##
 # class Category(models.Model):
