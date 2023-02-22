@@ -15,15 +15,14 @@
 {% endfor %} {% endcomment %}
 
 <!-- page content -->
-<div class="container bg-custom-light shadow-lg">
-    {% include 'base/hero.html' %}
+{% include 'base/hero.html' %}
 
-    {% comment %} <div class="container py-3">
-        {% include 'base/staff-picks-carousel/staff-picks.html' %}
-    </div>
-    <div class="container py-5">
-        {% include 'base/configure-your-own.html' %}
-    </div> {% endcomment %}
+{% comment %} <div class="container py-3">
+    {% include 'base/staff-picks-carousel/staff-picks.html' %}
 </div>
+<div class="container py-5">
+    {% include 'base/configure-your-own.html' %}
+</div> {% endcomment %}
+
 
 {% endblock content %}

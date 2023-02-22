@@ -8,7 +8,7 @@ def home(request):
     context = {}
     return render(request, 'base/home.html', context)
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')

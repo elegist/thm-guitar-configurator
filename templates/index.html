@@ -27,13 +27,17 @@
     </head>
 
     <body>
-        <!-- navbar -->
-        {% include 'navbar.html' %}
-        <!-- main content area -->
-        {% block content %} 
-        {% endblock %}
-        <!-- footer -->
-        {% include 'footer.html' %}
+        <div class="wrapper">
+            <!-- navbar -->
+            {% include 'navbar.html' %}
+            <div id="mainContent" class="container bg-custom-light shadow-lg text-center">
+                <!-- main content area -->
+                {% block content %} 
+                {% endblock content %}
+            </div>
+            <!-- footer -->
+            {% include 'footer.html' %}
+        </div>
 
         <!-- scripts -->
         <!-- <script src="{% static 'scripts/main.js' %}"></script> -->

@@ -1,33 +1,31 @@
 {% extends 'index.html' %} 
 {% load static %}
 {% block content %}
-<div class="container bg-custom-light shadow-lg text-center">
-    <section class="account-information pt-3">
-        <h2 class="p-3">Account Information</h2>
-        <form action="" method="POST">
-            
-        </form>
-    </section>
+<section class="account-information pt-3">
+    <h2 class="p-3">Account Information</h2>
+    <form action="" method="POST">
+        
+    </form>
+</section>
 
-    <section class="saved-presets pt-3">
-        <h2 class="p-3">Saved Presets</h2>
-        <div class="row">
-            <div class="col-md-6 col-lg-3 my-2">
-                {% include 'base/account/account-page/saved-preset-card.html' %}
-            </div>
-            <div class="col-md-6 col-lg-3 my-2">
-                {% include 'base/account/account-page/saved-preset-card.html' %}
-            </div>
-            <div class="col-md-6 col-lg-3 my-2">
-                {% include 'base/account/account-page/saved-preset-card.html' %}
-            </div>
-            <div class="col-md-6 col-lg-3 my-2">
-                {% include 'base/account/account-page/saved-preset-card.html' %}
-            </div>
-            <div class="col-md-6 col-lg-3 my-2">
-                {% include 'base/account/account-page/saved-preset-card.html' %}
-            </div>
+<section class="saved-presets pt-3">
+    <h2 class="p-3">Saved Presets</h2>
+    <div class="row">
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
         </div>
-    </section>
-</div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+    </div>
+</section>
 {% endblock content %}

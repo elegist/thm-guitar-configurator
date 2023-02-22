@@ -47,9 +47,22 @@ html {
 }
 
 body {
-    min-height: 100vh;
     background: var(--background-gradient);
     font-family: var(--font-family-primary) !important;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#mainContent {
+    flex-grow: 1;
+}
+
+.footer {
+    justify-self: flex-end;
 }
 
 form label {
