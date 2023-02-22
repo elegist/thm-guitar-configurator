@@ -40,16 +40,23 @@ def register(request):
 
 @login_required(login_url='login')
 def account(request):
-    # update_user_form = UpdateUserForm(instance=request.user)
-    # if request.method == 'POST':
-    #     update_user_form = UpdateUserForm(request.POST, instance=request.user)
-    #     if update_user_form.is_valid():
-    #         update_user_form.save()
-    #         user = update_user_form.cleaned_data.get('username')
-    #         messages.success(request, 'Account informations changed for ' + user)
-    #         return redirect('account')
+    if request.method == 'POST':
+        update_user_form = UpdateUserForm(request.POST, instance=request.user)
+        update_customer_form = UpdateCustomerForm(request.POST, instance=request.user.customer)
+        if update_user_form.is_valid() and update_customer_form.is_valid():
+            update_user_form.save()
+            update_customer_form.save()
+            user = update_user_form.cleaned_data.get('username')
+            messages.success(request, 'Account informations changed for ' + user)
+            return redirect('account')
+    else:
+        update_user_form = UpdateUserForm(instance=request.user)
+        update_customer_form = UpdateCustomerForm(instance=request.user.customer)
 
-    context = {}
+    context = {
+        'update_user_form': update_user_form,
+        'update_customer_form': update_customer_form,
+    }
     return render(request, 'base/account/account.html', context)
 
 def logout_user(request):

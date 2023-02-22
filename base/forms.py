@@ -11,33 +11,31 @@ class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs) -> None:
         super(RegisterForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].widget = forms.TextInput(attrs={'id': 'usernameInput', 'class': 'form-control', 'placeholder': 'User Name', 'required': True})
-        self.fields['email'].widget = forms.TextInput(attrs={'id': 'emailInput', 'class': 'form-control', 'placeholder': 'Email', 'required': True})
-        self.fields['password1'].widget = forms.PasswordInput(attrs={'id': 'password1Input', 'class': 'form-control', 'placeholder': 'Choose a password', 'required': True})
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'id': 'password2Input', 'class': 'form-control', 'placeholder': 'Repeat the password', 'required': True})
+        self.fields['username'].widget = forms.TextInput(attrs={'id': 'usernameInput', 'class': 'form-control', 'placeholder': 'User Name'})
+        self.fields['email'].widget = forms.TextInput(attrs={'id': 'emailInput', 'class': 'form-control', 'placeholder': 'Email'})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'id': 'password1Input', 'class': 'form-control', 'placeholder': 'Choose a password'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'id': 'password2Input', 'class': 'form-control', 'placeholder': 'Repeat the password'})
 
-class CustomerForm(forms.ModelForm):
+class UpdateUserForm(forms.ModelForm):
     class Meta:
-        model = Customer
-        fields = '__all__'
+        model = User
+        fields = ['username', 'email']
     
     def __init__(self, *args, **kwargs) -> None:
-        super(CustomerForm, self).__init__(*args, **kwargs)
+        super(UpdateUserForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget = forms.TextInput(attrs={'id': 'usernameInput', 'class': 'form-control', 'placeholder': 'User Name'})
+        self.fields['email'].widget = forms.TextInput(attrs={'id': 'emailInput', 'class': 'form-control', 'placeholder': 'Email'})
+
+class UpdateCustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['street', 'city', 'state', 'zip_code']
+    
+    def __init__(self, *args, **kwargs) -> None:
+        super(UpdateCustomerForm, self).__init__(*args, **kwargs)
 
         self.fields['street'].widget = forms.TextInput(attrs={'id': 'streetInput', 'class': 'form-control', 'placeholder': 'Street'})
         self.fields['city'].widget = forms.TextInput(attrs={'id': 'cityInput', 'class': 'form-control', 'placeholder': 'City'})
         self.fields['state'].widget = forms.TextInput(attrs={'id': 'stateInput', 'class': 'form-control', 'placeholder': 'State'})
         self.fields['zip_code'].widget = forms.TextInput(attrs={'id': 'zip_codeInput', 'class': 'form-control', 'placeholder': 'Zip Code'})
-
-# class UpdateUserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['first_name', 'last_name', 'email', 'username']
-    
-#     def __init__(self, *args, **kwargs) -> None:
-#         super(UpdateUserForm, self).__init__(*args, **kwargs)
-
-#         self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
-#         self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'})
-#         self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'})
-#         self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name'})
