@@ -3,40 +3,43 @@
 {% if not user.is_authenticated %}
 <h1 class="py-4">Login</h1>
 
-<form class="form-container row g-3 mx-auto p-3 border rounded" method='POST'>
+<form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
     {% csrf_token %}
-        {% if error %}
-            <p class="text-danger"> {{error}}</p>
-        {% endif %}
-    <div class="mb-3">
+    <div class="form-floating col-md-12">
         <input
             class="form-control"
             type="username"
             name="username"
-            id="inputUsername"
+            id="usernameInput"
             aria-describedby="usernameHelp"
             placeholder="Username"
         />
+        <label for="usernameInput">User Name</label>
     </div>
-    <div class="mb-3">
+    <div class="form-floating col-md-12">
         <input
             class="form-control"
             type="password"
             name="password"
-            id="inputPassword"
+            id="passwordInput"
             placeholder="Password"
         />
+        <label for="passwordInput">Password</label>
     </div>
-    <button type="submit" class="btn btn-success">Login</button>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-lg btn-success">Login</button>
+        {% for message in messages %}
+        <div class="alert alert-warning col-md-12 mx-auto my-4">{{ message }}</div>
+        {% endfor %}
+        {% if error %}
+        <div class="alert alert-danger col-md-12 mx-auto my-4"> {{error}}</div>
+        {% endif %}
+    </div>
 </form>
-
-{% for message in messages %}
-    <div class="alert alert-warning w-50 mx-auto my-4">{{ message }}</div>
-{% endfor %}
 
 <p class="fw-light mt-2">Don't have an account yet? <i class="bi bi-arrow-right"></i> <a class="link-primary fw-bold" type="button" href="{% url 'register' %}">Register</a></p>
 
 {% else %}
-<p> You are already logged in. Would you like to <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>?</p>
+<p class="mt-5"> You are already logged in. Would you like to <a class="link-primary fw-bold" type="button" href="{% url 'logout' %}">Logout</a>?</p>
 {% endif %}
 {% endblock content %}
