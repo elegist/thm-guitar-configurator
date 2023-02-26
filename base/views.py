@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from .models import Category
 from .models import Item
 from .models import StaffPickItem
 from .models import StaffPick
-from .models import RegisterForm
+from .models import RegisterForm, Cart, CartItem
+from .serializers import CategorySerializer, ItemSerializer, CartSerializer, CartItemSerializer, StaffPickSerializer, StaffPickItemSerializer
 from django.contrib import messages
 # Create your views here.
 
@@ -80,3 +82,35 @@ def logout_user(request):
     logout(request)
     return redirect('home')
     
+
+# Django rest_framework
+
+def category_list(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def item_list(request):
+    items = Item.objects.all()
+    serializer = ItemSerializer(items, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def cart_list(request):
+    carts = Cart.objects.all()
+    serializer = CartSerializer(carts, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def cartItem_list(request):
+    cartItems = CartItem.objects.all()
+    serializer = CartItemSerializer(cartItems, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def staffPick_list(request):
+    staffPicks = StaffPick.objects.all()
+    serializer = StaffPickSerializer(staffPicks, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def staffPickItem_list(request):
+    staffPickItems = StaffPickItem.objects.all()
+    serializer = StaffPickItemSerializer(staffPickItems, many=True)
+    return JsonResponse(serializer.data, safe=False)
