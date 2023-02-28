@@ -1,11 +1,26 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import *
 from .forms import *
 from django.contrib import messages
 
 def home(request):
-    context = {}
+    products = Product.objects.all()
+
+    # TODO: Cart display should be available on entire site. send to index.html?
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+
+    context = {
+        'products': products,
+        'orderItems': items,
+    }
     return render(request, 'base/home.html', context)
 
 def login_user(request):

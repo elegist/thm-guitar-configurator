@@ -14,6 +14,41 @@ class Customer(models.Model):
     def __str__(self) -> str:
         return self.user.username
 
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    image = models.ImageField()
+
+    def __str__(self) -> str:
+        return self.name
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    is_completed = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=200, null=True)
+
+    def __str__(self) -> str:
+        return str(self.id)
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=1)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.product.name
+
+
+
 # ## color, wood, frets, pickup, hardware##
 # class Category(models.Model):
 #     name = models.CharField(max_length = 150)
