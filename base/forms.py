@@ -30,11 +30,13 @@ class UpdateUserForm(forms.ModelForm):
 class UpdateCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['street', 'city', 'state', 'zip_code']
+        fields = ['first_name', 'last_name', 'street', 'city', 'state', 'zip_code']
     
     def __init__(self, *args, **kwargs) -> None:
         super(UpdateCustomerForm, self).__init__(*args, **kwargs)
 
+        self.fields['first_name'].widget = forms.TextInput(attrs={'id': 'first_nameInput', 'class': 'form-control', 'placeholder': 'First Name'})
+        self.fields['last_name'].widget = forms.TextInput(attrs={'id': 'last_nameInput', 'class': 'form-control', 'placeholder': 'Last Name'})
         self.fields['street'].widget = forms.TextInput(attrs={'id': 'streetInput', 'class': 'form-control', 'placeholder': 'Street'})
         self.fields['city'].widget = forms.TextInput(attrs={'id': 'cityInput', 'class': 'form-control', 'placeholder': 'City'})
         self.fields['state'].widget = forms.TextInput(attrs={'id': 'stateInput', 'class': 'form-control', 'placeholder': 'State'})
