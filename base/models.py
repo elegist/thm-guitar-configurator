@@ -35,6 +35,12 @@ class Order(models.Model):
     is_completed = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=200, null=True)
 
+    @property
+    def total(self):
+        order_items = self.orderitem_set.all()
+        total = sum([item.total for item in order_items])
+        return total
+
     def __str__(self) -> str:
         return str(self.id)
 
@@ -43,6 +49,11 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def total(self):
+        total = self.product.price * self.quantity
+        return total
 
     def __str__(self) -> str:
         return self.product.name

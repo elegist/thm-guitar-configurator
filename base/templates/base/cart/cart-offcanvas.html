@@ -18,15 +18,15 @@
     </div>
     <div class="offcanvas-body">
         <!-- TODO: Display the chosen cart item / configuration -->
-        {% if orderItems != None %}
+        {% if order_items != None %}
         <ol class="list-group list-group-numbered">
-                {% for item in orderItems %}
+                {% for item in order_items %}
                 <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">{{ item.product.name }}</div>
                         <div class="d-flex justify-content-between align-items-center">
                             <img class="w-50" src="{% static item.product.image.url %}" alt="">
-                            <span class="fst-italic text-success">€{{ item.product.price }}</span>
+                            <span class="fst-italic text-success">€{{ item.total }}</span>
                         </div>
                     </div>
                     <span class="badge bg-primary rounded-pill">{{ item.quantity }}</span>
@@ -35,7 +35,7 @@
             </ol>
 
             <div class="d-grid gap-2 mt-5">
-                <button class="btn btn-success btn-lg">Order</button>
+                <button class="btn btn-success btn-lg">Order (€{{ order.total }})</button>
             </div>
         {% else %}
         <p class="fst-italic text-color-info">No items in cart</p>

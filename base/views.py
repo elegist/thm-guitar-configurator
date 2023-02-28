@@ -13,13 +13,15 @@ def home(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
-        items = order.orderitem_set.all()
+        order_items = order.orderitem_set.all()
     else:
-        items = []
+        order_items = []
+        order = {'total': 0}
 
     context = {
         'products': products,
-        'orderItems': items,
+        'order': order,
+        'order_items': order_items,
     }
     return render(request, 'base/home.html', context)
 
