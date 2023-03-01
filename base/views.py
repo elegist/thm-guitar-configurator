@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from .models import *
 from .forms import *
 from django.contrib import messages
+import json
 
 def home(request):
     products = Product.objects.all()
@@ -80,3 +82,24 @@ def logout_user(request):
     logout(request)
     return redirect('home')
     
+def updateCart(request):
+    data = json.loads(request.body)
+    product_id = data['productId']
+    action = data['action']
+
+    customer = request.user.customer
+    product = Product.objects.get(id=product_id)
+    order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
+    order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add-to-cart':
+        order_item.quantity = (order_item.quantity + 1)
+    elif action == 'remove-from-cart':
+        order_item.quantity = (order_item.quantity - 1)
+    
+    order_item.save()
+
+    if order_item.quantity <= 0:
+        order_item.delete()
+
+    return JsonResponse('Item was added', safe=False)

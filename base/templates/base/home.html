@@ -31,7 +31,7 @@
     <div class="card-body">
         <h1 class="card-title">{{product.name}}</h1>
         <p class="card-text">{{product.price}}</p>
-        <a href="#" class="btn btn-primary">Add to Cart</a>
+        <button data-product={{product.id}} data-action="add-to-cart" class="btn btn-primary update-cart">Add to Cart</button>
     </div>
 </div>
 {% endfor %}
