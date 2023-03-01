@@ -1,11 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import *
 from django.contrib import messages
+from django.utils import timezone
+from .models import *
+from .forms import *
 
 def home(request):
-    context = {}
+    items = Item.objects.all()
+    context = {
+        'items': items,
+    }
     return render(request, 'base/home.html', context)
 
 def login_user(request):
@@ -63,3 +68,37 @@ def logout_user(request):
     logout(request)
     return redirect('home')
     
+def add_to_cart(request, item_id, *args, **kwargs):
+    item = get_object_or_404(Item, id=item_id)
+    order_item, created = OrderItem.objects.get_or_create(item=item)
+    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    if order.exists():
+        if order[0].items.filter(item__id=item.id).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "This items quantity was updated")
+        else:
+            order[0].items.add(order_item)
+            messages.info(request, "This item was added to your cart")
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(customer=request.user.customer, date_ordered=ordered_date)
+        order.items.add(order_item)
+        messages.info(request, "This item was added to your cart")
+    return redirect('home')
+
+def remove_from_cart(request, item_id, *args, **kwargs):
+    item = get_object_or_404(Item, id=item_id)
+    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    if order.exists():
+        if order[0].items.filter(item__id=item.id).exists():
+            order_item = OrderItem.objects.filter(item=item)[0]
+            order[0].items.remove(order_item)
+            messages.info(request, "This item was removed to your cart")
+        else:
+            messages.info(request, "This item was not in your cart")
+            return redirect('home')
+    else:
+        messages.info(request, "User does not have an order")
+        return redirect('home')
+    return redirect('home')
