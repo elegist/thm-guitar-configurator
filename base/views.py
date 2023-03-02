@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
@@ -8,8 +9,15 @@ from .forms import *
 
 def home(request):
     items = Item.objects.all()
+    order = []
+    if request.user.is_authenticated:
+        try:
+            order = Order.objects.get(customer=request.user.customer, is_completed=False)
+        except ObjectDoesNotExist:
+            order = []
     context = {
         'items': items,
+        'order': order,
     }
     return render(request, 'base/home.html', context)
 
@@ -93,7 +101,7 @@ def remove_from_cart(request, item_id, *args, **kwargs):
     if order.exists():
         if order[0].items.filter(item__id=item.id).exists():
             order_item = OrderItem.objects.filter(item=item)[0]
-            order[0].items.remove(order_item)
+            order_item.delete()
             messages.info(request, "This item was removed to your cart")
         else:
             messages.info(request, "This item was not in your cart")

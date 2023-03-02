@@ -28,7 +28,6 @@ class Item(models.Model):
     discount_percentage = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
     image = models.ImageField()
 
-    @property
     def discount_price(self):
         discount = self.price / 100 * self.discount_percentage
         price = self.price - discount
@@ -51,6 +50,21 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
 
+    def total_price(self):
+        return self.quantity * self.item.price
+    
+    def total_discount_price(self):
+        return self.quantity * self.item.discount_price
+
+    def amount_saving(self):
+        return self.total_price - self.total_discount_price
+
+    @property
+    def final_price(self):
+        if self.item.discount_percentage:
+            return self.total_discount_price
+        return self.total_price
+
     def __str__(self):
         return f'{self.quantity} of {self.item.name}'
 
@@ -60,6 +74,12 @@ class Order(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_ordered = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
+
+    def total_price(self):
+        order_items = self.items.all()
+        total = sum([item.final_price() for item in order_items])
+        return total
+    
 
     def __str__(self):
         return self.customer.user.username

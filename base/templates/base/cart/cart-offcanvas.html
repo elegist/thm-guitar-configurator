@@ -1,3 +1,4 @@
+{% load static %}
 <div
     class="offcanvas offcanvas-end bg-custom-dark"
     tabindex="-1"
@@ -16,20 +17,31 @@
         ></button>
     </div>
     <div class="offcanvas-body">
-        {% if cartItem != None %}
         <!-- TODO: Display the chosen cart item / configuration -->
+        {% if order.items.all %}
+        <ol class="list-group list-group-numbered">
+            {% for order_item in order.items.all %}
+            <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{ order_item.item.name }} <span class="text-danger">x{{ order_item.quantity }}</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <img src="{% static order_item.item.image.url %}" alt="" class="w-50">
+                        <span class="fst-italic text-success">€{{ order_item.total_price }}</span>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
 
         <div class="d-grid gap-2 mt-5">
-            <button class="btn btn-success btn-lg">Order</button>
+            <span>Total: €{{order.total_price}}</span> 
+            <a class="btn btn-warning btn-lg">Proceed to checkout</a>
         </div>
         {% else %}
-
         <p class="fst-italic text-color-info">No items in cart</p>
-
         <div class="d-grid gap-2 mt-5">
-            <button class="btn btn-success btn-lg" disabled>Order</button>
+            <a class="btn btn-warning btn-lg" disabled>Proceed to checkout</a>
         </div>
-
         {% endif %}
     </div>
 </div>
