@@ -47,6 +47,7 @@ class Item(models.Model):
         return self.name
     
 class OrderItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
 
@@ -80,7 +81,6 @@ class Order(models.Model):
         total = sum([item.final_price() for item in order_items])
         return total
     
-
     def __str__(self):
         return self.customer.user.username
     

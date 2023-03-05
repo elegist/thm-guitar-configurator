@@ -14,6 +14,10 @@
     {% include 'base/configurator/configurator-modal.html' with step=5 maxSteps=5 %}
 {% endfor %} {% endcomment %}
 
+{% for step in steps %}
+{% include 'base/configurator/configurator-modal.html' %}
+{% endfor %}
+
 <!-- page content -->
 {% include 'base/hero.html' %}
 
@@ -26,7 +30,7 @@
 
 {% for item in items %}
 <div class="card guitar-card">
-    <img src="{% static item.image.url %}" alt="" class="card-img-top">
+    <img src="{% static item.image.url %}" alt="" class="card-img-top w-50">
     <div class="card-body">
         <h1 class="card-title">{{ item.name }}</h1>
         <div class="card-text">€{{ item.price }}</div>

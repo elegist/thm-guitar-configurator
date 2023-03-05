@@ -9,6 +9,13 @@ from .forms import *
 
 def home(request):
     items = Item.objects.all()
+    steps = Category.objects.all()
+    base_models = Item.objects.filter(category=1)
+    general = Item.objects.filter(category=2)
+    wood = Item.objects.filter(category=3)
+    color = Item.objects.filter(category=4)
+    electronics = Item.objects.filter(category=5)
+    hardware = Item.objects.filter(category=6)
     order = []
     if request.user.is_authenticated:
         try:
@@ -18,6 +25,13 @@ def home(request):
     context = {
         'items': items,
         'order': order,
+        'steps': steps,
+        'base_models': base_models,
+        'general': general,
+        'wood': wood,
+        'color': color,
+        'electronics' : electronics,
+        'hardware': hardware,
     }
     return render(request, 'base/home.html', context)
 
@@ -78,10 +92,10 @@ def logout_user(request):
     
 def add_to_cart(request, item_id, *args, **kwargs):
     item = get_object_or_404(Item, id=item_id)
-    order_item, created = OrderItem.objects.get_or_create(item=item)
+    order_item, created = OrderItem.objects.get_or_create(item=item, customer=request.user.customer)
     order = Order.objects.filter(customer=request.user.customer, is_completed=False)
     if order.exists():
-        if order[0].items.filter(item__id=item.id).exists():
+        if order[0].items.filter(item__id=item.id, order__customer=request.user.customer).exists():
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This items quantity was updated")
