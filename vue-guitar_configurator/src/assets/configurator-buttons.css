@@ -1,0 +1,50 @@
+@import url("./main.css");
+
+.config-input {
+    display: none;
+}
+
+.config-btn {
+    margin: 1rem;
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    position: relative;
+    text-align: center;
+    background: var(--color-dark-200);
+    box-shadow: 0 0 0.25rem #10101067;
+    cursor: pointer;
+}
+
+.config-btn > i {
+    color: var(--color-success-400);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.config-btn > .config-content {
+    position: relative;
+}
+
+.config-btn > .config-content > .config-img {
+    width: 200px;
+}
+
+.config-btn > .config-content > .config-title {
+    margin-top: 0.5rem;
+    font-size: var(--font-size-h4);
+}
+
+/* .radio-btn > .radio-content > .radio-price-text {
+    position: absolute;
+    top: -1.5rem;
+    right: -1rem;
+} */
+
+.config-input:checked + .config-btn {
+    border: 2px solid var(--color-success-400);
+}
+
+.config-input:checked + .config-btn > i {
+    opacity: 1;
+}

@@ -1,56 +1,71 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
-from django.http import JsonResponse
-from .models import Category
-from .models import Item
-from .models import StaffPickItem
-from .models import StaffPick
-from .models import RegisterForm, Cart, CartItem
-from .serializers import CategorySerializer, ItemSerializer, CartSerializer, CartItemSerializer, StaffPickSerializer, StaffPickItemSerializer
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-# Create your views here.
+from django.utils import timezone
+from .models import *
+from .forms import *
+from .serializers import CategorySerializer, ItemSerializer, ConfigurationItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
+from django.http import JsonResponse
 
 def home(request):
-    steps = Category.objects.all()
-    models = Item.objects.filter(category=1)
-    frets = Item.objects.filter(category=2)
-    woods = Item.objects.filter(category=3)
-    colors = Item.objects.filter(category=4)
-    electronics = Item.objects.filter(category=5)
-    hardware = Item.objects.filter(category=6)
+    if request.user.is_authenticated and request.method == 'POST':
+        for item in request.POST:
+            if item != 'csrfmiddlewaretoken':
+                chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
 
-    StratocasterStaff = StaffPickItem.objects.filter(staffPick = 1)
-    TelecasterStaff = StaffPickItem.objects.filter(staffPick = 2)
-    LesPaulStaff = StaffPickItem.objects.filter(staffPick = 3)
-    FlyingVStaff = StaffPickItem.objects.filter(staffPick = 4)
-    staffPicks = [StaffPickItem.objects.filter(staffPick = 1), StaffPickItem.objects.filter(staffPick = 2), StaffPickItem.objects.filter(staffPick = 3), StaffPickItem.objects.filter(staffPick = 4)]
-    staffPicksIndex = range(len(staffPicks))
-    stratIndex = range(len(StratocasterStaff))
+                print(request.POST.get(item, ""))
+        # for item in request.POST.items():
+        #     configuration_item, created = ConfigurationItem.objects.get_or_create(item=item, customer=request.user.customer)
 
-    stratocasterTotal = 0
-    for index in stratIndex:
-        stratocasterTotal += StratocasterStaff[index].item.price
+    items = Item.objects.all()
+    categories = Category.objects.all()
+    max_steps = categories.count()
+    configuration_items = [
+        Item.objects.filter(category=1),
+        Item.objects.filter(category=2),
+        Item.objects.filter(category=3),
+        Item.objects.filter(category=4),
+        Item.objects.filter(category=5),
+        Item.objects.filter(category=6),
+        Item.objects.filter(category=7)
+    ]
 
+    order = []
+    if request.user.is_authenticated:
+        try:
+            order = Order.objects.get(customer=request.user.customer, is_completed=False)
+        except ObjectDoesNotExist:
+            order = []
     context = {
-        'steps': steps,
-        'models': models,
-        'frets': frets,
-        'woods': woods,
-        'colors': colors,
-        'electronics': electronics,
-        'hardware': hardware,
-        'StratocasterStaff': StratocasterStaff,
-        'TelecasterStaff': TelecasterStaff,
-        'LesPaulStaff': LesPaulStaff, 
-        'FlyingVStaff': FlyingVStaff,
-        'staffPicks': staffPicks,
-        'staffPicksIndex': staffPicksIndex,
-        'stratocasterTotal': stratocasterTotal
+        'items': items,
+        'order': order,
+        'categories': categories,
+        'max_steps': max_steps,
+        'configuration_items': configuration_items
     }
     return render(request, 'base/home.html', context)
 
-def login_view(request):
+def configurator(request):
+    guitar_models = Item.objects.filter(category=1)
+    configuration_items = [
+        Item.objects.filter(category=2),
+        Item.objects.filter(category=3),
+        Item.objects.filter(category=4),
+        Item.objects.filter(category=5),
+        Item.objects.filter(category=6),
+        Item.objects.filter(category=7)
+    ]
+
+    context = {
+        'guitar_models': guitar_models,
+        'configuration_items': configuration_items
+    }
+    return render(request, 'base/configurator/configurator.html', context)
+
+def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -64,53 +79,111 @@ def login_view(request):
     context = {}
     return render(request, 'base/account/login.html', context)
 
-def register_view(request):
-    form = RegisterForm()
-
+def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            user_name = register_form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user_name)
             return redirect('login')
+    else:
+        register_form = RegisterForm()
     
-    context = {'form': form}
+    context = {
+        'register_form': register_form,
+    }
     return render(request, 'base/account/register.html', context)
+
+@login_required(login_url='login')
+def account(request):
+    if request.method == 'POST':
+        update_user_form = UpdateUserForm(request.POST, instance=request.user)
+        update_customer_form = UpdateCustomerForm(request.POST, instance=request.user.customer)
+        if update_user_form.is_valid() and update_customer_form.is_valid():
+            update_user_form.save()
+            update_customer_form.save()
+            user = update_user_form.cleaned_data.get('username')
+            messages.success(request, 'Account informations changed for ' + user)
+            return redirect('account')
+    else:
+        update_user_form = UpdateUserForm(instance=request.user)
+        update_customer_form = UpdateCustomerForm(instance=request.user.customer)
+
+    context = {
+        'update_user_form': update_user_form,
+        'update_customer_form': update_customer_form,
+    }
+    return render(request, 'base/account/account.html', context)
 
 def logout_user(request):
     logout(request)
     return redirect('home')
     
+def add_to_cart(request, item_id, *args, **kwargs):
+    item = get_object_or_404(Item, id=item_id)
+    order_item, created = OrderItem.objects.get_or_create(item=item, customer=request.user.customer)
+    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    if order.exists():
+        if order[0].items.filter(item__id=item.id, order__customer=request.user.customer).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "This items quantity was updated")
+        else:
+            order[0].items.add(order_item)
+            messages.info(request, "This item was added to your cart")
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(customer=request.user.customer, date_ordered=ordered_date)
+        order.items.add(order_item)
+        messages.info(request, "This item was added to your cart")
+    return redirect('home')
 
-# Django rest_framework
+def remove_from_cart(request, item_id, *args, **kwargs):
+    item = get_object_or_404(Item, id=item_id)
+    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    if order.exists():
+        if order[0].items.filter(item__id=item.id).exists():
+            order_item = OrderItem.objects.filter(item=item)[0]
+            order_item.delete()
+            messages.info(request, "This item was removed to your cart")
+        else:
+            messages.info(request, "This item was not in your cart")
+            return redirect('home')
+    else:
+        messages.info(request, "User does not have an order")
+        return redirect('home')
+    return redirect('home')
+    
 
-def category_list(request):
-    categories = Category.objects.all()
-    serializer = CategorySerializer(categories, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# # Django rest_framework
 
-def item_list(request):
-    items = Item.objects.all()
-    serializer = ItemSerializer(items, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# def category_list(request):
+#     categories = Category.objects.all()
+#     serializer = CategorySerializer(categories, many=True)
+#     return JsonResponse(serializer.data, safe=False)
 
-def cart_list(request):
-    carts = Cart.objects.all()
-    serializer = CartSerializer(carts, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# def item_list(request):
+#     items = Item.objects.all()
+#     serializer = ItemSerializer(items, many=True)
+#     return JsonResponse(serializer.data, safe=False)
 
-def cartItem_list(request):
-    cartItems = CartItem.objects.all()
-    serializer = CartItemSerializer(cartItems, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# def cart_list(request):
+#     carts = Cart.objects.all()
+#     serializer = CartSerializer(carts, many=True)
+#     return JsonResponse(serializer.data, safe=False)
 
-def staffPick_list(request):
-    staffPicks = StaffPick.objects.all()
-    serializer = StaffPickSerializer(staffPicks, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# def cartItem_list(request):
+#     cartItems = CartItem.objects.all()
+#     serializer = CartItemSerializer(cartItems, many=True)
+#     return JsonResponse(serializer.data, safe=False)
 
-def staffPickItem_list(request):
-    staffPickItems = StaffPickItem.objects.all()
-    serializer = StaffPickItemSerializer(staffPickItems, many=True)
-    return JsonResponse(serializer.data, safe=False)
+# def staffPick_list(request):
+#     staffPicks = StaffPick.objects.all()
+#     serializer = StaffPickSerializer(staffPicks, many=True)
+#     return JsonResponse(serializer.data, safe=False)
+
+# def staffPickItem_list(request):
+#     staffPickItems = StaffPickItem.objects.all()
+#     serializer = StaffPickItemSerializer(staffPickItems, many=True)
+#     return JsonResponse(serializer.data, safe=False)

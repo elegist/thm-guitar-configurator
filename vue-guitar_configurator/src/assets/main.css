@@ -1,0 +1,421 @@
+@font-face {
+  font-family: PlayfairDisplay;
+  src: url(./fonts/Rubik-VariableFont_wght.ttf); /* add URL*/
+}
+
+:root {
+  --color-dark-400: hsl(0, 0%, 9%);
+  --color-dark-200: hsl(0, 0%, 17%);
+  --color-primary-400: hsl(295, 55%, 40%);
+  --color-primary-200: hsl(295, 55%, 60%);
+  --color-secondary-400: hsl(220, 5%, 65%);
+  --color-secondary-200: hsl(220, 5%, 85%);
+  --color-success-400: hsl(139, 74%, 44%);
+  --color-success-200: hsl(139, 87%, 61%);
+  --color-danger-400: hsl(3, 88%, 62%);
+  --color-danger-200: hsl(3, 88%, 72%);
+  --color-warning-400: hsl(50, 82%, 63%);
+  --color-warning-200: hsl(50, 82%, 73%);
+  --color-info-400: hsl(17, 88%, 59%);
+  --color-info-200: hsl(17, 88%, 79%);
+
+  --background-gradient: linear-gradient(
+      -45deg,
+      hsl(50, 78%, 63%),
+      hsl(37, 85%, 54%),
+      hsl(17, 84%, 59%),
+      hsl(3, 84%, 62%)
+  );
+
+  --font-family-primary: PlayfairDisplay;
+  --font-family-heading: var(--font-family-primary);
+  --font-family-body: var(--font-family-primary);
+
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 500;
+  --font-weight-bold: 700;
+
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.75rem;
+  --font-size-h4: 1.5rem;
+  --font-size-regular: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background-gradient);
+  font-family: var(--font-family-primary) !important;
+}
+
+.form-container {
+  width: 75%;
+}
+
+@media (min-width: 992px) {
+  .form-container {
+      width: 50%;
+  }
+}
+
+/* Text */
+.text-color-black {
+  color: black;
+}
+.text-color-primary {
+  color: var(--color-primary-400);
+}
+.text-color-secondary {
+  color: var(--color-secondary-400);
+}
+.text-color-success {
+  color: var(--color-success-400);
+}
+.text-color-danger {
+  color: var(--color-danger-400);
+}
+.text-color-warning {
+  color: var(--color-warning-400);
+}
+.text-color-info {
+  color: var(--color-info-400);
+}
+
+/* Links */
+
+.link-primary {
+  color: var(--color-primary-400) !important;
+  text-decoration: none;
+}
+
+.link-primary:is(:hover, :focus) {
+  color: var(--color-primary-200) !important;
+  text-decoration: underline;
+}
+
+.link-secondary {
+  color: var(--color-secondary-400) !important;
+  text-decoration: none;
+}
+
+.link-secondary:is(:hover, :focus) {
+  color: var(--color-secondary-200) !important;
+  text-decoration: underline;
+}
+
+.link-success {
+  color: var(--color-success-400) !important;
+  text-decoration: none;
+}
+
+.link-success:is(:hover, :focus) {
+  color: var(--color-success-200) !important;
+  text-decoration: underline;
+}
+
+.link-warning {
+  color: var(--color-warning-400) !important;
+  text-decoration: none;
+}
+
+.link-warning:is(:hover, :focus) {
+  color: var(--color-warning-200) !important;
+  text-decoration: underline;
+}
+
+.link-danger {
+  color: var(--color-danger-400) !important;
+  text-decoration: none;
+}
+
+.link-danger:is(:hover, :focus) {
+  color: var(--color-danger-200) !important;
+  text-decoration: underline;
+}
+
+.link-info {
+  color: var(--color-info-400) !important;
+  text-decoration: none;
+}
+
+.link-info:is(:hover, :focus) {
+  color: var(--color-info-200) !important;
+  text-decoration: underline;
+}
+
+/* Button */
+
+.btn-primary {
+  background-color: var(--color-primary-400);
+  color: white;
+  border: none;
+}
+.btn-primary:is(:hover, :active) {
+  background-color: var(--color-primary-200);
+  color: black;
+}
+.btn-outline-primary {
+  border-color: var(--color-primary-400);
+  color: white;
+}
+.btn-outline-primary:is(:hover, :active) {
+  background-color: var(--color-primary-200);
+  border-color: var(--color-primary-200);
+  color: black;
+}
+.btn-outline-primary:is(:disabled) {
+  border-color: var(--color-primary-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary-400);
+  color: white;
+  border: none;
+}
+.btn-secondary:is(:hover, :active) {
+  background-color: var(--color-secondary-200);
+  color: black;
+}
+.btn-outline-secondary {
+  border-color: var(--color-secondary-400);
+  color: white;
+}
+.btn-outline-secondary:is(:hover, :active) {
+  background-color: var(--color-secondary-200);
+  border-color: var(--color-secondary-200);
+  color: black;
+}
+.btn-outline-secondary:is(:disabled) {
+  border-color: var(--color-secondary-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn-success {
+  background-color: var(--color-success-400);
+  color: white;
+  border: none;
+}
+.btn-success:is(:hover, :active) {
+  background-color: var(--color-success-200);
+  color: black;
+}
+.btn-outline-success {
+  border-color: var(--color-success-400);
+  color: white;
+}
+.btn-outline-success:is(:hover, :active) {
+  background-color: var(--color-success-200);
+  border-color: var(--color-success-200);
+  color: black;
+}
+.btn-outline-success:is(:disabled) {
+  border-color: var(--color-success-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background-color: var(--color-danger-400);
+  color: white;
+  border: none;
+}
+.btn-danger:is(:hover, :active) {
+  background-color: var(--color-danger-200);
+  color: black;
+}
+.btn-outline-danger {
+  border-color: var(--color-danger-400);
+  color: white;
+}
+.btn-outline-danger:is(:hover, :active) {
+  background-color: var(--color-danger-200);
+  border-color: var(--color-danger-200);
+  color: black;
+}
+.btn-outline-danger:is(:disabled) {
+  border-color: var(--color-danger-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn-warning {
+  background-color: var(--color-warning-400);
+  color: white;
+  border: none;
+}
+.btn-warning:is(:hover, :active) {
+  background-color: var(--color-warning-200);
+  color: black;
+}
+.btn-outline-warning {
+  border-color: var(--color-warning-400);
+  color: white;
+}
+.btn-outline-warning:is(:hover, :active) {
+  background-color: var(--color-warning-200);
+  border-color: var(--color-warning-200);
+  color: black;
+}
+.btn-outline-warning:is(:disabled) {
+  border-color: var(--color-warning-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn-info {
+  background-color: var(--color-info-400);
+  color: white;
+  border: none;
+}
+.btn-info:is(:hover, :active) {
+  background-color: var(--color-info-200);
+  color: black;
+}
+.btn-outline-info {
+  border-color: var(--color-info-400);
+  color: white;
+}
+.btn-outline-info:is(:hover, :active) {
+  background-color: var(--color-info-200);
+  border-color: var(--color-info-200);
+  color: black;
+}
+.btn-outline-info:is(:disabled) {
+  border-color: var(--color-info-400);
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Navigation */
+
+.bg-custom-dark {
+  background: var(--color-dark-400);
+  color: white;
+}
+
+.bg-custom-light {
+  background: var(--color-dark-200);
+  color: white;
+}
+
+.nav-link,
+.navbar-toggler-icon {
+  color: white !important;
+}
+
+.nav-link:is(:hover) {
+  color: var(--color-primary-400) !important;
+}
+
+.navbar-nav {
+  text-align: right;
+}
+
+.dropdown-menu {
+  background: var(--color-dark-400);
+  text-align: right;
+}
+
+@media (min-width: 992px) {
+  .dropdown-menu {
+      text-align: initial;
+  }
+}
+
+.dropdown-menu > li > .dropdown-item:is(:hover, :focus) {
+  color: black !important; 
+  background: var(--color-primary-200) !important;
+}
+.dropdown-menu > li > .dropdown-item {
+  color: white !important;
+}
+
+/* Hero */
+
+.hero-image {
+  transform: scale(1.4);
+}
+
+/* Carousel */
+
+.carousel-item {
+  height: 24rem;
+  background: var(--color-dark-400);
+  border-radius: 0.7rem;
+}
+
+/* Card */
+
+.guitar-card {
+  background-color: var(--color-dark-400) !important;
+  color: white;
+}
+
+/* Modal */
+
+.modal-dark {
+  background: var(--color-dark-200);
+  color: white;
+}
+
+.modal-body > form input:is(:focus),
+.modal-body > form input {
+  background-color: var(--color-dark-200);
+  color: white;
+}
+
+.progress {
+  background: var(--color-dark-400);
+}
+
+.progress-bar {
+  background: var(--color-info-400);
+}
+
+
+.configurator-body {
+  min-height: 80vh;
+  height: 100%;
+}
+
+.configurator-body > .input-col {
+  height: 50%;
+}
+
+.configurator-body > .img-container > .img-guitar-preview {
+  height: 30%;
+  width: auto;
+}
+
+.configurator-body > .input-col > .options-container {
+  max-height: 85%;
+  background: var(--color-dark-400);
+}
+
+@media (min-width: 992px) {
+  .configurator-body {
+      min-height: 0;
+      height: 60vh;
+  }
+
+  .configurator-body > .img-container > .img-guitar-preview {
+      height: 90%;
+      width: auto;
+  }
+
+  .configurator-body > .input-col {
+      margin: auto;
+      height: inherit;
+  }
+
+  .configurator-body > .input-col > .options-container {
+      max-height: 75%;
+  }
+}

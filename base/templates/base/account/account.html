@@ -1,0 +1,92 @@
+{% extends 'index.html' %} 
+{% load static %}
+{% block content %}
+<section class="account-information pt-3">
+    <h2 class="p-3">Account Information</h2>
+    <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
+        {% csrf_token %}
+        <div class="form-floating col-xl-6">
+            {{ update_user_form.username }}
+            <label for="usernameInput">Username</label>
+        </div>
+        <div class="form-floating col-xl-6">
+            {{ update_user_form.email }}
+            <label for="emailInput">Email</label>
+        </div>
+        <div class="form-floating col-xl-12">
+            {{ update_customer_form.first_name }}
+            <label for="first_nameInput">First Name</label>
+        </div>
+        <div class="form-floating col-xl-12">
+            {{ update_customer_form.last_name }}
+            <label for="last_nameInput">Last Name</label>
+        </div>
+        <div class="form-floating col-xl-12">
+            {{ update_customer_form.street }}
+            <label for="streetInput">Street</label>
+        </div>
+        <div class="form-floating col-xl-5">
+            {{ update_customer_form.city }}
+            <label for="cityInput">City</label>
+        </div>
+        <div class="form-floating col-xl-5">
+            {{ update_customer_form.state }}
+            <label for="stateInput">State</label>
+        </div>
+        <div class="form-floating col-xl-2">
+            {{ update_customer_form.zip_code }}
+            <label for="zip_codeInput">Zip Code</label>
+        </div>
+    
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-lg btn-success">Update Information</button>
+            {% for message in messages %}
+            <div class="alert alert-warning col-xl-12 mx-auto">{{ message }}</div>
+            {% endfor %}
+            
+            {% if update_user_form.errors %}
+                {% for field in update_user_form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger col-xl-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in update_user_form.non_field_errors %}
+                    <div class="alert alert-danger col-xl-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
+                {% endfor %}
+            {% endif %}
+
+            {% if update_customer_form.errors %}
+                {% for field in update_customer_form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger col-xl-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in update_customer_form.non_field_errors %}
+                    <div class="alert alert-danger col-xl-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </form>
+</section>
+
+<section class="saved-presets pt-3">
+    <h2 class="p-3">Saved Presets</h2>
+    <div class="row">
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+        <div class="col-md-6 col-lg-3 my-2">
+            {% include 'base/account/account-page/saved-preset-card.html' %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

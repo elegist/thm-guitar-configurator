@@ -1,35 +1,35 @@
 from rest_framework import serializers
-from .models import Category, Item, Cart, CartItem, StaffPick, StaffPickItem
+from .models import Category, Item, ConfigurationItem, Configuration, OrderItem, Order
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'categoryDesc')
+        fields = '__all__'
 
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', 'name', 'price', 'description', 'category_id', 'image_path')
+        fields = '__all__'
 
-class CartSerializer(serializers.ModelSerializer):
+class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cart
-        fields = ('id', 'total', 'created_at', 'updated_at', 'user_id')
+        model = OrderItem
+        fields = '__all__'
         
-class CartItemSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CartItem
-        fields = ('id', 'cart_id', 'item_id')
+        model = Order
+        fields = '__all__'
 
-class StaffPickSerializer(serializers.ModelSerializer):
+class ConfigurationItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StaffPick
-        fields = ('id', 'name')
+        model = ConfigurationItem
+        fields = '__all__'
 
-class StaffPickItemSerializer(serializers.ModelSerializer):
+class ConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StaffPickItem
-        fields = ('id', 'item_id', 'staffPick_id')
+        model = Configuration
+        fields = '__all__'
 
 
         

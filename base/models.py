@@ -1,77 +1,111 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
-# Create your models here.
+from django.urls import reverse
 
-class RegisterForm(UserCreationForm):
-    address = forms.CharField(label="Address", max_length=50)
-    city = forms.CharField(label="City", max_length=60)
-    state = forms.CharField(label="State", max_length=30)
-    zip = forms.CharField(label="Zip Code", max_length=6)
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=200, null=True, blank=True)
+    last_name = models.CharField(max_length=200, null=True, blank=True)
+    street = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    state = models.CharField(max_length=200, null=True, blank=True)
+    zip_code = models.CharField(max_length=200, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'address', 'city', 'state', 'zip', 'password1', 'password2']
-    
-    def __init__(self, *args, **kwargs) -> None:
-        super(RegisterForm, self).__init__(*args, **kwargs)
+    def __str__(self) -> str:
+        return self.user.username
 
-        self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True})
-        self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True})
-        self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email', 'required': True})
-        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'User Name', 'required': True})
-        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address', 'required': True})
-        self.fields['city'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City', 'required': True})
-        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State', 'required': True})
-        self.fields['zip'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Zip', 'required': True})
-        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Choose a password', 'required': True})
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repeat the password', 'required': True})
-
-## color, wood, frets, pickup, hardware##
 class Category(models.Model):
-    name = models.CharField(max_length = 150)
-    categoryDesc = models.CharField(max_length = 150)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
-
+    
 class Item(models.Model):
-    name = models.CharField(max_length = 150)
-    category = models.ForeignKey(Category, verbose_name="fk_category", on_delete=models.CASCADE, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    description = models.CharField(max_length=150)
-    image_path = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    discount_percentage = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
+    image = models.ImageField(upload_to='items', null=True, blank=True)
+
+    def image_url(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
+    def discount_price(self):
+        discount = self.price / 100 * self.discount_percentage
+        price = self.price - discount
+        return price
+    
+    def add_to_cart(self):
+        return reverse('add-to-cart', kwargs={
+            'item_id': str(self.pk)
+        })
+
+    def remove_from_cart(self):
+        return reverse('remove-from-cart', kwargs={
+            'item_id': str(self.pk)
+        })
 
     def __str__(self):
         return self.name
 
-class Cart(models.Model):
-    user = models.ForeignKey(User, verbose_name="fk_user", on_delete=models.CASCADE, null=True)
-    total = models.DecimalField(max_digits=8, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class ConfigurationItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.item)
+    
+class Configuration(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    configuration_items = models.ManyToManyField(ConfigurationItem)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_staff_pick = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.customer.user.username
+    
+class OrderItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey(Configuration, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=1)
+
+    def total_price(self):
+        return self.quantity * self.item.price
+    
+    def total_discount_price(self):
+        return self.quantity * self.item.discount_price
+
+    def amount_saving(self):
+        return self.total_price - self.total_discount_price
+
+    @property
+    def final_price(self):
+        if self.item.discount_percentage:
+            return self.total_discount_price
+        return self.total_price
+
+    def __str__(self):
+        return f'{self.quantity} of {self.item.name}'
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    items = models.ManyToManyField(OrderItem)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_ordered = models.DateTimeField()
+    is_completed = models.BooleanField(default=False)
+
+    def total_price(self):
+        order_items = self.items.all()
+        total = sum([item.final_price() for item in order_items])
+        return total
     
     def __str__(self):
-        return self.user
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, verbose_name="fk_cart", on_delete=models.CASCADE, null=True)
-    item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)
-
-
-class StaffPick(models.Model):
-    name = models.CharField(max_length = 150)
-    
-    def __str__(self):
-        return self.name
-
-class StaffPickItem(models.Model):
-    staffPick = models.ForeignKey(StaffPick, verbose_name="fk_StaffPick", on_delete=models.CASCADE, null=True)
-    item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)    
-
-    def __str__(self):
-        item = str(self.item)
-        staffPick = str(self.staffPick)
-        name = staffPick + " " + item
-        return name
+        return self.customer.user.username

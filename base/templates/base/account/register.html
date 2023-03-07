@@ -1,70 +1,45 @@
 {% extends 'index.html' %} 
 {% block content %}
-<div class="container bg-custom-light shadow-lg text-center vh-100">
-    <h1 class="py-4">Register</h1>
+{% if not user.is_authenticated %}
+<h1 class="py-4">Register</h1>
 
-    <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
-        {% csrf_token %}
+<form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
+    {% csrf_token %}
+    <div class="form-floating col-md-12">
+        {{ register_form.username }}
+        <label for="usernameInput">Username</label>
+    </div>
+    <div class="form-floating col-md-12">
+        {{ register_form.email }}
+        <label for="emailInput">Email</label>
+    </div>
+    <div class="form-floating col-md-6">
+        {{ register_form.password1 }}
+        <label for="password1Input">Choose a password</label>
+    </div>
+    <div class="form-floating col-md-6">
+        {{ register_form.password2 }}
+        <label for="password2Input">Repeat the password</label>
+    </div>
 
-        <div class="col-md-6">
-            {{ form.first_name }}
-        </div>
-        <div class="col-md-6">
-            {{ form.last_name }}
-        </div>
-
-        <div class="col-md-12">
-            {{ form.email }}
-        </div>
-
-        <div class="col-md-12">
-            {{ form.username }}
-        </div>
-
-        <div class="col-md-12">
-            {{ form.address }}
-        </div>
-
-        <div class="col-md-6">
-            {{ form.city }}
-        </div>
-        <div class="col-md-3">
-            {{ form.state }}
-        </div>
-        <div class="col-md-3">
-            {{ form.zip }}
-        </div>
-        <div class="col-md-6">
-            {{ form.password1 }}
-        </div>
-        <div class="col-md-6">
-            {{ form.password2 }}
-        </div>
-
-        <div class="col-12">
-            <input type="submit" class="btn btn-success" value="Register"></input>
-        </div>
-    </form>
-
-    {% if form.errors %}
-        {% for field in form %}
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-lg btn-success">Register</button>
+        {% if register_form.errors %}
+        {% for field in register_form %}
             {% for error in field.errors %}
-                <div class="alert alert-danger w-50 mx-auto my-4" role="alert"><strong>{{ error|escape }}</strong></div>
+                <div class="alert alert-danger col-md-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
             {% endfor %}
         {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="alert alert-danger w-50 mx-auto my-4" role="alert"><strong>{{ error|escape }}</strong></div>
+        {% for error in register_form.non_field_errors %}
+            <div class="alert alert-danger col-md-12 mx-auto" role="alert"><strong>{{ error|escape }}</strong></div>
         {% endfor %}
-    {% endif %}
-    
+        {% endif %}
+    </div>
+</form>
 
-    <p class="fw-light py-4">Already have an account?</p>
-    <a
-        class="btn btn-primary"
-        type="button"
-        href="{% url 'login' %}"
-    >
-        Login
-    </a>
-</div>
+<p class="fw-light mt-2">Already have an account? <i class="bi bi-arrow-right"></i> <a class="link-primary fw-bold" type="button" href="{% url 'login' %}">Login</a></p>
+
+{% else %}
+<p class="mt-5"> You are already logged in. Would you like to <a class="link-primary fw-bold" type="button" href="{% url 'logout' %}">Logout</a>?</p>
+{% endif %}
 {% endblock content %}
