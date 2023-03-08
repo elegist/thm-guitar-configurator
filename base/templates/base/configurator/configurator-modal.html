@@ -47,16 +47,17 @@
                                 </div>
                             </div>
                             {% if user.is_authenticated %}
-                            <button class="btn btn-info my-2">
+                            <button type="submit" class="btn btn-info my-2" name="save-and-quit">
                                 Save configuration and quit
                             </button>
                             {% endif %}
                             <button
                                 type="submit"
                                 class="btn btn-success my-2"
+                                name="add-to-cart"
                                 {% if category.id != max_steps %} disabled {% endif %}
                             >
-                                Complete and add to cart
+                            Complete and add to cart
                             </button>
                             <p class="text-color-success my-2">
                                 Total: {price}€

@@ -63,6 +63,7 @@ class ConfigurationItem(models.Model):
         return str(self.item)
     
 class Configuration(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     configuration_items = models.ManyToManyField(ConfigurationItem)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -93,7 +94,7 @@ class OrderItem(models.Model):
         return self.total_price
 
     def __str__(self):
-        return f'{self.quantity} of {self.item.name}'
+        return f'{self.quantity} of {self.item}'
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)

@@ -8,15 +8,24 @@ from .models import *
 from .forms import *
 
 def home(request):
-    if request.user.is_authenticated and request.method == 'POST':
-        for item in request.POST:
-            if item != 'csrfmiddlewaretoken':
-                chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
+    if request.user.is_authenticated: 
+        if request.method == 'POST':
+            configuration = Configuration.objects.create(customer=request.user.customer, name=f'{request.user.customer}s {request.POST.get("radio-1", "")}')
+            if 'add-to-cart' in request.POST:
+                order_item = OrderItem.objects.create(customer=request.user.customer, item=configuration)
+            elif 'save-and-quit' in request.POST:
+                pass
 
-                print(request.POST.get(item, ""))
-        # for item in request.POST.items():
-        #     configuration_item, created = ConfigurationItem.objects.get_or_create(item=item, customer=request.user.customer)
+            for item in request.POST:
+                if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
+                    if 'add-to-cart' in request.POST:
+                        chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                        configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
+                        configuration.configuration_items.add(configuration_item)
+                    elif 'save-and-quit' in request.POST:
+                        chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                        configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
+                        configuration.configuration_items.add(configuration_item)
 
     items = Item.objects.all()
     categories = Category.objects.all()
@@ -95,6 +104,8 @@ def register(request):
 
 @login_required(login_url='login')
 def account(request):
+    configurations = Configuration.objects.filter(customer=request.user.customer)
+
     if request.method == 'POST':
         update_user_form = UpdateUserForm(request.POST, instance=request.user)
         update_customer_form = UpdateCustomerForm(request.POST, instance=request.user.customer)
@@ -111,6 +122,7 @@ def account(request):
     context = {
         'update_user_form': update_user_form,
         'update_customer_form': update_customer_form,
+        'configurations': configurations,
     }
     return render(request, 'base/account/account.html', context)
 
