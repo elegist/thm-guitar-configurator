@@ -8,14 +8,29 @@ from .models import *
 from .forms import *
 
 def home(request):
+    if request.user.is_authenticated and request.method == 'POST':
+        for item in request.POST:
+            if item != 'csrfmiddlewaretoken':
+                chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
+
+                print(request.POST.get(item, ""))
+        # for item in request.POST.items():
+        #     configuration_item, created = ConfigurationItem.objects.get_or_create(item=item, customer=request.user.customer)
+
     items = Item.objects.all()
-    steps = Category.objects.all()
-    base_models = Item.objects.filter(category=1)
-    general = Item.objects.filter(category=2)
-    wood = Item.objects.filter(category=3)
-    color = Item.objects.filter(category=4)
-    electronics = Item.objects.filter(category=5)
-    hardware = Item.objects.filter(category=6)
+    categories = Category.objects.all()
+    max_steps = categories.count()
+    configuration_items = [
+        Item.objects.filter(category=1),
+        Item.objects.filter(category=2),
+        Item.objects.filter(category=3),
+        Item.objects.filter(category=4),
+        Item.objects.filter(category=5),
+        Item.objects.filter(category=6),
+        Item.objects.filter(category=7)
+    ]
+
     order = []
     if request.user.is_authenticated:
         try:
@@ -25,15 +40,28 @@ def home(request):
     context = {
         'items': items,
         'order': order,
-        'steps': steps,
-        'base_models': base_models,
-        'general': general,
-        'wood': wood,
-        'color': color,
-        'electronics' : electronics,
-        'hardware': hardware,
+        'categories': categories,
+        'max_steps': max_steps,
+        'configuration_items': configuration_items
     }
     return render(request, 'base/home.html', context)
+
+def configurator(request):
+    guitar_models = Item.objects.filter(category=1)
+    configuration_items = [
+        Item.objects.filter(category=2),
+        Item.objects.filter(category=3),
+        Item.objects.filter(category=4),
+        Item.objects.filter(category=5),
+        Item.objects.filter(category=6),
+        Item.objects.filter(category=7)
+    ]
+
+    context = {
+        'guitar_models': guitar_models,
+        'configuration_items': configuration_items
+    }
+    return render(request, 'base/configurator/configurator.html', context)
 
 def login_user(request):
     if request.method == 'POST':

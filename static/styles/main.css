@@ -421,12 +421,14 @@ form label {
 @media (min-width: 992px) {
     .configurator-body {
         min-height: 0;
-        height: 60vh;
+        height: 55vh;
     }
 
     .configurator-body > .img-container > .img-guitar-preview {
-        height: 90%;
+        transform-origin: center;
+        transform: rotate(-90deg);
         width: auto;
+        height: auto;
     }
 
     .configurator-body > .input-col {

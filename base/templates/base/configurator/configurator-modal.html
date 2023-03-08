@@ -1,20 +1,17 @@
+{% load static %}
 <div
     class="modal"
-    id="{{model.name}}-configuratorModalStep{{step}}"
+    id="step-{{category.id}}"
     data-bs-backdrop="static"
     data-bs-keyboard="false"
     tabindex="-1"
     aria-labelledby="configuratorModalLabel"
     aria-hidden="true"
 >
-    <div
-        class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-xl-down"
-    >
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-lg-down">
         <div class="modal-content modal-dark">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="configuratorModalLabel">
-                    Configure your own {{model.name}}
-                </h1>
+                <h1 class="modal-title fs-5">Choose: {{category}}</h1>
                 <button
                     class="btn-close btn-close-white"
                     type="button"
@@ -24,17 +21,64 @@
             </div>
 
             <div class="modal-body">
-                {% include 'base/configurator/configurator-content.html' %}
+                <div class="container-fluid text-center h-100">
+                    <div
+                        class="configurator-body row d-block d-lg-flex text-center"
+                    >
+                        <div class="img-container col-lg-4 d-flex justify-content-center align-items-center">
+                            <img
+                                src="{% static 'images/items/strat.png' %}"
+                                alt=""
+                                class="img-fluid img-guitar-preview"
+                            />
+                        </div>
+                        <div class="col-lg-8 input-col">
+                            <div class="options-container overflow-auto my-2">
+                                <div class="form-check">
+                                    {% for item in items %}
+                                    {% if item.category.id == category.id %}
+                                    {% if category.slug == "miscellaneous" %}
+                                    {% include 'base/configurator/check-button.html' %}
+                                    {% else %}
+                                    {% include 'base/configurator/radio-button.html' %}
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if user.is_authenticated %}
+                            <button class="btn btn-info my-2">
+                                Save configuration and quit
+                            </button>
+                            {% endif %}
+                            <button
+                                type="submit"
+                                class="btn btn-success my-2"
+                                {% if category.id != max_steps %} disabled {% endif %}
+                            >
+                                Complete and add to cart
+                            </button>
+                            <p class="text-color-success my-2">
+                                Total: {price}€
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--TODO: replace aria-valuemax with a dynamic value from the database-->
             <div class="modal-footer d-flex justify-content-center">
-                {% if step == 1 %}
+                {% if category.id == 1 %}
                 <button type="button" class="btn btn-outline-info" disabled>
                     <i class="bi bi-caret-left-fill"></i>
                 </button>
                 {% else %}
-                <button type="button" class="btn btn-outline-info" data-bs-target="#{{model.name}}-configuratorModalStep{{ step|add:-1 }}" data-bs-toggle="modal">
+                <button
+                    type="button"
+                    class="btn btn-outline-info"
+                    data-bs-target="#step-{{ category.id|add:-1 }}"
+                    data-bs-toggle="modal"
+                >
                     <i class="bi bi-caret-left-fill"></i>
                 </button>
                 {% endif %}
@@ -44,19 +88,24 @@
                         role="progressbar"
                         aria-label="Configurator progress"
                         aria-valuemin="0"
-                        aria-valuemax="{{ maxSteps }}"
-                        aria-valuenow="{{ step }}"
-                        style="width: calc(100% / {{ maxSteps }} * {{ step }})"
+                        aria-valuemax="{{ max_steps }}"
+                        aria-valuenow="{{ category.id }}"
+                        style="width: calc(100% / {{ max_steps }} * {{ category.id }})"
                     >
-                        {{ step }} / {{ maxSteps }}
+                        {{ category.id }} / {{ max_steps }}
                     </div>
                 </div>
-                {% if step == maxSteps %}
+                {% if category.id == max_steps %}
                 <button type="button" class="btn btn-outline-info" disabled>
                     <i class="bi bi-caret-right-fill"></i>
                 </button>
                 {% else %}
-                <button type="button" class="btn btn-outline-info" data-bs-target="#{{model.name}}-configuratorModalStep{{ step|add:1 }}" data-bs-toggle="modal">
+                <button
+                    type="button"
+                    class="btn btn-outline-info"
+                    data-bs-target="#step-{{ category.id|add:1 }}"
+                    data-bs-toggle="modal"
+                >
                     <i class="bi bi-caret-right-fill"></i>
                 </button>
                 {% endif %}

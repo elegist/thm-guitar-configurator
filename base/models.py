@@ -17,16 +17,25 @@ class Customer(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
     
 class Item(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount_percentage = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='items', null=True, blank=True)
+
+    def image_url(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
     def discount_price(self):
         discount = self.price / 100 * self.discount_percentage
@@ -45,10 +54,27 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+class ConfigurationItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.item)
+    
+class Configuration(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    configuration_items = models.ManyToManyField(ConfigurationItem)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_staff_pick = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.customer.user.username
     
 class OrderItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey(Configuration, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
 
     def total_price(self):
@@ -83,52 +109,3 @@ class Order(models.Model):
     
     def __str__(self):
         return self.customer.user.username
-    
-
-# ## color, wood, frets, pickup, hardware##
-# class Category(models.Model):
-#     name = models.CharField(max_length = 150)
-#     categoryDesc = models.CharField(max_length = 150)
-
-#     def __str__(self):
-#         return self.name
-
-# class Item(models.Model):
-#     name = models.CharField(max_length = 150)
-#     category = models.ForeignKey(Category, verbose_name="fk_category", on_delete=models.CASCADE, null=True)
-#     price = models.DecimalField(max_digits=7, decimal_places=2)
-#     description = models.CharField(max_length=150)
-#     image_path = models.CharField(max_length=200, null=True)
-
-#     def __str__(self):
-#         return self.name
-
-# class Cart(models.Model):
-#     user = models.ForeignKey(User, verbose_name="fk_user", on_delete=models.CASCADE, null=True)
-#     total = models.DecimalField(max_digits=8, decimal_places=2)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-    
-#     def __str__(self):
-#         return self.user
-
-# class CartItem(models.Model):
-#     cart = models.ForeignKey(Cart, verbose_name="fk_cart", on_delete=models.CASCADE, null=True)
-#     item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)
-
-
-# class StaffPick(models.Model):
-#     name = models.CharField(max_length = 150)
-    
-#     def __str__(self):
-#         return self.name
-
-# class StaffPickItem(models.Model):
-#     staffPick = models.ForeignKey(StaffPick, verbose_name="fk_StaffPick", on_delete=models.CASCADE, null=True)
-#     item = models.ForeignKey(Item, verbose_name="fk_item", on_delete=models.CASCADE, null=True)    
-
-#     def __str__(self):
-#         item = str(self.item)
-#         staffPick = str(self.staffPick)
-#         name = staffPick + " " + item
-#         return name

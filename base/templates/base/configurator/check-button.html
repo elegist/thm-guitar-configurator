@@ -1,12 +1,12 @@
 {% load static %}
 <label class="">
-    <input class="config-input" type="checkbox" name="checkbox" />
+    <input class="config-input" type="checkbox" name="check-{{item.slug}}" value="{{item.pk}}" />
     <span class="config-btn">
         <i class="bi bi-check-square"></i>
         <div class="config-content">
-            <img src="{% static configuratorItem.image_path %}" alt="" class="config-img" />
-            <h3 class="config-title">{{ configuratorItem }}</h3>
-            <p class="text-color-success fs-6 config-price-text">+{{configuratorItem.price}}€</p>
+            <img src="{% static item.image_url %}" alt="" class="config-img" />
+            <h3 class="config-title">{{ item.name }}</h3>
+            <p class="text-color-success fs-6 config-price-text">+{{item.price}}€</p>
         </div>
     </span>
 </label>
