@@ -36,13 +36,33 @@
                             <div class="options-container overflow-auto my-2">
                                 <div class="form-check">
                                     {% for item in items %}
-                                    {% if item.category.id == category.id %}
-                                    {% if category.slug == "miscellaneous" %}
-                                    {% include 'base/configurator/check-button.html' %}
-                                    {% else %}
-                                    {% include 'base/configurator/radio-button.html' %}
-                                    {% endif %}
-                                    {% endif %}
+                                        {% if item.category.id == category.id %}
+                                            {% if category.slug == "miscellaneous" %}
+                                                <label class="">
+                                                    <input class="config-input" type="checkbox" name="check-{{item.slug}}" value="{{item.id}}" data-price="{{item.price}}" />
+                                                    <span class="config-btn">
+                                                        <i class="bi bi-check-square"></i>
+                                                        <div class="config-content">
+                                                            <img src="{% static item.image_url %}" alt="" class="config-img" />
+                                                            <h3 class="config-title">{{ item.name }}</h3>
+                                                            <p class="text-color-success fs-6 config-price-text">+{{item.price}}€</p>
+                                                        </div>
+                                                    </span>
+                                                </label>
+                                                {% else %}
+                                                <label class="">
+                                                    <input class="config-input" type="radio" name="radio-{{category.id}}" value="{{item.id}}" data-price="{{item.price}}" />
+                                                    <span class="config-btn">
+                                                        <i class="bi bi-check-circle"></i>
+                                                        <div class="config-content">
+                                                            <img src="{% static item.image_url %}" alt="" class="config-img" />
+                                                            <h3 class="config-title">{{ item.name }}</h3>
+                                                            <p class="text-color-success fs-6 config-price-text">+{{item.price}}€</p>
+                                                        </div>
+                                                    </span>
+                                                </label>
+                                            {% endif %}
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -59,8 +79,8 @@
                             >
                             Complete and add to cart
                             </button>
-                            <p class="text-color-success my-2">
-                                Total: {price}€
+                            <p id="priceText-{{category.id}}" class="text-color-success my-2">
+                                Total: €<span id="currentPrice-{{category.id}}">0.00</span>
                             </p>
                         </div>
                     </div>
@@ -114,3 +134,18 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    let configurationInputs{{category.id}} = document.querySelectorAll(".config-input");
+    let priceText{{category.id}} = document.getElementById("currentPrice-{{category.id}}");
+    let currentPrice{{category.id}} = parseFloat(priceText{{category.id}}.innerText);
+    let addToPrice{{category.id}} = 0.00;
+
+    configurationInputs{{category.id}}.forEach((input) => {
+        input.addEventListener("click", () => {
+            priceText{{category.id}}.innerText = " ";
+            newPrice{{category.id}} = currentPrice{{category.id}} + input.dataset.price
+            priceText{{category.id}}.innerText = newPrice{{category.id}}.toString();
+        })
+    })
+</script>
