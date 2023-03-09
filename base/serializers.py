@@ -27,11 +27,6 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
 
-class ConfigurationItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ConfigurationItem
-        fields = '__all__'
-
 class ConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Configuration

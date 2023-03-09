@@ -272,19 +272,14 @@ class ItemList(APIView):
 def order_list(request, format=None):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    return Response(serializer.data)
 
 def orderItem_list(request, format=None):
     orderItems = OrderItem.objects.all()
     serializer = OrderItemSerializer(orderItems, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    return Response(serializer.data)
 
 def configuration_list(request, format=None):
     configurations = Configuration.objects.all()
     serializer = ConfigurationSerializer(configurations, many=True)
-    return JsonResponse(serializer.data, safe=False)
-
-def configurationItem_list(request, format=None):
-    configurationItems = ConfigurationItem.objects.all()
-    serializer = ConfigurationItemSerializer(configurationItems, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    return Response(serializer.data)
