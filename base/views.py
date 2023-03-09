@@ -8,7 +8,6 @@ from .models import *
 from .forms import *
 
 def home(request):
-    order = []
     if request.method == 'POST':
         try:
             customer = request.user.customer
@@ -18,28 +17,25 @@ def home(request):
 
         configuration = Configuration.objects.create(customer=customer, name=f'Configuration {request.POST.get("radio-1", "")}')
         if 'add-to-cart' in request.POST:
-            order_item = OrderItem.objects.create(customer=customer, configuration=configuration)
-            order = Order.objects.filter(customer=customer, is_completed=False)
-            if order.exists():
-                if order[0].configurations.filter(configuration__id=configuration.id, order__customer=customer).exists():
-                    order_item.quantity += 1
-                    order_item.save()
-                    messages.info(request, "This items quantity was updated")
-                else:
-                    order[0].configurations.add(order_item)
-                    messages.info(request, "This item was added to your cart")
-            else:
-                ordered_date = timezone.now()
-                order = Order.objects.create(customer=customer, date_ordered=ordered_date)
-                order.configurations.add(order_item)
-                messages.info(request, "This item was added to your cart")
+            for item in request.POST:
+                if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
+                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                    configuration.configuration_items.add(chosen_item)
+            return redirect('add-to-cart', item_id=configuration.id)
         elif 'save-and-quit' in request.POST:
             pass
-
-        for item in request.POST:
-            if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
-                chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                configuration.configuration_items.add(chosen_item)
+        
+        order = Order.objects.get(customer=customer, is_completed=False)
+        print(order)
+    else:
+        try:
+            if request.user.is_authenticated:
+                customer = request.user.customer
+            else:
+                customer = Customer.objects.get(device=request.COOKIES['device'])
+            order = Order.objects.get(customer=customer, is_completed=False)
+        except:
+            order = []
 
     items = Item.objects.all()
     categories = Category.objects.all()
@@ -54,9 +50,18 @@ def home(request):
         Item.objects.filter(category=7)
     ]
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order = Order.objects.get(customer=customer, is_completed=False)
+    # if request.user.is_authenticated:
+    #     customer = request.user.customer
+    #     try:
+    #         order = Order.objects.get(customer=customer, is_completed=False)
+    #     except:
+    #         order = []
+    # else:
+    #     try:
+    #         customer = request.COOKIES['device']
+    #         order = Order.objects.get(device=customer, is_completed=False)
+    #     except:
+    #         order = []
 
     staff_picks = Configuration.objects.filter(is_staff_pick=True)
     staff_picks_indexes = range(len(staff_picks))
@@ -168,15 +173,12 @@ def add_to_cart(request, item_id, *args, **kwargs):
         if order[0].configurations.filter(configuration__id=configuration.id, order__customer=customer).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request, "This items quantity was updated")
         else:
             order[0].configurations.add(order_item)
-            messages.info(request, "This item was added to your cart")
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(customer=customer, date_ordered=ordered_date)
         order.configurations.add(order_item)
-        messages.info(request, "This item was added to your cart")
     return redirect('home')
 
 def remove_from_cart(request, item_id, *args, **kwargs):
@@ -192,11 +194,19 @@ def remove_from_cart(request, item_id, *args, **kwargs):
         if order[0].configurations.filter(configuration__id=configuration.id).exists():
             order_item = OrderItem.objects.filter(configuration=configuration)[0]
             order_item.delete()
-            messages.info(request, "This item was removed to your cart")
         else:
-            messages.info(request, "This item was not in your cart")
             return redirect('home')
     else:
-        messages.info(request, "User does not have an order")
         return redirect('home')
     return redirect('home')
+
+@login_required(login_url='login')
+def order_summary(request):
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
+    items = order.configurations.all()
+    context = {
+        'order': order,
+        'items': items
+    }
+    return render(request, 'base/cart/order-summary.html', context)

@@ -51,14 +51,15 @@
                 });
                 return uuid;
             }
-
+            
             let device = getCookie('device');
-
+            
             if (device == null || device == undefined) {
                 device = create_UUID();
             }
 
-            document.cookie = `device=${device};domain=;path=/`
+            document.cookie = `device=${device};SameSite=None;Secure;domain=;path=/`
+
         </script>
     </head>
 
