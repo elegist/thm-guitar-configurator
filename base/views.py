@@ -8,6 +8,7 @@ from .models import *
 from .forms import *
 
 def home(request):
+    print(request.POST.get("radio-1", ""))
     if request.method == 'POST':
         try:
             customer = request.user.customer
@@ -23,7 +24,11 @@ def home(request):
                     configuration.configuration_items.add(chosen_item)
             return redirect('add-to-cart', item_id=configuration.id)
         elif 'save-and-quit' in request.POST:
-            pass
+            for item in request.POST:
+                if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
+                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                    configuration.configuration_items.add(chosen_item)
+            return redirect('account')
         
         order = Order.objects.get(customer=customer, is_completed=False)
         print(order)
@@ -50,19 +55,6 @@ def home(request):
         Item.objects.filter(category=7)
     ]
 
-    # if request.user.is_authenticated:
-    #     customer = request.user.customer
-    #     try:
-    #         order = Order.objects.get(customer=customer, is_completed=False)
-    #     except:
-    #         order = []
-    # else:
-    #     try:
-    #         customer = request.COOKIES['device']
-    #         order = Order.objects.get(device=customer, is_completed=False)
-    #     except:
-    #         order = []
-
     staff_picks = Configuration.objects.filter(is_staff_pick=True)
     staff_picks_indexes = range(len(staff_picks))
 
@@ -81,6 +73,11 @@ def login_user(request):
     if request.user.is_authenticated:
         return redirect('account')
     else:
+        try:
+            customer = Customer.objects.get(device=request.COOKIES['device'])
+            order = Order.objects.get(customer=customer, is_completed=False)
+        except:
+            order = []
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -91,13 +88,20 @@ def login_user(request):
             else:
                 messages.info(request, 'Username OR password is incorrect')
     
-    context = {}
+    context = {
+        'order': order
+    }
     return render(request, 'base/account/login.html', context)
 
 def register(request):
     if request.user.is_authenticated:
         return redirect('account')
     else:
+        try:
+            customer = Customer.objects.get(device=request.COOKIES['device'])
+            order = Order.objects.get(customer=customer, is_completed=False)
+        except:
+            order = []
         if request.method == 'POST':
             register_form = RegisterForm(request.POST)
             if register_form.is_valid():
@@ -117,11 +121,17 @@ def register(request):
     
     context = {
         'register_form': register_form,
+        'order': order
     }
     return render(request, 'base/account/register.html', context)
 
 @login_required(login_url='login')
 def account(request):
+    try:
+        order = Order.objects.get(customer=request.user.customer, is_completed=False)
+    except:
+        order = []
+
     configurations = Configuration.objects.filter(customer=request.user.customer)
 
     if request.method == 'POST':
@@ -141,6 +151,7 @@ def account(request):
         'update_user_form': update_user_form,
         'update_customer_form': update_customer_form,
         'configurations': configurations,
+        'order': order
     }
     return render(request, 'base/account/account.html', context)
 
