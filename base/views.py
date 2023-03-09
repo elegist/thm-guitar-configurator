@@ -54,14 +54,10 @@ def home(request):
         Item.objects.filter(category=7)
     ]
 
-    try:
+    if request.user.is_authenticated:
         customer = request.user.customer
-    except:
-        device = request.COOKIES['device']
-        customer, created = Customer.objects.get_or_create(device=device)
+        order = Order.objects.get(customer=customer, is_completed=False)
 
-    order = Order.objects.get(customer=customer, is_completed=False)
-        
     staff_picks = Configuration.objects.filter(is_staff_pick=True)
     staff_picks_indexes = range(len(staff_picks))
 
@@ -111,12 +107,19 @@ def register(request):
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
+            guest_customer = Customer.objects.filter(device=request.COOKIES['device'])
+            if guest_customer.exists():
+                guest_customer.update(user=user)
+            else:
+                Customer.objects.create(user=user)
             user_name = register_form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user_name)
             return redirect('login')
     else:
         register_form = RegisterForm()
+
+    print(Customer.objects.filter(device=request.COOKIES['device']).exists())
     
     context = {
         'register_form': register_form,
