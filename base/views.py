@@ -12,7 +12,21 @@ def home(request):
         if request.method == 'POST':
             configuration = Configuration.objects.create(customer=request.user.customer, name=f'{request.user.customer}s {request.POST.get("radio-1", "")}')
             if 'add-to-cart' in request.POST:
-                order_item = OrderItem.objects.create(customer=request.user.customer, item=configuration)
+                order_item = OrderItem.objects.create(customer=request.user.customer, configuration=configuration)
+                order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+                if order.exists():
+                    if order[0].configurations.filter(configuration__id=configuration.id, order__customer=request.user.customer).exists():
+                        order_item.quantity += 1
+                        order_item.save()
+                        messages.info(request, "This items quantity was updated")
+                    else:
+                        order[0].configurations.add(order_item)
+                        messages.info(request, "This item was added to your cart")
+                else:
+                    ordered_date = timezone.now()
+                    order = Order.objects.create(customer=request.user.customer, date_ordered=ordered_date)
+                    order.configurations.add(order_item)
+                    messages.info(request, "This item was added to your cart")
             elif 'save-and-quit' in request.POST:
                 pass
 
