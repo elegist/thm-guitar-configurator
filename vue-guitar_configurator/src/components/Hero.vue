@@ -35,7 +35,7 @@
         </div>
         <div class="col-lg-4">
             <img
-                class="img-fluid hero-image"
+                class="img-fluid"
                 src="images/guitar.png"
                 alt=""
             />

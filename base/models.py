@@ -55,6 +55,11 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def get_image(self):
+        if self.image:
+            return 'http://127.0.0.1:8000' + self.image.url
+        return ''
+    
 class ConfigurationItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
@@ -93,7 +98,7 @@ class OrderItem(models.Model):
         return self.total_price
 
     def __str__(self):
-        return f'{self.quantity} of {self.item.name}'
+        return f'{self.quantity}'
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)

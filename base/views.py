@@ -6,8 +6,13 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import *
 from .forms import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from .serializers import CategorySerializer, ItemSerializer, ConfigurationItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
 from django.http import JsonResponse
+
 
 def home(request):
     if request.user.is_authenticated and request.method == 'POST':
@@ -156,34 +161,65 @@ def remove_from_cart(request, item_id, *args, **kwargs):
     return redirect('home')
     
 
-# # Django rest_framework
+# Django rest_framework 
 
-# def category_list(request):
-#     categories = Category.objects.all()
-#     serializer = CategorySerializer(categories, many=True)
-#     return JsonResponse(serializer.data, safe=False)
+@api_view(['GET', 'POST'])
+def category_list(request, format=None):
 
-# def item_list(request):
-#     items = Item.objects.all()
-#     serializer = ItemSerializer(items, many=True)
-#     return JsonResponse(serializer.data, safe=False)
+    if request.method == 'GET':
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
 
-# def cart_list(request):
-#     carts = Cart.objects.all()
-#     serializer = CartSerializer(carts, many=True)
-#     return JsonResponse(serializer.data, safe=False)
+    if request.method == 'POST':
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# def cartItem_list(request):
-#     cartItems = CartItem.objects.all()
-#     serializer = CartItemSerializer(cartItems, many=True)
-#     return JsonResponse(serializer.data, safe=False)
 
-# def staffPick_list(request):
-#     staffPicks = StaffPick.objects.all()
-#     serializer = StaffPickSerializer(staffPicks, many=True)
-#     return JsonResponse(serializer.data, safe=False)
+@api_view(['GET', 'POST'])
+def item_list(request, format=None):
+    if request.method == 'GET':
+        items = Item.objects.all()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
 
-# def staffPickItem_list(request):
-#     staffPickItems = StaffPickItem.objects.all()
-#     serializer = StaffPickItemSerializer(staffPickItems, many=True)
-#     return JsonResponse(serializer.data, safe=False)
+    if request.method == 'POST':
+        serializer = ItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def model_list(request, format=None):
+    if request.method == 'GET':
+        models = Item.objects.filter(category = 1)
+        serializer = ItemSerializer(models, many=True)
+        return Response(serializer.data)    
+
+class ItemList(APIView):
+    def get(self, request, format=None):
+        items = Item.objects.all()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
+
+def order_list(request, format=None):
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def orderItem_list(request, format=None):
+    orderItems = OrderItem.objects.all()
+    serializer = OrderItemSerializer(orderItems, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def configuration_list(request, format=None):
+    configurations = Configuration.objects.all()
+    serializer = ConfigurationSerializer(configurations, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def configurationItem_list(request, format=None):
+    configurationItems = ConfigurationItem.objects.all()
+    serializer = ConfigurationItemSerializer(configurationItems, many=True)
+    return JsonResponse(serializer.data, safe=False)

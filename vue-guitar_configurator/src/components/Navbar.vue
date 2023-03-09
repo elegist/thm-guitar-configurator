@@ -5,8 +5,14 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-dark shadow">
     <div class="container">
-        <a href="#" class="navbar-brand">
-          <i class="bi bi-cup-hot"></i>
+        <a href="/" class="navbar-brand">
+            <img
+                src='images/guitar-configurator-logo.svg'
+                width="64"
+                height="64"
+                alt="logo"
+                srcset=""
+            />
             Guitar Configurator
         </a>
         <button
@@ -33,7 +39,9 @@
                         role="button"
                         data-bs-toggle="dropdown"
                     >
-                        <i class="bi bi-person fs-1"></i>
+                    <BootstrapIcon
+                        icon="person"
+                        size="3x" />    
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -58,7 +66,9 @@
                         data-bs-target="#offcanvasCart"
                         aria-controls="offcanvasCart"
                     >
-                        <i class="bi bi-cart fs-1"></i>
+                        <BootstrapIcon
+                            icon="cart"
+                            size="3x" />    
                     </a>
                 </li>
             </ul>

@@ -1,6 +1,6 @@
 @font-face {
   font-family: PlayfairDisplay;
-  src: url(./fonts/Rubik-VariableFont_wght.ttf); /* add URL*/
+  src: url(../fonts/Rubik-VariableFont_wght.ttf); /* add URL*/
 }
 
 :root {
@@ -335,12 +335,6 @@ body {
 }
 .dropdown-menu > li > .dropdown-item {
   color: white !important;
-}
-
-/* Hero */
-
-.hero-image {
-  transform: scale(1.4);
 }
 
 /* Carousel */

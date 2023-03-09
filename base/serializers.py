@@ -9,7 +9,13 @@ class CategorySerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = '__all__'
+        fields = ('name',
+                  'slug',
+                  'category',
+                  'price',
+                  'discount_percentage',
+                  'image',
+                  'get_image',)
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:

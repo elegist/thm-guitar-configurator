@@ -9,19 +9,16 @@ import { getAPI } from '../axios';
 <div class="container text-center pt-5">
     <div class="row">
         <div v-for="model in APIData" :key="model.id" class="col-md-6 col-lg-3 my-2">
-          <GuitarCard :modelName="model.name"/>  
+          <GuitarCard :model="model"/>  
         </div>
         
     </div>
 </div>
-
-
 </template>
 
 <script>
-    
     export default {
-        name: 'model',
+        name: 'ConfigureYourOwn',
         data(){
             return {
                 APIData: []
@@ -30,7 +27,7 @@ import { getAPI } from '../axios';
         components: {
         },
         created (){
-            getAPI.get('/api/item/',)
+            getAPI.get('/api/v1/model/',)
             .then(response => {
                 console.log('data fetch from API successful')
                 this.APIData = response.data
