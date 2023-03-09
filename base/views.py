@@ -77,52 +77,41 @@ def home(request):
     }
     return render(request, 'base/home.html', context)
 
-def configurator(request):
-    guitar_models = Item.objects.filter(category=1)
-    configuration_items = [
-        Item.objects.filter(category=2),
-        Item.objects.filter(category=3),
-        Item.objects.filter(category=4),
-        Item.objects.filter(category=5),
-        Item.objects.filter(category=6),
-        Item.objects.filter(category=7)
-    ]
-
-    context = {
-        'guitar_models': guitar_models,
-        'configuration_items': configuration_items
-    }
-    return render(request, 'base/configurator/configurator.html', context)
-
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
+    if request.user.is_authenticated:
+        return redirect('account')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
     
     context = {}
     return render(request, 'base/account/login.html', context)
 
 def register(request):
-    if request.method == 'POST':
-        register_form = RegisterForm(request.POST)
-        if register_form.is_valid():
-            user = register_form.save()
-            guest_customer = Customer.objects.filter(device=request.COOKIES['device'])
-            if guest_customer.exists():
-                guest_customer.update(user=user)
-            else:
-                Customer.objects.create(user=user)
-            user_name = register_form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user_name)
-            return redirect('login')
+    if request.user.is_authenticated:
+        return redirect('account')
     else:
-        register_form = RegisterForm()
+        if request.method == 'POST':
+            register_form = RegisterForm(request.POST)
+            if register_form.is_valid():
+                user = register_form.save()
+                guest_customer = Customer.objects.filter(device=request.COOKIES['device'])
+                if guest_customer.exists():
+                    guest_customer.update(user=user)
+                else:
+                    Customer.objects.create(user=user)
+                user_name = register_form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user_name)
+                return redirect('login')
+        else:
+            register_form = RegisterForm()
 
     print(Customer.objects.filter(device=request.COOKIES['device']).exists())
     
