@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     street = models.CharField(max_length=200, null=True, blank=True)
@@ -11,9 +11,12 @@ class Customer(models.Model):
     state = models.CharField(max_length=200, null=True, blank=True)
     zip_code = models.CharField(max_length=200, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    device = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self) -> str:
-        return self.user.username
+        if self.user:
+            return self.user.username
+        return self.device
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -41,6 +44,28 @@ class Item(models.Model):
         discount = self.price / 100 * self.discount_percentage
         price = self.price - discount
         return price
+
+    def __str__(self):
+        return self.name
+
+    def get_image(self):
+        if self.image:
+            return 'http://127.0.0.1:8000' + self.image.url
+        return ''    
+    
+class Configuration(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    configuration_items = models.ManyToManyField(Item)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_staff_pick = models.BooleanField(default=False)
+
+    @property
+    def total_price(self):
+        configuration_items = self.configuration_items.all()
+        total = sum([item.price for item in configuration_items])
+        return total
     
     def add_to_cart(self):
         return reverse('add-to-cart', kwargs={
@@ -53,64 +78,38 @@ class Item(models.Model):
         })
 
     def __str__(self):
-        return self.name
+        if self.customer.user:
+            return self.customer.user.username
+        return self.customer.device
 
-    def get_image(self):
-        if self.image:
-            return 'http://127.0.0.1:8000' + self.image.url
-        return ''
     
-class ConfigurationItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return str(self.item)
-    
-class Configuration(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    configuration_items = models.ManyToManyField(ConfigurationItem)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
-    is_staff_pick = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.customer.user.username
     
 class OrderItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    item = models.ForeignKey(Configuration, on_delete=models.SET_NULL, null=True)
+    configuration = models.ForeignKey(Configuration, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=1)
 
-    def total_price(self):
-        return self.quantity * self.item.price
-    
-    def total_discount_price(self):
-        return self.quantity * self.item.discount_price
-
-    def amount_saving(self):
-        return self.total_price - self.total_discount_price
-
     @property
-    def final_price(self):
-        if self.item.discount_percentage:
-            return self.total_discount_price
-        return self.total_price
+    def total_price(self):
+        return self.quantity * self.configuration.total_price
 
     def __str__(self):
-        return f'{self.quantity}'
+        return f'{self.quantity} of {self.configuration}'
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    items = models.ManyToManyField(OrderItem)
+    configurations = models.ManyToManyField(OrderItem)
     date_created = models.DateTimeField(auto_now_add=True)
     date_ordered = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
 
+    @property
     def total_price(self):
-        order_items = self.items.all()
-        total = sum([item.final_price() for item in order_items])
+        order_items = self.configurations.all()
+        total = sum([item.total_price for item in order_items])
         return total
     
     def __str__(self):
-        return self.customer.user.username
+        if self.customer.user:    
+            return self.customer.user.username
+        return self.customer.device

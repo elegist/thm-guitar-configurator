@@ -1,3 +1,5 @@
+<h2>Staff Picks</h2>
+
 <div class="container mt-5">
     <div
         class="carousel slide text-center"
@@ -7,13 +9,13 @@
         data-bs-touch="true"
     >
         <div class="carousel-indicators">
-            {% for index in staffPicksIndex %}
+            {% for index in staff_picks_indexes %}
             <button
-                {% if index == staffPicksIndex|first %} class="active" {% endif %}
+                {% if index == staff_picks_indexes|first %} class="active" {% endif %}
                 type="button"
                 data-bs-target="#carouselStaffPicks"
                 data-bs-slide-to="{{index}}"
-                {% if index == staffPicksIndex|first %} aria-current="true" {% endif %}
+                {% if index == staff_picks_indexes|first %} aria-current="true" {% endif %}
                 aria-label="Slide {{index|add:1}}"
             ></button>
             {% endfor %}
@@ -23,8 +25,8 @@
             {% comment %} <div class="carousel-item active">
                 {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with pickInfo="Guitar 1" %}
             </div> {% endcomment %}
-            {% for pick in staffPicks %}
-                <div class="carousel-item {% if pick == staffPicks|first %} active {% endif %}">
+            {% for pick in staff_picks %}
+                <div class="carousel-item {% if pick == staff_picks|first %} active {% endif %}">
                     {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' %}
                 </div>
             {% endfor %}

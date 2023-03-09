@@ -1,3 +1,4 @@
+{% load static %}
 <div
     class="offcanvas offcanvas-end bg-custom-dark"
     tabindex="-1"
@@ -16,20 +17,34 @@
         ></button>
     </div>
     <div class="offcanvas-body">
-        {% if cartItem != None %}
         <!-- TODO: Display the chosen cart item / configuration -->
+        {% if order.configurations.all %}
+        <ol class="list-group">
+        {% for item in order.configurations.all %}
+            <li class="list-group-item list-group-item-dark">
+                <img src="{% static item.configuration.configuration_items.all.0.image_url %}" alt="Selected guitar shape" class="w-50">
+                <div class="d-flex justify-content-between">
+                    <div class="fw-bold">{{ item.configuration.name }}</div>
+                    <div class="d-flex gap-2">
+                        <a href="{{ item.configuration.remove_from_cart }}"><i class="bi bi-dash-circle"></i></a>
+                        <div>{{ item.quantity }}</div>
+                        <a href="{{ item.configuration.add_to_cart }}"><i class="bi bi-plus-circle"></i></a>
+                    </div>
+                    <div class="fw-bold fst-italic text-success">€{{ item.total_price }}</div>
+                </div>
 
+            </li>
+        {% endfor %}    
+        </ol>
         <div class="d-grid gap-2 mt-5">
-            <button class="btn btn-success btn-lg">Order</button>
+            <span>Total: €{{ order.total_price }}</span> 
+            <a href="{% url 'order-summary' %}" class="btn btn-warning btn-lg">Proceed to checkout</a>
         </div>
         {% else %}
-
         <p class="fst-italic text-color-info">No items in cart</p>
-
         <div class="d-grid gap-2 mt-5">
-            <button class="btn btn-success btn-lg" disabled>Order</button>
+            <button class="btn btn-warning btn-lg" disabled>Proceed to checkout</button>
         </div>
-
         {% endif %}
     </div>
 </div>
