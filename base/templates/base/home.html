@@ -14,4 +14,46 @@
     {% endfor %}
 </form>
 
+<script type="text/javascript">
+    let configurationInputs = document.querySelectorAll(".config-input");
+    let prices = []
+    let previousPrice;
+    let nextStepButton = document.querySelectorAll(".nextStepButton");
+    let previousStepButton = document.querySelectorAll(".previousStepButton");
+    let currentPrice;
+    let priceTexts = document.querySelectorAll(".currentPrice")
+
+    configurationInputs.forEach((input) => {
+        input.addEventListener("click", () => {
+            if (input.checked) {
+                if (previousPrice && previousName === input.name) {
+                    prices = prices.filter(item => item !== parseFloat(previousPrice));
+                    console.log(`REMOVE ${prices}`)
+                    console.log(`SUM: ${prices.reduce((partialSum, a) => partialSum + a, 0)}`)
+                    currentPrice = prices.reduce((partialSum, a) => partialSum + a, 0); 
+                }
+
+                prices.push(parseFloat(input.dataset.price))
+                console.log(`ADD ${prices}`)
+                console.log(`SUM: ${prices.reduce((partialSum, a) => partialSum + a, 0)}`)
+                currentPrice = prices.reduce((partialSum, a) => partialSum + a, 0); 
+
+                if (input.type === 'radio') {
+                    previousPrice = input.dataset.price;
+                    previousName = input.name;
+                }
+            } else {
+                prices = prices.filter(item => item !== parseFloat(input.dataset.price));
+                console.log(`REMOVE ${prices}`)
+                console.log(`SUM: ${prices.reduce((partialSum, a) => partialSum + a, 0)}`)
+                currentPrice = prices.reduce((partialSum, a) => partialSum + a, 0); 
+            }
+            priceTexts.forEach((text) => {
+                text.innerText = currentPrice
+            })
+        })
+    })
+</script>
+
+
 {% endblock content %}
