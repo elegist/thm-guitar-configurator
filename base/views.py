@@ -193,7 +193,11 @@ def remove_from_cart(request, item_id, *args, **kwargs):
     if order.exists():
         if order[0].configurations.filter(configuration__id=configuration.id).exists():
             order_item = OrderItem.objects.filter(configuration=configuration)[0]
-            order_item.delete()
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order_item.delete()
         else:
             return redirect('home')
     else:

@@ -29,6 +29,8 @@
                         <span class="fst-italic text-success">€{{ order_item.total_price }}</span>
                     </div>
                 </div>
+                <a href="{{ order_item.configuration.add_to_cart }}">+</a>
+                <a href="{{ order_item.configuration.remove_from_cart }}">-</a>
             </li>
             {% endfor %}
         </ol>
