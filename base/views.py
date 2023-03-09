@@ -208,9 +208,9 @@ def remove_from_cart(request, item_id, *args, **kwargs):
 def order_summary(request):
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
-    items = order.configurations.all()
+    order_items = order.configurations.all()
     context = {
         'order': order,
-        'items': items
+        'order_items': order_items
     }
     return render(request, 'base/cart/order-summary.html', context)
