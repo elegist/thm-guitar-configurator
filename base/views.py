@@ -204,7 +204,7 @@ def remove_from_cart(request, item_id, *args, **kwargs):
         return redirect('home')
     return redirect('home')
 
-@login_required(login_url='login')
+@login_required(login_url='register')
 def order_summary(request):
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, is_completed=False)
