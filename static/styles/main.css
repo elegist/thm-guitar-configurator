@@ -363,12 +363,6 @@ form label {
     color: white !important;
 }
 
-/* Hero */
-
-.hero-image {
-    transform: scale(1.4);
-}
-
 /* Carousel */
 
 .carousel-item {
