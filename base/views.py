@@ -8,38 +8,41 @@ from .models import *
 from .forms import *
 
 def home(request):
-    if request.user.is_authenticated: 
-        if request.method == 'POST':
-            configuration = Configuration.objects.create(customer=request.user.customer, name=f'{request.user.customer}s {request.POST.get("radio-1", "")}')
-            if 'add-to-cart' in request.POST:
-                order_item = OrderItem.objects.create(customer=request.user.customer, configuration=configuration)
-                order = Order.objects.filter(customer=request.user.customer, is_completed=False)
-                if order.exists():
-                    if order[0].configurations.filter(configuration__id=configuration.id, order__customer=request.user.customer).exists():
-                        order_item.quantity += 1
-                        order_item.save()
-                        messages.info(request, "This items quantity was updated")
-                    else:
-                        order[0].configurations.add(order_item)
-                        messages.info(request, "This item was added to your cart")
+    order = []
+    if request.method == 'POST':
+        try:
+            customer = request.user.customer
+        except:
+            device = request.COOKIES['device']
+            customer, created = Customer.objects.get_or_create(device=device)
+        configuration = Configuration.objects.create(customer=customer, name=f'Configuration {request.POST.get("radio-1", "")}')
+        if 'add-to-cart' in request.POST:
+            order_item = OrderItem.objects.create(customer=customer, configuration=configuration)
+            order = Order.objects.filter(customer=customer, is_completed=False)
+            if order.exists():
+                if order[0].configurations.filter(configuration__id=configuration.id, order__customer=customer).exists():
+                    order_item.quantity += 1
+                    order_item.save()
+                    messages.info(request, "This items quantity was updated")
                 else:
-                    ordered_date = timezone.now()
-                    order = Order.objects.create(customer=request.user.customer, date_ordered=ordered_date)
-                    order.configurations.add(order_item)
+                    order[0].configurations.add(order_item)
                     messages.info(request, "This item was added to your cart")
-            elif 'save-and-quit' in request.POST:
-                pass
+            else:
+                ordered_date = timezone.now()
+                order = Order.objects.create(customer=customer, date_ordered=ordered_date)
+                order.configurations.add(order_item)
+                messages.info(request, "This item was added to your cart")
+        elif 'save-and-quit' in request.POST:
+            pass
 
-            for item in request.POST:
-                if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
-                    if 'add-to-cart' in request.POST:
-                        chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                        configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
-                        configuration.configuration_items.add(chosen_item)
-                    elif 'save-and-quit' in request.POST:
-                        chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                        configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
-                        configuration.configuration_items.add(chosen_item)
+        for item in request.POST:
+            if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
+                if 'add-to-cart' in request.POST:
+                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                    configuration.configuration_items.add(chosen_item)
+                elif 'save-and-quit' in request.POST:
+                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                    configuration.configuration_items.add(chosen_item)
 
     items = Item.objects.all()
     categories = Category.objects.all()
@@ -53,14 +56,7 @@ def home(request):
         Item.objects.filter(category=6),
         Item.objects.filter(category=7)
     ]
-
-    order = []
-    if request.user.is_authenticated:
-        try:
-            order = Order.objects.get(customer=request.user.customer, is_completed=False)
-        except ObjectDoesNotExist:
-            order = []
-    
+        
     staff_picks = Configuration.objects.filter(is_staff_pick=True)
     staff_picks_indexes = range(len(staff_picks))
 
@@ -151,11 +147,17 @@ def logout_user(request):
     return redirect('home')
     
 def add_to_cart(request, item_id, *args, **kwargs):
+    try:
+        customer = request.user.customer
+    except:
+        device = request.COOKIES['device']
+        customer, created = Customer.objects.get_or_create(device=device)
+
     configuration = get_object_or_404(Configuration, id=item_id)
-    order_item, created = OrderItem.objects.get_or_create(configuration=configuration, customer=request.user.customer)
-    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    order_item, created = OrderItem.objects.get_or_create(configuration=configuration, customer=customer)
+    order = Order.objects.filter(customer=customer, is_completed=False)
     if order.exists():
-        if order[0].configurations.filter(configuration__id=configuration.id, order__customer=request.user.customer).exists():
+        if order[0].configurations.filter(configuration__id=configuration.id, order__customer=customer).exists():
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This items quantity was updated")
@@ -164,14 +166,20 @@ def add_to_cart(request, item_id, *args, **kwargs):
             messages.info(request, "This item was added to your cart")
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(customer=request.user.customer, date_ordered=ordered_date)
+        order = Order.objects.create(customer=customer, date_ordered=ordered_date)
         order.configurations.add(order_item)
         messages.info(request, "This item was added to your cart")
     return redirect('home')
 
 def remove_from_cart(request, item_id, *args, **kwargs):
+    try:
+        customer = request.user.customer
+    except:
+        device = request.COOKIES['device']
+        customer, created = Customer.objects.get_or_create(device=device)
+
     configuration = get_object_or_404(Configuration, id=item_id)
-    order = Order.objects.filter(customer=request.user.customer, is_completed=False)
+    order = Order.objects.filter(customer=customer, is_completed=False)
     if order.exists():
         if order[0].configurations.filter(configuration__id=configuration.id).exists():
             order_item = OrderItem.objects.filter(configuration=configuration)[0]

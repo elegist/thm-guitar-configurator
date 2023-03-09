@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     street = models.CharField(max_length=200, null=True, blank=True)
@@ -11,9 +11,12 @@ class Customer(models.Model):
     state = models.CharField(max_length=200, null=True, blank=True)
     zip_code = models.CharField(max_length=200, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    device = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self) -> str:
-        return self.user.username
+        if self.user:
+            return self.user.username
+        return self.device
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -44,13 +47,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
-
-class ConfigurationItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return str(self.item)
     
 class Configuration(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -77,7 +73,9 @@ class Configuration(models.Model):
         })
 
     def __str__(self):
-        return self.customer.user.username
+        if self.customer.user:
+            return self.customer.user.username
+        return self.customer.device
     
 class OrderItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
@@ -105,4 +103,6 @@ class Order(models.Model):
         return total
     
     def __str__(self):
-        return self.customer.user.username
+        if self.customer.user:    
+            return self.customer.user.username
+        return self.customer.device
