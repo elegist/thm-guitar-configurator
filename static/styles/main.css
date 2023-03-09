@@ -310,6 +310,15 @@ form label {
     cursor: not-allowed;
 }
 
+.btn-dark {
+    background-color: var(--color-dark-400);
+    color: white;
+    border: none;
+}
+.btn-dark:is(:hover, :active, :focus) {
+    background-color: var(--color-dark-200);
+}
+
 /* Navigation */
 
 .bg-custom-dark {
