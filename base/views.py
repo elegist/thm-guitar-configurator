@@ -46,12 +46,18 @@ def home(request):
             order = Order.objects.get(customer=request.user.customer, is_completed=False)
         except ObjectDoesNotExist:
             order = []
+    
+    staff_picks = Configuration.objects.filter(is_staff_pick=True)
+    staff_picks_indexes = range(len(staff_picks))
+
     context = {
         'items': items,
         'order': order,
         'categories': categories,
         'max_steps': max_steps,
-        'configuration_items': configuration_items
+        'configuration_items': configuration_items,
+        'staff_picks': staff_picks,
+        'staff_picks_indexes': staff_picks_indexes
     }
     return render(request, 'base/home.html', context)
 

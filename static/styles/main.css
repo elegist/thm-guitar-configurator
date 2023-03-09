@@ -439,4 +439,10 @@ form label {
     .configurator-body > .input-col > .options-container {
         max-height: 75%;
     }
+
+    .carousel-item {
+        height: 32rem;
+        background: var(--color-dark-400);
+        border-radius: 0.7rem;
+    }
 }
