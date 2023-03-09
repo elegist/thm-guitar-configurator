@@ -15,6 +15,7 @@ def home(request):
         except:
             device = request.COOKIES['device']
             customer, created = Customer.objects.get_or_create(device=device)
+
         configuration = Configuration.objects.create(customer=customer, name=f'Configuration {request.POST.get("radio-1", "")}')
         if 'add-to-cart' in request.POST:
             order_item = OrderItem.objects.create(customer=customer, configuration=configuration)
@@ -37,12 +38,8 @@ def home(request):
 
         for item in request.POST:
             if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
-                if 'add-to-cart' in request.POST:
-                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                    configuration.configuration_items.add(chosen_item)
-                elif 'save-and-quit' in request.POST:
-                    chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
-                    configuration.configuration_items.add(chosen_item)
+                chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
+                configuration.configuration_items.add(chosen_item)
 
     items = Item.objects.all()
     categories = Category.objects.all()
@@ -56,6 +53,14 @@ def home(request):
         Item.objects.filter(category=6),
         Item.objects.filter(category=7)
     ]
+
+    try:
+        customer = request.user.customer
+    except:
+        device = request.COOKIES['device']
+        customer, created = Customer.objects.get_or_create(device=device)
+
+    order = Order.objects.get(customer=customer, is_completed=False)
         
     staff_picks = Configuration.objects.filter(is_staff_pick=True)
     staff_picks_indexes = range(len(staff_picks))
