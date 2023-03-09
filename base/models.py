@@ -65,10 +65,15 @@ class ConfigurationItem(models.Model):
 class Configuration(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    configuration_items = models.ManyToManyField(ConfigurationItem)
+    configuration_items = models.ManyToManyField(Item)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     is_staff_pick = models.BooleanField(default=False)
+
+    def total_price(self):
+        configuration_items = self.configuration_items.all()
+        total = sum([item.price for item in configuration_items])
+        return total
 
     def __str__(self):
         return self.customer.user.username

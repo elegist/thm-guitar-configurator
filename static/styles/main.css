@@ -371,8 +371,8 @@ form label {
 /* Card */
 
 .guitar-card {
-    max-width: 18rem;
-    height: 20rem;
+    min-width: fit-content;
+    min-height: 20rem;
     background-color: var(--color-dark-400) !important;
     color: white;
 }

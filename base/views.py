@@ -21,11 +21,11 @@ def home(request):
                     if 'add-to-cart' in request.POST:
                         chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
                         configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
-                        configuration.configuration_items.add(configuration_item)
+                        configuration.configuration_items.add(chosen_item)
                     elif 'save-and-quit' in request.POST:
                         chosen_item = get_object_or_404(Item, id=request.POST.get(item, ""))
                         configuration_item, created = ConfigurationItem.objects.get_or_create(item=chosen_item, customer=request.user.customer)
-                        configuration.configuration_items.add(configuration_item)
+                        configuration.configuration_items.add(chosen_item)
 
     items = Item.objects.all()
     categories = Category.objects.all()
