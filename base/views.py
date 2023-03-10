@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import CategorySerializer, ItemSerializer, ConfigurationItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
+from .serializers import CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
 
 def home(request):
     print(request.POST.get("radio-1", ""))
@@ -263,12 +263,6 @@ def model_list(request, format=None):
         serializer = ItemSerializer(models, many=True)
         return Response(serializer.data)    
 
-class ItemList(APIView):
-    def get(self, request, format=None):
-        items = Item.objects.all()
-        serializer = ItemSerializer(items, many=True)
-        return Response(serializer.data)
-
 def order_list(request, format=None):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
@@ -283,3 +277,9 @@ def configuration_list(request, format=None):
     configurations = Configuration.objects.all()
     serializer = ConfigurationSerializer(configurations, many=True)
     return Response(serializer.data)
+
+# class ItemList(APIView):
+#     def get(self, request, format=None):
+#         items = Item.objects.all()
+#         serializer = ItemSerializer(items, many=True)
+#         return Response(serializer.data)

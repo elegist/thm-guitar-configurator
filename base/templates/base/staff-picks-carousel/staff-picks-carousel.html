@@ -22,9 +22,6 @@
         </div>
 
         <div class="carousel-inner">
-            {% comment %} <div class="carousel-item active">
-                {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' with pickInfo="Guitar 1" %}
-            </div> {% endcomment %}
             {% for pick in staff_picks %}
                 <div class="carousel-item {% if pick == staff_picks|first %} active {% endif %}">
                     {% include 'base/staff-picks-carousel/staff-picks-carousel-item.html' %}

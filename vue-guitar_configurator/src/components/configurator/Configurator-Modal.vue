@@ -29,7 +29,7 @@
                 </div>
                 
                 <div class="modal-body">
-                    <ConfiguratorContent />    
+                    <!-- <ConfiguratorContent />  -->
                 </div>
 
                 

@@ -2,8 +2,6 @@ from django.urls import path
 from base import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
-
-
 urlpatterns = [
     path('', views.home, name="home"),
     path('login/', views.login_user, name='login'),
@@ -19,7 +17,6 @@ urlpatterns = [
     path('order/', views.order_list),
     path('orderItem/', views.orderItem_list),
     path('configuration/', views.configuration_list),
-    path('configurationItem/', views.configurationItem_list),
 ] 
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+##urlpatterns = format_suffix_patterns(urlpatterns)

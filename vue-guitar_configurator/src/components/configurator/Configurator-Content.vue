@@ -64,7 +64,7 @@
 
 <script>
     export default {
-        name: 'ConfigureContent',
+        name: 'ConfiguratorContent',
         data(){
             return {
                 APIData: [],
@@ -75,7 +75,7 @@
             }
         },
         components: {
-
+            RadioButton
         },
         created (){
             getAPI.get('/api/v1/item/',)
