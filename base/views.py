@@ -230,7 +230,6 @@ def order_summary(request):
 # Django api_views
 @api_view(['GET', 'POST'])
 def category_list(request, format=None):
-
     if request.method == 'GET':
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)

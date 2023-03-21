@@ -1,6 +1,6 @@
 @font-face {
   font-family: PlayfairDisplay;
-  src: url(../fonts/Rubik-VariableFont_wght.ttf); /* add URL*/
+  src: url(../fonts/Rubik-VariableFont_wght.ttf);
 }
 
 :root {
@@ -47,9 +47,26 @@ html {
 }
 
 body {
-  min-height: 100vh;
   background: var(--background-gradient);
   font-family: var(--font-family-primary) !important;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#mainContent {
+  flex-grow: 1;
+}
+
+.footer {
+  justify-self: flex-end;
+}
+
+form label {
+  color: hsl(230, 22%, 53%)
 }
 
 .form-container {
@@ -293,6 +310,15 @@ body {
   cursor: not-allowed;
 }
 
+.btn-dark {
+  background-color: var(--color-dark-400);
+  color: white;
+  border: none;
+}
+.btn-dark:is(:hover, :active, :focus) {
+  background-color: var(--color-dark-200);
+}
+
 /* Navigation */
 
 .bg-custom-dark {
@@ -348,6 +374,8 @@ body {
 /* Card */
 
 .guitar-card {
+  min-width: fit-content;
+  min-height: 20rem;
   background-color: var(--color-dark-400) !important;
   color: white;
 }
@@ -396,12 +424,14 @@ body {
 @media (min-width: 992px) {
   .configurator-body {
       min-height: 0;
-      height: 60vh;
+      height: 55vh;
   }
 
   .configurator-body > .img-container > .img-guitar-preview {
-      height: 90%;
+      transform-origin: center;
+      transform: rotate(-90deg);
       width: auto;
+      height: auto;
   }
 
   .configurator-body > .input-col {
@@ -411,5 +441,11 @@ body {
 
   .configurator-body > .input-col > .options-container {
       max-height: 75%;
+  }
+
+  .carousel-item {
+      height: 32rem;
+      background: var(--color-dark-400);
+      border-radius: 0.7rem;
   }
 }
