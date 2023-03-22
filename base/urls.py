@@ -17,6 +17,7 @@ urlpatterns = [
     path('order/', views.order_list),
     path('orderItem/', views.orderItem_list),
     path('configuration/', views.configuration_list),
+    path('staff-picks/', views.staff_pick_list),
 ] 
 
 ##urlpatterns = format_suffix_patterns(urlpatterns)

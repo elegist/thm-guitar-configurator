@@ -1,6 +1,5 @@
 <script setup>
 import ConfiguratorContent from "./Configurator-Content.vue";
-import { getAPI } from "../../axios";
 </script>
 
 <template>
@@ -73,7 +72,7 @@ import { getAPI } from "../../axios";
                                                         ></i>
                                                         <div class="config-content">
                                                             <img
-                                                                :src="`${item.image_url}`"
+                                                                :src="item.get_image"
                                                                 alt=""
                                                                 class="config-img"
                                                             />
@@ -104,7 +103,7 @@ import { getAPI } from "../../axios";
                                                         ></i>
                                                         <div class="config-content">
                                                             <img
-                                                                :src="`${item.image_url}`"
+                                                                :src="item.get_image"
                                                                 alt=""
                                                                 class="config-img"
                                                             />

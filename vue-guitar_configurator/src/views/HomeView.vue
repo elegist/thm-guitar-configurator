@@ -1,7 +1,7 @@
 <script setup>
 import ConfigureYourOwn from "../components/Configure-Your-Own.vue";
 import Hero from "../components/Hero.vue";
-import StaffPicks from "../components/staff-picks-carousel/Staff-Picks.vue";
+import StaffPicksCarousel from "../components/staff-picks-carousel/Staff-Picks-Carousel.vue";
 import ConfiguratorModal from "../components/configurator/Configurator-Modal.vue";
 import CartOffCanvas from "../components/cart/cart-offcanvas.vue";
 import { getAPI } from "../axios";
@@ -20,6 +20,8 @@ import { getAPI } from "../axios";
     </form>
 
     <Hero />
+
+    <StaffPicksCarousel :staffPicks="staffPicks"/>
 </template>
 
 <script>
@@ -30,6 +32,7 @@ export default {
             categories: [],
             items: [],
             max_steps: 0,
+            staffPicks: [],
         };
     },
     components: {},
@@ -53,6 +56,15 @@ export default {
             .catch((error) => {
                 console.log(error)
             });
+        getAPI
+            .get("/api/v1/staff-picks/")
+            .then((response) => {
+                console.log("data fetch from API successful -> Staff Picks");
+                this.staffPicks = response.data;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     },
 };
 
