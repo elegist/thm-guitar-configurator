@@ -6,11 +6,7 @@
             <div class="col">
                 <h3>{{ pick.name }}</h3>
 
-                <img
-                    class="img-fluid"
-                    :src="pick.get_image"
-                    alt=""
-                />
+                <img class="img-fluid" :src="image" alt="" />
 
                 <p class="text-color-success pt-3">{{ pick.total_price }}€</p>
                 <div class="d-grid gap-2 col-sm mx-auto">
@@ -23,8 +19,12 @@
             </div>
             <div class="col d-none d-lg-block my-auto">
                 <ul class="list-group">
-                    <li v-for="item in pick.configuration_items" :key="item.id" class="list-group-item list-group-item-dark">
-                        {{ item.name }}
+                    <li
+                        v-for="item in configurationItems"
+                        :key="item.id"
+                        class="list-group-item list-group-item-dark"
+                    >
+                        {{ item[0].name }}
                     </li>
                 </ul>
             </div>
@@ -36,6 +36,23 @@
 export default {
     name: "StaffPicksCarouselItem",
     components: {},
-    props: ["pick"],
+    props: ["pick", "items"],
+    data() {
+        return {
+            configurationItems: [],
+            image: '',
+        };
+    },
+    created() {
+        this.pick.configuration_items.forEach((configurationItem) => {
+            this.configurationItems.push(
+                this.items.filter((item) => {
+                    return item.id == configurationItem;
+                })
+            );
+        });
+
+        this.image = this.configurationItems[0][0].get_image
+    },
 };
 </script>

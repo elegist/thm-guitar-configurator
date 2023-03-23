@@ -21,7 +21,7 @@ import { getAPI } from "../axios";
 
     <Hero />
 
-    <StaffPicksCarousel :staffPicks="staffPicks"/>
+    <StaffPicksCarousel :staffPicks="staffPicks" :items="items"/>
 </template>
 
 <script>

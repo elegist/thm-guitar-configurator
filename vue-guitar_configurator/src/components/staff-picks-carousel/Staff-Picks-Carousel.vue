@@ -37,10 +37,10 @@ import StaffPicksCarouselItem from "./Staff-Picks-Carousel-Item.vue"
             <div class="carousel-inner">
                 <template v-for="(pick, index) in staffPicks" :key="pick.id">
                     <div v-if="index == 0" class="carousel-item active">
-                        <StaffPicksCarouselItem :pick="pick"/>
+                        <StaffPicksCarouselItem :pick="pick" :items="items"/>
                     </div>
                     <div v-else class="carousel-item">
-                        <StaffPicksCarouselItem :pick="pick"/>
+                        <StaffPicksCarouselItem :pick="pick" :items="items"/>
                     </div>
                 </template>
             </div>
@@ -78,7 +78,7 @@ import StaffPicksCarouselItem from "./Staff-Picks-Carousel-Item.vue"
 export default {
     name: "StaffPicksCarousel",
     components: {},
-    props: ["staffPicks"],
+    props: ["staffPicks", "items"],
 };
 </script>
 
