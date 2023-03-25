@@ -274,7 +274,7 @@ def orderItem_list(request, format=None):
     serializer = OrderItemSerializer(orderItems, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(['GET']) ## filter for user configuratons
 def configuration_list(request, format=None):
     configurations = Configuration.objects.all()
     serializer = ConfigurationSerializer(configurations, many=True)

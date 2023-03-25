@@ -1,10 +1,15 @@
 <script setup>
 import { useUserStore }  from '../stores/user'
+import CartOffCanvas from "../components/cart/cart-offcanvas.vue"
+import { mapStores } from 'pinia'
+import axios from 'axios'
+
 const userStore = useUserStore()
-console.log(userStore.isAuthenticated)
+
 </script>
 
 <template>
+    <CartOffCanvas/>
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-dark shadow">
     <div class="container">
         <router-link to="/" class="navbar-brand">
@@ -33,7 +38,7 @@ console.log(userStore.isAuthenticated)
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
                     <template v-if="userStore.isAuthenticated">
-                        Hello, <span class="text-color-info">Julius</span>
+                        Hello, <span class="text-color-info">{{ username }}</span>
                     </template>
                     <template v-else>
                         Hello, <span class="text-color-info">Guest</span>
@@ -80,6 +85,36 @@ console.log(userStore.isAuthenticated)
     </div>
   </nav>
 </template>
+
+<script>
+    export default {
+        name: 'navbar',
+        data() {
+            return {
+                username: '',
+            }
+        },
+        computed: {
+            ...mapStores(useUserStore),
+        },
+        created() {
+                axios
+                    .get("api/v1/users/me",)
+                    .then(response => {
+                        this.userStore.username = response.data.username
+                        this.username = response.data.username
+                        console.log('logged in as ' + response.data.username)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    }) 
+        },
+    }
+
+</script>
+
+
+
 
 <style scoped>
 
