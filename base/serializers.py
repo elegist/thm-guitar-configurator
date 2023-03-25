@@ -9,13 +9,16 @@ class CategorySerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ('name',
-                  'slug',
-                  'category',
-                  'price',
-                  'discount_percentage',
-                  'image',
-                  'get_image',)
+        fields = (
+            'id',
+            'name',
+            'slug',
+            'category',
+            'price',
+            'discount_percentage',
+            'image',
+            'get_image',
+        )
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,7 +35,15 @@ class OrderSerializer(serializers.ModelSerializer):
 class ConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Configuration
-        fields = '__all__'
+        fields = (
+            'name',
+            'customer',
+            'configuration_items',
+            'date_created',
+            'date_updated',
+            'is_staff_pick',
+            'total_price',
+        )
 
 
         

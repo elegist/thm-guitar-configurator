@@ -230,7 +230,6 @@ def order_summary(request):
 # Django api_views
 @api_view(['GET', 'POST'])
 def category_list(request, format=None):
-
     if request.method == 'GET':
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
@@ -263,19 +262,28 @@ def model_list(request, format=None):
         serializer = ItemSerializer(models, many=True)
         return Response(serializer.data)    
 
+@api_view(['GET'])
 def order_list(request, format=None):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
 def orderItem_list(request, format=None):
     orderItems = OrderItem.objects.all()
     serializer = OrderItemSerializer(orderItems, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
 def configuration_list(request, format=None):
     configurations = Configuration.objects.all()
     serializer = ConfigurationSerializer(configurations, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def staff_pick_list(request, format=None):
+    staff_picks = Configuration.objects.filter(is_staff_pick=True)
+    serializer = ConfigurationSerializer(staff_picks, many=True)
     return Response(serializer.data)
 
 # class ItemList(APIView):
