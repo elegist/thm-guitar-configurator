@@ -1,5 +1,7 @@
 <script setup>
-
+import { useUserStore }  from '../stores/user'
+const userStore = useUserStore()
+console.log(userStore.isAuthenticated)
 </script>
 
 <template>
@@ -30,7 +32,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
-                    Hello, <span class="text-color-info">Guest</span>
+                    <template v-if="userStore.isAuthenticated">
+                        Hello, <span class="text-color-info">Julius</span>
+                    </template>
+                    <template v-else>
+                        Hello, <span class="text-color-info">Guest</span>
+                    </template>  
+                    
                 </p>
                 <li class="nav-item dropdown mx-3">
                     <a
@@ -48,9 +56,9 @@
                             </router-link>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item"
-                                >Register</a
-                            >
+                            <router-link to="/register" class="dropdown-item">
+                                Register
+                            </router-link>
                         </li>
                     </ul>
                 </li>

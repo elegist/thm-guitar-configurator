@@ -1,7 +1,15 @@
+<script setup>
+    import axios from 'axios';
+    import { mapStores } from 'pinia'
+
+    //import { getAPI } from '../axios'
+    //const userStore = useUserStore()
+</script>
+
 <template>
     <h1 class="py-4">Login</h1>
 
-    <form class="row g-3 w-75 mx-auto p-3 border rounded" method='POST' action="">
+    <form @submit.prevent="login" class="row g-3 w-75 mx-auto p-3 border rounded">
         <div class="form-floating col-md-12">
             <input
                 class="form-control"
@@ -10,6 +18,7 @@
                 id="usernameInput"
                 aria-describedby="usernameHelp"
                 placeholder="Username"
+                v-model="username"
             />
             <label for="usernameInput">User Name</label>
         </div>
@@ -20,11 +29,12 @@
                 name="password"
                 id="passwordInput"
                 placeholder="Password"
+                v-model="password"
             />
             <label for="passwordInput">Password</label>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-lg btn-success">Login</button>
+            <button class="btn btn-lg btn-success">Login</button>
         </div>
     </form>
 
@@ -34,16 +44,54 @@
 
 
 <script>
+    import { useUserStore } from '../stores/user';
     export default {
         name: 'login',
+        // setup() {
+        //     const userStore = useUserStore()
+        //     const token = userStore.token
+        //     return { userStore }
+        // },
         data() {
-            return {}
+            return {
+                username: '',
+                password: '',
+            }
         },
-        components: {
+        computed: {
+            ...mapStores(useUserStore),
+        },
+        methods: {
+            async login() {
+                axios.defaults.headers.common["Authorization"] = ""
+                localStorage.removeItem("token")
+
+                const formData = {
+                    username: this.username,
+                    password: this.password
+                }
+
+                await axios
+                        .post("api/v1/token/login", formData)
+                        .then(response => {
+                            const token = response.data.auth_token
+                            console.log(token)
+                            this.userStore.setToken(token)
+
+                            axios.defaults.headers.common["Authorization"] = "Token" + token
+                            localStorage.setItem("token", token)
+                            
+                            this.$router.push('/')
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+            }
             
-        }
+        },
     }
 </script>
+
 <style>
 
 </style>

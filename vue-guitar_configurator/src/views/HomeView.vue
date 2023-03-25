@@ -5,6 +5,9 @@
   import ConfiguratorModal from '../components/configurator/Configurator-Modal.vue'
   import CartOffCanvas from '../components/cart/cart-offcanvas.vue'
   import { getAPI } from '../axios';
+  import { useUserStore } from '../stores/user'
+  const userStore = useUserStore()
+
 </script>
 
 <template>
@@ -21,7 +24,7 @@
       <ConfiguratorModal :model="model" :step="5" :maxStep="6"/>
       <ConfiguratorModal :model="model" :step="6" :maxStep="6"/>
     </template>
-    <ConfiguratorContent />
+    
     <div class="container bg-custom-light shadow-lg">
       <Hero />
       <div class="container py-3">
