@@ -109,7 +109,7 @@ import {ref} from 'vue'
             ...mapStores(useUserStore),
         },
         created(){
-            this.getUsername()
+            //this.getUsername()
         },
         methods: {
             async getUsername(){

@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Category, Item, Configuration, OrderItem, Order
+from .models import Customer, Category, Item, Configuration, OrderItem, Order
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

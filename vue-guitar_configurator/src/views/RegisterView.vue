@@ -101,6 +101,10 @@
                         .post("api/v1/users/", formData)
                         .then(response => { 
                             this.$router.push('/login')
+                            return response
+                        })
+                        .then(response => {
+                            axios.post("api/v1/customer/", { user: response.data.id })
                         })
                         .catch(error => {
                             console.log(error)

@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
+from .serializers import CustomerSerializer, CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
 
 def home(request):
     print(request.POST.get("radio-1", ""))
@@ -228,6 +228,19 @@ def order_summary(request):
 
 
 # Django api_views
+@api_view(['GET', 'POST'])
+def customer_list(request, format=None):
+    if request.method == 'GET':
+        customers = Customer.objects.all()
+        serializer = CustomerSerializer(customers, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = CustomerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 @api_view(['GET', 'POST'])
 def category_list(request, format=None):
     if request.method == 'GET':
