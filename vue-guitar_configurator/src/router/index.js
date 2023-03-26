@@ -37,7 +37,7 @@ const router = createRouter({
 
 // pinia instance not working correctly 
 // router.beforeEach((to, from, next) => {
-//   if(to.matched.some(record => record.meta.requireLogin) && !useUserStore.isAuthenticated) {
+//   if(to.matched.some(record => record.meta.requireLogin) && !userStore.isAuthenticated) {
 //     next({name: 'login', query: { to: to.path }})
 //   }else{
 //     next()

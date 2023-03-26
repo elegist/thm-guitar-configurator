@@ -3,8 +3,10 @@ import { useUserStore }  from '../stores/user'
 import CartOffCanvas from "../components/cart/cart-offcanvas.vue"
 import { mapStores } from 'pinia'
 import axios from 'axios'
+import { nextTick } from 'vue';
+import {ref} from 'vue'
 
-const userStore = useUserStore()
+//const userStore = useUserStore()
 
 </script>
 
@@ -38,7 +40,7 @@ const userStore = useUserStore()
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
                     <template v-if="userStore.isAuthenticated">
-                        Hello, <span class="text-color-info">{{ username }}</span>
+                        Hello, <span class="text-color-info">{{ userStore.username }}</span>
                     </template>
                     <template v-else>
                         Hello, <span class="text-color-info">Guest</span>
@@ -55,16 +57,25 @@ const userStore = useUserStore()
                     <i class="bi bi-person fs-1"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <router-link to="/login" class="dropdown-item">
-                                Login
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/register" class="dropdown-item">
-                                Register
-                            </router-link>
-                        </li>
+                        <template v-if="userStore.isAuthenticated">
+                            <li>
+                                <router-link to="/account" class="dropdown-item">
+                                    Account
+                                </router-link>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li>
+                                <router-link to="/login" class="dropdown-item">
+                                    Login
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/register" class="dropdown-item">
+                                    Register
+                                </router-link>
+                            </li>
+                        </template>
                     </ul>
                 </li>
 
@@ -89,26 +100,30 @@ const userStore = useUserStore()
 <script>
     export default {
         name: 'navbar',
-        data() {
-            return {
-                username: '',
-            }
+        data(){
+            return{
+                username: ''
+            } 
         },
         computed: {
             ...mapStores(useUserStore),
         },
-        created() {
-                axios
+        created(){
+            this.getUsername()
+        },
+        methods: {
+            async getUsername(){
+               await axios
                     .get("api/v1/users/me",)
                     .then(response => {
                         this.userStore.username = response.data.username
-                        this.username = response.data.username
                         console.log('logged in as ' + response.data.username)
                     })
                     .catch(error => {
                         console.log(error)
-                    }) 
-        },
+                    })  
+            },
+        }
     }
 
 </script>
