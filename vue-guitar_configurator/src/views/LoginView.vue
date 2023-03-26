@@ -47,11 +47,6 @@
     import { useUserStore } from '../stores/user';
     export default {
         name: 'login',
-        // setup() {
-        //     const userStore = useUserStore()
-        //     const token = userStore.token
-        //     return { userStore }
-        // },
         data() {
             return {
                 username: '',

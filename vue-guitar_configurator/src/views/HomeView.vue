@@ -2,11 +2,14 @@
 import Hero from "../components/Hero.vue";
 import StaffPicksCarousel from "../components/staff-picks-carousel/Staff-Picks-Carousel.vue";
 import ConfiguratorModal from "../components/configurator/Configurator-Modal.vue";
+import {storeToRefs} from 'pinia'
 import { getAPI } from "../axios";
+
+
 </script>
 
 <template>
-    <form id="configurationForm" method="post" action="">
+    <form @submit.prevent id="configurationForm">
         <ConfiguratorModal
             v-for="(category, step) in categories"
             :key="category.id"
@@ -31,7 +34,6 @@ export default {
             items: [],
             max_steps: 0,
             staffPicks: [],
-            configurations: [] // get user configurations
         };
     },
     created() {

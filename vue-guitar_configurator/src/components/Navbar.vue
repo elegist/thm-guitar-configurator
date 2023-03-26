@@ -1,12 +1,43 @@
 <script setup>
 import { useUserStore }  from '../stores/user'
 import CartOffCanvas from "../components/cart/cart-offcanvas.vue"
-import { mapStores } from 'pinia'
+import { mapState, mapStores, mapWritableState } from 'pinia'
 import axios from 'axios'
 import { nextTick } from 'vue';
 import {ref} from 'vue'
+import { onUpdated, onMounted } from 'vue';
+import { storeToRefs } from 'pinia'
 
-//const userStore = useUserStore()
+const userStore = useUserStore()
+const {username, token} = storeToRefs(userStore)
+
+
+function getUsername(){
+    if (token.value) {
+    axios.defaults.headers.common['Authorization'] = "Token " + token.value
+    } else {
+    axios.defaults.headers.common['Authorization'] = ""
+    }
+    
+    axios
+        .get("api/v1/users/me",)
+        .then(response => {
+            
+            userStore.$patch({username: response.data.username})
+            console.log('logged in as ' + response.data.username)
+        })
+        .catch(error => {
+            console.log(error)
+        })  
+}
+
+onMounted(() => {
+    getUsername()
+})
+
+
+
+
 
 </script>
 
@@ -40,7 +71,7 @@ import {ref} from 'vue'
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
                     <template v-if="userStore.isAuthenticated">
-                        Hello, <span class="text-color-info">{{ userStore.username }}</span>
+                        Hello, <span class="text-color-info">{{ username }}</span>
                     </template>
                     <template v-else>
                         Hello, <span class="text-color-info">Guest</span>
@@ -98,33 +129,29 @@ import {ref} from 'vue'
 </template>
 
 <script>
-    export default {
-        name: 'navbar',
-        data(){
-            return{
-                username: ''
-            } 
-        },
-        computed: {
-            ...mapStores(useUserStore),
-        },
-        created(){
-            this.getUsername()
-        },
-        methods: {
-            async getUsername(){
-               await axios
-                    .get("api/v1/users/me",)
-                    .then(response => {
-                        this.userStore.username = response.data.username
-                        console.log('logged in as ' + response.data.username)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })  
-            },
-        }
-    }
+    // export default {
+    //     name: 'navbar',
+    //     computed: {
+    //         ...mapStores(useUserStore),
+    //         ...mapWritableState(useUserStore, ['username']),
+    //     },
+    //     created(){
+    //         this.getUsername()
+    //     },
+    //     methods: {
+    //         async getUsername(){
+    //            await axios
+    //                 .get("api/v1/users/me",)
+    //                 .then(response => {
+    //                     this.username = response.data.username
+    //                     console.log('logged in as ' + response.data.username)
+    //                 })
+    //                 .catch(error => {
+    //                     console.log(error)
+    //                 })  
+    //         },
+    //     }
+    // }
 
 </script>
 
