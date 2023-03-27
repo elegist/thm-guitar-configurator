@@ -21,6 +21,7 @@ urlpatterns = [
     path('staff-picks/', views.staff_pick_list),
     path('user/<int:id>', views.user_detail),
     path('customer/<int:id>', views.customer_detail),
+    path('configuration/<int:id>', views.configuration_detail),
 ] 
 
 ##urlpatterns = format_suffix_patterns(urlpatterns)

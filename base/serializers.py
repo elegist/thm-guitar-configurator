@@ -49,6 +49,7 @@ class ConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Configuration
         fields = (
+            'id',
             'name',
             'customer',
             'configuration_items',
