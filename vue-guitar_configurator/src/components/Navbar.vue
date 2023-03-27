@@ -154,6 +154,7 @@ onMounted(() => {
                     })
                     .then(response => {
                         this.userStore.setUserId(response.data.id)
+    
                     })
                     .catch(error => console.log(error));
             }

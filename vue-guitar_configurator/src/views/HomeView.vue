@@ -17,15 +17,15 @@ import { useCartStore } from '../stores/cart'
 </script>
 
 <template>
-    <form @submit.prevent="submitCart" id="configurationForm">
+    <form @submit.prevent id="configurationForm">
         <ConfiguratorModal
-            @updateFormSelection="updateS($event)"
             v-for="(category, step) in categories"
             :key="category.id"
             :category="category"
             :items="items"
             :max_steps="max_steps"
             :step="step"
+            :modal_step="modal_step"
         />
     </form>
 
@@ -43,8 +43,7 @@ export default {
             items: [],
             max_steps: 0,
             staffPicks: [],
-            radio: [],
-            checked: []
+            modal_step:[],
         };
     },
     created() {
@@ -77,19 +76,6 @@ export default {
                 console.log(error)
             })
     },
-    methods: {
-        updateS(checked, radio){
-            this.checked=checked;
-            this.radio=radio;
-        },
-        submitCart(){
-            const formData = {
-                radio: this.radio,
-                checked: this.checked
-            }
-            console.log(this.checked)
-        }
-    }
 };
 
 </script>

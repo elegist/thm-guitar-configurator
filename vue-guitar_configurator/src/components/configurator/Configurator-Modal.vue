@@ -1,15 +1,6 @@
 <script setup>
-import { mapStores, mapWritableState } from 'pinia';
-import { useCartStore } from '../../stores/cart'
-import { storeToRefs } from 'pinia'
-
-const cartStore = useCartStore()
-
-function saveToConfiguration() {
-    cartStore.cart.configurations.push(cartStore.cart.stepChoices)
-    console.log(cartStore.cart.configurations)      
-}
-
+    import {useUserStore} from '../../stores/user'
+    import {useCartStore} from '../../stores/cart'
 </script>
 
 <template>
@@ -75,7 +66,7 @@ function saveToConfiguration() {
                                                         :name="`check-${item.slug}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
-                                                        v-model="checked"
+                                                        v-model="modal_step_check"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -107,7 +98,7 @@ function saveToConfiguration() {
                                                         :name="`radio-${category.id}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
-                                                        v-model="radio"
+                                                        v-model="modal_step[step]"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -145,7 +136,7 @@ function saveToConfiguration() {
                                     Save configuration and quit
                                 </button>
                                 <button
-                                    @click="passEvent"
+                                    @click="saveToLocalCart"
                                     v-if="category.id == max_steps"
                                     class="btn btn-success my-2"
                                     type="submit"
@@ -155,6 +146,7 @@ function saveToConfiguration() {
                                 </button>
                                 <button
                                     v-else
+                                    @click="saveToLocalCart"
                                     class="btn btn-success my-2"
                                     type="submit"
                                     name="add-to-cart"
@@ -236,21 +228,26 @@ function saveToConfiguration() {
 </template>
 
 <script>
+
 export default {
     name: "ConfiguratorModal",
-    props: ["category", "items", "step", "max_steps"],
+    props: ["category", "items", "step", "max_steps", "modal_step"],
     data(){
         return{
-            radio: [],
-            checked: []
-            //stepChoices: [],
+            modal_step_check: [],
+            cartStore: useCartStore()
             //configuration: []
         }
     },
     methods: {
-        passEvent(){
-            this.$emit('updateFormSelection', this.checked, this.radio)
-        }
+        saveToLocalCart(){
+            const wholeSelection = this.modal_step.concat(this.modal_step_check)
+            this.cartStore.cart.configurations = wholeSelection.flat(1)
+            console.log(this.cartStore.cart.configurations)
+        },
+    },
+    mounted() {
+        
     }
 
     // computed: {
