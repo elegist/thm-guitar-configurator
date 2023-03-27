@@ -137,6 +137,7 @@ export default {
             userStore: useUserStore(),
             userConfigurations: [],
             items: [],
+            customerId: 0,
             username: "",
             email: "",
             password: "",
@@ -152,16 +153,21 @@ export default {
         updateUser() {},
     },
     created() {
+        console.log("userid", this.userStore.userId);
         axios
-            .get("/api/v1/configuration/")
-            .then((response) => {
-                const userConfiguration = response.data.filter(
-                    (configuration) =>
-                        configuration.customer == this.userStore.userId
-                );
-                this.userConfigurations = userConfiguration;
+            .get(`/api/v1/customer/${this.userStore.userId}`)
+            .then(response => {
+                console.log("customer", response.data.id)
+                return response.data.id;
             })
-            .catch((error) => console.log(error));
+            .then(response => {
+                axios
+                    .get(`/api/v1/configuration/${response}`)
+                    .then(response => {
+                        this.userConfigurations = response.data
+                    })
+            })
+            .catch((error) => console.log(error))
         
         axios
             .get("/api/v1/item/")

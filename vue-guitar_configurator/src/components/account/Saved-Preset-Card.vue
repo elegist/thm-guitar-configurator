@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     name: "SavedPresetCard",
     props: ["configuration", "id", "items"],
@@ -75,9 +73,11 @@ export default {
     created() {
         this.configuration.configuration_items.forEach((configurationItem) => {
             this.configurationItems.push(
-                this.items.filter((item) => item.id == configurationItem)
+                this.items.filter((item) => {
+                    return item.id == configurationItem;
+                })
             )
-        });
+        })
     },
 }
 </script>
