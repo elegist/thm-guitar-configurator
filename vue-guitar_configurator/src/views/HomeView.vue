@@ -3,14 +3,23 @@ import Hero from "../components/Hero.vue";
 import StaffPicksCarousel from "../components/staff-picks-carousel/Staff-Picks-Carousel.vue";
 import ConfiguratorModal from "../components/configurator/Configurator-Modal.vue";
 import {storeToRefs} from 'pinia'
+import { ref } from 'vue'
 import { getAPI } from "../axios";
+import { useCartStore } from '../stores/cart'
 
+// const modalForm = ref([])
+// function submitCart(){
+//     modalForm = {
+
+//     }
+// }
 
 </script>
 
 <template>
-    <form @submit.prevent id="configurationForm">
+    <form @submit.prevent="submitCart" id="configurationForm">
         <ConfiguratorModal
+            @updateFormSelection="updateS($event)"
             v-for="(category, step) in categories"
             :key="category.id"
             :category="category"
@@ -34,6 +43,8 @@ export default {
             items: [],
             max_steps: 0,
             staffPicks: [],
+            radio: [],
+            checked: []
         };
     },
     created() {
@@ -66,6 +77,19 @@ export default {
                 console.log(error)
             })
     },
+    methods: {
+        updateS(checked, radio){
+            this.checked=checked;
+            this.radio=radio;
+        },
+        submitCart(){
+            const formData = {
+                radio: this.radio,
+                checked: this.checked
+            }
+            console.log(this.checked)
+        }
+    }
 };
 
 </script>

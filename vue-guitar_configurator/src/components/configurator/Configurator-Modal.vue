@@ -9,6 +9,7 @@ function saveToConfiguration() {
     cartStore.cart.configurations.push(cartStore.cart.stepChoices)
     console.log(cartStore.cart.configurations)      
 }
+
 </script>
 
 <template>
@@ -74,7 +75,7 @@ function saveToConfiguration() {
                                                         :name="`check-${item.slug}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
-                                                        v-model="cartStore.cart.stepChoices"
+                                                        v-model="checked"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -106,7 +107,7 @@ function saveToConfiguration() {
                                                         :name="`radio-${category.id}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
-                                                        v-model="cartStore.cart.stepChoices"
+                                                        v-model="radio"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -144,8 +145,8 @@ function saveToConfiguration() {
                                     Save configuration and quit
                                 </button>
                                 <button
+                                    @click="passEvent"
                                     v-if="category.id == max_steps"
-                                    @click="saveToConfiguration"
                                     class="btn btn-success my-2"
                                     type="submit"
                                     name="add-to-cart"
@@ -223,11 +224,11 @@ function saveToConfiguration() {
                         class="btn btn-outline-info nextStepButton"
                         :data-bs-target="`#step-${category.id + 1}`"
                         data-bs-toggle="modal"
-                        @click="saveToConfiguration"
+                        
                     >
                         <i class="bi bi-caret-right-fill"></i>
                     </button>
-                    {{ cartStore.cart.stepChoices }}
+                    
                 </div>
             </div>
         </div>
@@ -238,12 +239,20 @@ function saveToConfiguration() {
 export default {
     name: "ConfiguratorModal",
     props: ["category", "items", "step", "max_steps"],
-    // data(){
-    //     return{
-    //         stepChoices: [],
-    //         //configuration: []
-    //     }
-    // },
+    data(){
+        return{
+            radio: [],
+            checked: []
+            //stepChoices: [],
+            //configuration: []
+        }
+    },
+    methods: {
+        passEvent(){
+            this.$emit('updateFormSelection', this.checked, this.radio)
+        }
+    }
+
     // computed: {
     //     ...mapWritableState(useCartStore, ['configurations'])
     // },
