@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import CustomerSerializer, CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
+from .serializers import UserSerializer, CustomerSerializer, CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
 
 def home(request):
     print(request.POST.get("radio-1", ""))
@@ -304,3 +304,35 @@ def staff_pick_list(request, format=None):
 #         items = Item.objects.all()
 #         serializer = ItemSerializer(items, many=True)
 #         return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, id, format=None):
+    try:
+        user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = UserSerializer(user, data=request.data)
+        
+    elif request.method == 'DELETE':
+        pass
+
+# Django api_views
+@api_view(['GET', 'PUT', 'DELETE'])
+def customer_detail(request, id, format=None):
+    try:
+        customer = Customer.objects.get(pk=id)
+    except Customer.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        pass
+    elif request.method == 'DELETE':        
+        pass
