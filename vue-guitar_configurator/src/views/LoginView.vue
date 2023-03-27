@@ -38,7 +38,7 @@
         </div>
     </form>
 
-    <p class="fw-light mt-2">Don't have an account yet? <i class="bi bi-arrow-right"></i> <a class="link-primary fw-bold" type="button" href="#">Register</a></p>
+    <p class="fw-light mt-2">Don't have an account yet? <i class="bi bi-arrow-right"></i> <router-link class="link-primary fw-bold" type="button" to="/register">Login</router-link></p>
 
 </template>
 
