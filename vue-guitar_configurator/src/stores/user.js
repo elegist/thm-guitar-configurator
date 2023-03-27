@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
     //state
     state: () => ({
         username: "",
+        userId: "",
         isAuthenticated: false,
         token: "",
     }),
@@ -37,6 +38,12 @@ export const useUserStore = defineStore("user", {
         },
         removeUser(){
             this.username = ""
+        },
+        setUserId(id){
+            this.userId = id;
+        },
+        removeUserId(){
+            this.userId = ""
         }
     },
 });
