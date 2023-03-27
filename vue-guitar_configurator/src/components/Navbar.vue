@@ -118,13 +118,11 @@ import {ref} from 'vue'
                 axios
                     .get("api/v1/users/me/")
                     .then(response => {
-                        this.userStore.setUser(response.data.username)
-                        localStorage.setItem('username', response.data.username) 
+                        this.userStore.setUser(response.data.username) 
                         return response 
                     })
                     .then(response => {
                         this.userStore.setUserId(response.data.id)
-                        localStorage.setItem('userId', response.data.id) 
                     })
                     .catch(error => console.log(error));
             }
@@ -132,11 +130,10 @@ import {ref} from 'vue'
         methods: {
             logout(){
                 axios.defaults.headers.common["Authorization"] = ""
-                localStorage.removeItem("token")
                 
                 this.userStore.removeToken()
                 this.userStore.removeUser()
-                //this.$router.push('/')
+                this.$router.push('/')
             }
         }
     }
