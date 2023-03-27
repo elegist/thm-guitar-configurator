@@ -117,7 +117,11 @@ import {ref} from 'vue'
             if (this.userStore.isAuthenticated) {
                 axios
                     .get("api/v1/users/me/")
-                    .then(response => this.userStore.setUser(response.data.username))
+                    .then(response => {
+                        this.userStore.setUser(response.data.username) 
+                        return response 
+                    })
+                    .then(response => this.userStore.setUserId(response.data.id))
                     .catch(error => console.log(error));
             }
         },
