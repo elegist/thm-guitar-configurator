@@ -118,10 +118,14 @@ import {ref} from 'vue'
                 axios
                     .get("api/v1/users/me/")
                     .then(response => {
-                        this.userStore.setUser(response.data.username) 
+                        this.userStore.setUser(response.data.username)
+                        localStorage.setItem('username', response.data.username) 
                         return response 
                     })
-                    .then(response => this.userStore.setUserId(response.data.id))
+                    .then(response => {
+                        this.userStore.setUserId(response.data.id)
+                        localStorage.setItem('userId', response.data.id) 
+                    })
                     .catch(error => console.log(error));
             }
         },

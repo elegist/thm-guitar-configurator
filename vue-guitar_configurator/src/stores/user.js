@@ -24,6 +24,22 @@ export const useUserStore = defineStore("user", {
                 this.isAuthentiated = false;
             }
 
+            if (localStorage.getItem("userId")) {
+                this.userId = localStorage.getItem("userId");
+                this.isAuthenticated = true;
+            } else {
+                this.userId = "";
+                this.isAuthentiated = false;
+            }
+
+            if (localStorage.getItem("username")) {
+                this.userId = localStorage.getItem("username");
+                this.isAuthenticated = true;
+            } else {
+                this.userId = "";
+                this.isAuthentiated = false;
+            }
+
         },
         setToken(token) {
             this.token = token;
