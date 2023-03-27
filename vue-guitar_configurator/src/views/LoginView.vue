@@ -54,12 +54,10 @@
         // },
         data() {
             return {
+                userStore: useUserStore(),
                 username: '',
                 password: '',
             }
-        },
-        computed: {
-            ...mapStores(useUserStore),
         },
         methods: {
             async login() {
@@ -77,6 +75,7 @@
                             const token = response.data.auth_token
                             console.log(token)
                             this.userStore.setToken(token)
+                            this.userStore.setUser(this.username)
 
                             axios.defaults.headers.common["Authorization"] = "Token" + token
                             localStorage.setItem("token", token)

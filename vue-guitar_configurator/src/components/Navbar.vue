@@ -102,27 +102,17 @@ import {ref} from 'vue'
         name: 'navbar',
         data(){
             return{
+                userStore: useUserStore(),
                 username: ''
             } 
         },
-        computed: {
-            ...mapStores(useUserStore),
-        },
-        created(){
-            //this.getUsername()
-        },
-        methods: {
-            async getUsername(){
-               await axios
-                    .get("api/v1/users/me",)
-                    .then(response => {
-                        this.userStore.username = response.data.username
-                        console.log('logged in as ' + response.data.username)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })  
-            },
+        mounted() {
+            if (this.userStore.isAuthenticated) {
+                axios
+                    .get("api/v1/users/me/")
+                    .then(response => this.userStore.setUser(response.data.username))
+                    .catch(error => console.log(error));
+            }
         }
     }
 
