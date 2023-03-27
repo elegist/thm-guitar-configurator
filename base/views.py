@@ -317,7 +317,11 @@ def user_detail(request, id, format=None):
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = UserSerializer(user, data=request.data)
-        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
     elif request.method == 'DELETE':
         pass
 
@@ -325,14 +329,43 @@ def user_detail(request, id, format=None):
 @api_view(['GET', 'PUT', 'DELETE'])
 def customer_detail(request, id, format=None):
     try:
-        customer = Customer.objects.get(pk=id)
+        customer = Customer.objects.get(user_id=id)
     except Customer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = CustomerSerializer(customer)
         return Response(serializer.data)
+
     elif request.method == 'PUT':
-        pass
+        serializer = CustomerSerializer(customer, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
     elif request.method == 'DELETE':        
         pass
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def configuration_detail(request, id, format=None):
+    try:
+        configuration = Configuration.objects.filter(customer_id=id)
+    except Configuration.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ConfigurationSerializer(configuration, many=True)
+        return Response(serializer.data)
+
+
+
+    elif request.method == 'PUT':
+        serializer = ConfigurationSerializer(configuration, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':        
+        pass    
