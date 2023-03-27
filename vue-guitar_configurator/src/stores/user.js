@@ -22,6 +22,7 @@ export const useUserStore = defineStore("user", {
                 this.token = "";
                 this.isAuthentiated = false;
             }
+
         },
         setToken(token) {
             this.token = token;
@@ -34,5 +35,8 @@ export const useUserStore = defineStore("user", {
         setUser(name) {
             this.username = name;
         },
+        removeUser(){
+            this.username = ""
+        }
     },
 });

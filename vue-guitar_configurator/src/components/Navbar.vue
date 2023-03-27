@@ -40,7 +40,14 @@ import {ref} from 'vue'
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
                     <template v-if="userStore.isAuthenticated">
-                        Hello, <span class="text-color-info">{{ userStore.username }}</span>
+                        Welcome Back, <span class="text-color-info">{{ userStore.username }}</span>
+                        <a
+                        @click="logout"
+                        type="button"
+                        class="mx-3 link-secondary"
+                        >
+                        Logout
+                        </a>
                     </template>
                     <template v-else>
                         Hello, <span class="text-color-info">Guest</span>
@@ -112,6 +119,16 @@ import {ref} from 'vue'
                     .get("api/v1/users/me/")
                     .then(response => this.userStore.setUser(response.data.username))
                     .catch(error => console.log(error));
+            }
+        },
+        methods: {
+            logout(){
+                axios.defaults.headers.common["Authorization"] = ""
+                localStorage.removeItem("token")
+                
+                this.userStore.removeToken()
+                this.userStore.removeUser()
+                //this.$router.push('/')
             }
         }
     }
