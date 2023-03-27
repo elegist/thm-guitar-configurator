@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
+from .serializers import UserSerializer, CustomerSerializer, CategorySerializer, ItemSerializer, ConfigurationSerializer, OrderItemSerializer, OrderSerializer
 
 def home(request):
     print(request.POST.get("radio-1", ""))
@@ -229,6 +229,19 @@ def order_summary(request):
 
 # Django api_views
 @api_view(['GET', 'POST'])
+def customer_list(request, format=None):
+    if request.method == 'GET':
+        customers = Customer.objects.all()
+        serializer = CustomerSerializer(customers, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = CustomerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET', 'POST'])
 def category_list(request, format=None):
     if request.method == 'GET':
         categories = Category.objects.all()
@@ -291,3 +304,68 @@ def staff_pick_list(request, format=None):
 #         items = Item.objects.all()
 #         serializer = ItemSerializer(items, many=True)
 #         return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, id, format=None):
+    try:
+        user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        pass
+
+# Django api_views
+@api_view(['GET', 'PUT', 'DELETE'])
+def customer_detail(request, id, format=None):
+    try:
+        customer = Customer.objects.get(user_id=id)
+    except Customer.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = CustomerSerializer(customer, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':        
+        pass
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def configuration_detail(request, id, format=None):
+    try:
+        configuration = Configuration.objects.filter(customer_id=id)
+    except Configuration.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ConfigurationSerializer(configuration, many=True)
+        return Response(serializer.data)
+
+
+
+    elif request.method == 'PUT':
+        serializer = ConfigurationSerializer(configuration, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':        
+        pass    

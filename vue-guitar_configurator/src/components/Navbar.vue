@@ -71,7 +71,14 @@ onMounted(() => {
             <ul class="navbar-nav ms-auto">
                 <p class="my-auto">
                     <template v-if="userStore.isAuthenticated">
-                        Hello, <span class="text-color-info">{{ username }}</span>
+                        Welcome Back, <span class="text-color-info">{{ userStore.username }}</span>
+                        <a
+                        @click="logout"
+                        type="button"
+                        class="mx-3 link-secondary"
+                        >
+                        Logout
+                        </a>
                     </template>
                     <template v-else>
                         Hello, <span class="text-color-info">Guest</span>
@@ -129,29 +136,38 @@ onMounted(() => {
 </template>
 
 <script>
-    // export default {
-    //     name: 'navbar',
-    //     computed: {
-    //         ...mapStores(useUserStore),
-    //         ...mapWritableState(useUserStore, ['username']),
-    //     },
-    //     created(){
-    //         this.getUsername()
-    //     },
-    //     methods: {
-    //         async getUsername(){
-    //            await axios
-    //                 .get("api/v1/users/me",)
-    //                 .then(response => {
-    //                     this.username = response.data.username
-    //                     console.log('logged in as ' + response.data.username)
-    //                 })
-    //                 .catch(error => {
-    //                     console.log(error)
-    //                 })  
-    //         },
-    //     }
-    // }
+    export default {
+        name: 'navbar',
+        data(){
+            return{
+                userStore: useUserStore(),
+                username: ''
+            } 
+        },
+        mounted() {
+            if (this.userStore.isAuthenticated) {
+                axios
+                    .get("api/v1/users/me/")
+                    .then(response => {
+                        this.userStore.setUser(response.data.username) 
+                        return response 
+                    })
+                    .then(response => {
+                        this.userStore.setUserId(response.data.id)
+                    })
+                    .catch(error => console.log(error));
+            }
+        },
+        methods: {
+            logout(){
+                axios.defaults.headers.common["Authorization"] = ""
+                
+                this.userStore.removeToken()
+                this.userStore.removeUser()
+                this.$router.push('/')
+            }
+        }
+    }
 
 </script>
 

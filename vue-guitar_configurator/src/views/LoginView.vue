@@ -1,4 +1,5 @@
 <script setup>
+    
     import axios from 'axios';
     import { mapStores } from 'pinia'
 
@@ -49,12 +50,10 @@
         name: 'login',
         data() {
             return {
+                userStore: useUserStore(),
                 username: '',
                 password: '',
             }
-        },
-        computed: {
-            ...mapStores(useUserStore),
         },
         methods: {
             async login() {
@@ -70,12 +69,21 @@
                         .post("api/v1/token/login", formData)
                         .then(response => {
                             const token = response.data.auth_token
+        
                             console.log(token)
                             this.userStore.setToken(token)
+                            this.userStore.setUser(this.username)
 
-                            axios.defaults.headers.common["Authorization"] = "Token" + token
-                            localStorage.setItem("token", token)
+                            axios.defaults.headers.common["Authorization"] = "Token " + token
                             this.$router.push('/')
+                        })
+                        .then(() => {
+                            axios
+                                .get("api/v1/users/me")
+                                .then(response => {
+                                    const userId = response.data.id
+                                    this.userStore.setUserId(userId)     
+                                })
                         })
                         .catch(error => {
                             console.log(error)

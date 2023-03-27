@@ -1,5 +1,18 @@
 from rest_framework import serializers
-from .models import Category, Item, Configuration, OrderItem, Order
+from .models import User, Customer, Category, Item, Configuration, OrderItem, Order
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email'
+        )
+                
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,6 +49,7 @@ class ConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Configuration
         fields = (
+            'id',
             'name',
             'customer',
             'configuration_items',
