@@ -14,6 +14,7 @@ import { getAPI } from "../axios";
             :items="items"
             :max_steps="max_steps"
             :step="step"
+            :form="form"
         />
     </form>
 
@@ -31,7 +32,8 @@ export default {
             items: [],
             max_steps: 0,
             staffPicks: [],
-            configurations: [] // get user configurations
+            configurations: [], // get user configurations
+            form: [],
         };
     },
     created() {
