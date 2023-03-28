@@ -2,7 +2,8 @@
 import Hero from "../components/Hero.vue";
 import StaffPicksCarousel from "../components/staff-picks-carousel/Staff-Picks-Carousel.vue";
 import ConfiguratorModal from "../components/configurator/Configurator-Modal.vue";
-import { getAPI } from "../axios";
+import axios from "axios";
+import { useUserStore } from "../stores/user";
 </script>
 
 <template>
@@ -20,7 +21,7 @@ import { getAPI } from "../axios";
 
     <Hero />
 
-    <StaffPicksCarousel :staffPicks="staffPicks"/>
+    <StaffPicksCarousel :staffPicks="staffPicks" />
 </template>
 
 <script>
@@ -28,6 +29,7 @@ export default {
     name: "HomeView",
     data() {
         return {
+            userStore: useUserStore(),
             categories: [],
             items: [],
             max_steps: 0,
@@ -39,35 +41,43 @@ export default {
         };
     },
     created() {
-        getAPI
-            .get("/api/v1/category/")
+        axios
+            .get(`/api/v1/customer/${this.userStore.userId}`)
             .then((response) => {
-                console.log("data fetch from API successful -> Categories");
-                this.categories = response.data;
-                this.max_steps = this.categories.length
+                this.userStore.customerId = response.data.id;
             })
             .catch((error) => {
                 console.log(error);
             });
-        getAPI
+
+        axios
+            .get("/api/v1/category/")
+            .then((response) => {
+                console.log("data fetch from API successful -> Categories");
+                this.categories = response.data;
+                this.max_steps = this.categories.length;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        axios
             .get("/api/v1/item/")
             .then((response) => {
                 console.log("data fetch from API successful -> Items");
                 this.items = response.data;
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
-        getAPI
+        axios
             .get("/api/v1/staff-picks/")
             .then((response) => {
                 console.log("data fetch from API successful -> Staff Picks");
                 this.staffPicks = response.data;
             })
             .catch((error) => {
-                console.log(error)
-            })
+                console.log(error);
+            });
     },
 };
-
 </script>

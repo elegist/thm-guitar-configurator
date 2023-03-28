@@ -15,15 +15,15 @@
             ></button>
         </div>
         <div class="offcanvas-body">
-            <template v-if="getCartLength > 0">
+            <template v-if="order">
                 <ol class="list-group">
                     <li
-                        v-for="item in items.configurations"
+                        v-for="(item, index) in orderItems"
                         class="list-group-item list-group-item-dark"
                     >
                         <img src="" alt="Selected guitar shape" class="w-50" />
                         <div class="d-flex justify-content-between">
-                            <div class="fw-bold">{{ item.name }}</div>
+                            <div class="fw-bold">Name</div>
                             <div class="d-flex gap-2">
                                 <a href="#"
                                     ><i class="bi bi-dash-circle"></i
@@ -34,14 +34,17 @@
                                 ></a>
                             </div>
                             <div class="fw-bold fst-italic text-success">
-                                €{{ item.total_price }}
+                                € Price 
                             </div>
                         </div>
                     </li>
                 </ol>
                 <div class="d-grid gap-2 mt-5">
                     <span>Total: €</span>
-                    <router-link to="/order-summary" class="btn btn-warning btn-lg">
+                    <router-link
+                        to="/order-summary"
+                        class="btn btn-warning btn-lg"
+                    >
                         Proceed to Checkout
                     </router-link>
                 </div>
@@ -62,21 +65,39 @@
 <script>
 import axios from "axios";
 import { useCartStore } from "../../stores/cart";
+import { useUserStore } from "../../stores/user";
 export default {
     name: "CartOffCanvas",
     data() {
         return {
-            items: [],
-            cartStore: useCartStore(),
+            userStore: useUserStore(),
+            order: null,
+            orderItems: [],
         };
     },
     mounted() {
-        this.items = this.cartStore.cart;
+        axios
+            .get(`api/v1/order/${this.userStore.customerId}`)
+            .then((response) => {
+                this.order = response.data;
+                return response.data.configurations;
+            })
+            .then((response) => {
+                response.forEach((data) => {
+                    axios
+                        .get(`api/v1/orderItem/${data}`)
+                        .then((response) => {
+                            this.orderItems.push(response.data);
+                        })
+                        .catch((error) => console.log(error));
+                });
+            })
+            .catch((error) => console.log(error));
     },
     computed: {
-        getCartLength() {
-            return this.cartStore.cart.configurations.length;
-        },
+        // getCartLength() {
+        //     return this.cartStore.cart.configurations.length;
+        // },
     },
 };
 </script>

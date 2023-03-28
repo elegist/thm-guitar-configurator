@@ -1,6 +1,7 @@
 <script setup>
-import axios from 'axios';
-import { useCartStore } from '../../stores/cart';
+import axios from "axios";
+import { useCartStore } from "../../stores/cart";
+import { useUserStore } from "../../stores/user";
 </script>
 
 <template>
@@ -16,8 +17,9 @@ import { useCartStore } from '../../stores/cart';
                     <button
                         @click="addToCart"
                         class="btn btn-success shadow-sm mt-2 mt-md-0"
-                        >Add to cart</button
                     >
+                        Add to cart
+                    </button>
                 </div>
             </div>
             <div class="col d-none d-lg-block my-auto">
@@ -42,38 +44,35 @@ export default {
     props: ["pick", "items"],
     data() {
         return {
-            configurationItems: [],
-            image: '',
             cartStore: useCartStore(),
+            userStore: useUserStore(),
+            customerId: 0,
+            configurationItems: [],
+            image: "",
         };
     },
-    created() {
-        // this.pick.configuration_items.forEach((configurationItem) => {
-        //     this.configurationItems.push(
-        //         this.items.filter((item) => {
-        //             return item.id == configurationItem;
-        //         })
-        //     );
-        // });
-
+    mounted() {
         axios
             .get(`api/v1/configuration-items/${this.pick.id}`)
-            .then(response => {
-                console.log(response.data);
+            .then((response) => {
                 response.data.items.forEach((data) => {
-                    this.configurationItems.push(data)
-                })
-                this.image = response.data.images[0]
-            })
+                    this.configurationItems.push(data);
+                });
+                this.image = response.data.images[0];
+            });
 
         //this.image = this.configurationItems[0][0].get_image
     },
     methods: {
         addToCart() {
-            const configuration = this.pick
-
-            this.cartStore.addToCart(configuration)
-        }
-    }
+            axios
+                .post("api/v1/addToCart/", {
+                    "customer": this.userStore.customerId,
+                    "configuration": this.pick.id,
+                })
+                .then((response) => {})
+                .catch((error) => console.log(error));
+        },
+    },
 };
 </script>

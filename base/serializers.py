@@ -41,7 +41,14 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = (
+            'customer',
+            'configurations',
+            'date_created',
+            'date_ordered',
+            'is_completed',
+            'total_price',
+        )
 
 
 

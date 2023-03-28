@@ -233,28 +233,11 @@ export default {
         return {
             userStore: useUserStore(),
             cartStore: useCartStore(),
-            customerId: 0,
             formCheck: [],
         }
     },
     components: {
         ConfiguratorContent,
-    },
-    mounted() {
-        axios
-            .get(`api/v1/customer/${this.userStore.userId}`)
-            .then(response => {
-                this.customerId = response.data.id;
-            })
-            .catch(error => console.log(error))
-    },
-    updated() {
-        axios
-            .get(`api/v1/customer/${this.userStore.userId}`)
-            .then(response => {
-                this.customerId = response.data.id;
-            })
-            .catch(error => console.log(error))
     },
     props: ["category", "items", "step", "max_steps", "form"],
     methods: {
@@ -264,7 +247,7 @@ export default {
             axios
                 .post("api/v1/configuration/", {
                     "name": `Configuration from ${this.userStore.username}`,
-                    "customer": this.customerId,
+                    "customer": this.userStore.customerId,
                     "configuration_items": chosenItems
                 })
                 .then((response) => {
@@ -278,7 +261,7 @@ export default {
             axios
                 .post("api/v1/configuration/", {
                     "name": `Configuration from ${this.userStore.username}`,
-                    "customer": this.customerId,
+                    "customer": this.userStore.customerId,
                     "configuration_items": chosenItems
                 })
                 .then((response) => {

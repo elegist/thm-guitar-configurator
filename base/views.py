@@ -285,9 +285,52 @@ def order_list(request, format=None):
 
 @api_view(['GET'])
 def orderItem_list(request, format=None):
-    orderItems = OrderItem.objects.all()
-    serializer = OrderItemSerializer(orderItems, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        orderItems = OrderItem.objects.all()
+        serializer = OrderItemSerializer(orderItems, many=True)
+        return Response(serializer.data)
+        
+
+@api_view(['POST'])
+def vue_add_to_cart(request, format=None):
+    customer = Customer.objects.get(id=request.data["customer"])
+    configuration = Configuration.objects.get(id=request.data["configuration"])
+    
+    order_item, created = OrderItem.objects.get_or_create(configuration=configuration, customer=customer)
+    order = Order.objects.filter(customer=customer, is_completed=False)
+    if order.exists():
+        if order[0].configurations.filter(configuration__id=configuration.id, order__customer=customer).exists():
+            order_item.quantity += 1
+            order_item.save()
+        else:
+            order[0].configurations.add(order_item)
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(customer=customer, date_ordered=ordered_date)
+        order.configurations.add(order_item)
+
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def vue_remove_from_cart(request, format=None):
+    customer = Customer.objects.get(id=request.data["customer"])
+    configuration = Configuration.objects.get(id=request.data["configuration"])
+
+    order = Order.objects.filter(customer=customer, is_completed=False)
+    if order.exists():
+        if order[0].configurations.filter(configuration__id=configuration.id).exists():
+            order_item = OrderItem.objects.filter(configuration=configuration)[0]
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order_item.delete()
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET', 'POST']) ## filter for user configuratons
 def configuration_list(request, format=None):
@@ -378,13 +421,42 @@ def configuration_detail(request, id, format=None):
         return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':        
-        pass    
+        pass
+
+@api_view(['GET'])
+def configuration_by_id(request, configuration_id, format=None):
+    try:
+        configuration = Configuration.objects.get(id=configuration_id)
+    except Configuration.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = ConfigurationSerializer(configuration)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def order_detail(request, customer_id, format=None):
+    try:
+        order = Order.objects.get(customer=customer_id, is_completed=False)
+    except Order.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = OrderSerializer(order)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def order_item_detail(request, order_item_id, format=None):
+    try:
+        order_item = OrderItem.objects.get(id=order_item_id)
+    except OrderItem.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = OrderItemSerializer(order_item)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def configuration_items(request, configuration_id, format=None):
     configuration = Configuration.objects.get(id=configuration_id)
     serializer = ConfigurationSerializer(configuration)
-    print(serializer.data["configuration_items"])
     configuration_item_ids = serializer.data["configuration_items"]
     response_data = {}
     response_data["items"] = []

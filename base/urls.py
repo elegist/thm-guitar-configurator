@@ -22,7 +22,12 @@ urlpatterns = [
     path('user/<int:id>', views.user_detail),
     path('customer/<int:id>', views.customer_detail),
     path('configuration/<int:id>', views.configuration_detail),
-    path('configuration-items/<int:configuration_id>', views.configuration_items)
+    path('configuration-items/<int:configuration_id>', views.configuration_items),
+    path('addToCart/', views.vue_add_to_cart),
+    path('removeFromCart/', views.vue_remove_from_cart),
+    path('order/<int:customer_id>', views.order_detail),
+    path('orderItem/<int:order_item_id>', views.order_item_detail),
+    path('configurationById/<int:configuration_id>', views.configuration_by_id)
 ] 
 
 ##urlpatterns = format_suffix_patterns(urlpatterns)

@@ -8,6 +8,7 @@ export const useUserStore = defineStore("user", {
     state: () => ({
         username: "",
         userId: "",
+        customerId: "",
         isAuthenticated: false,
         token: "",
     }),
@@ -15,8 +16,7 @@ export const useUserStore = defineStore("user", {
     //getters
 
     actions: {
-        init() {
-        },
+        init() {},
         setToken(token) {
             this.token = token;
             this.isAuthenticated = true;
@@ -28,15 +28,21 @@ export const useUserStore = defineStore("user", {
         setUser(name) {
             this.username = name;
         },
-        removeUser(){
-            this.username = ""
+        removeUser() {
+            this.username = "";
         },
-        setUserId(id){
+        setUserId(id) {
             this.userId = id;
         },
-        removeUserId(){
-            this.userId = ""
-        }
+        removeUserId() {
+            this.userId = "";
+        },
+        setCustomerId(id) {
+            this.customerId = id;
+        },
+        removeCustomerId(id) {
+            this.customerId = "";
+        },
     },
     persist: true,
 });
