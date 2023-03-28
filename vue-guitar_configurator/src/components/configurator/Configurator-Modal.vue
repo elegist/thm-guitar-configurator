@@ -34,15 +34,6 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                         <div
                             class="configurator-body row d-block d-lg-flex text-center"
                         >
-                            <div
-                                class="img-container col-lg-4 d-flex justify-content-center align-items-center"
-                            >
-                                <img
-                                    src=""
-                                    alt=""
-                                    class="img-fluid img-guitar-preview"
-                                />
-                            </div>
 
                             <div class="col-lg-8 input-col">
                                 <div
@@ -155,16 +146,6 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                 >
                                     Complete and add to cart
                                 </button>
-                                <p
-                                    class="text-color-success my-2"
-                                    :id="`priceText-${category.id}`"
-                                >
-                                    Total: €<span
-                                        class="currentPrice"
-                                        :id="`currentPrice-${category.id}`"
-                                        >0.00</span
-                                    >
-                                </p>
                             </div>
                         </div>
                     </div>

@@ -95,7 +95,7 @@ import {ref} from 'vue'
                         data-bs-target="#offcanvasCart"
                         aria-controls="offcanvasCart"
                     >
-                    <i class="bi bi-cart fs-1"></i> ({{ cartTotalLength }})
+                    <i class="bi bi-cart fs-1"></i>
                     </a>
                 </li>
             </ul>

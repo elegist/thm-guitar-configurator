@@ -121,7 +121,7 @@ import SavedPresetCard from "../components/account/Saved-Preset-Card.vue";
     <section class="saved-presets pt-3">
         <h2 class="p-3">Saved Presets</h2>
         <div class="row">
-            <div v-for="(configuration, id) in userConfigurations" :key="id" class="col-md-6 col-lg-3 my-2">
+            <div v-for="(configuration, id) in userConfigurations" :key="id" class="col-md-8 col-lg-4 my-2">
                 <SavedPresetCard :configuration="configuration" :id="id" :items="items"/>
             </div>
         </div>
