@@ -67,7 +67,7 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                                         :name="`check-${item.slug}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
-                                                        v-model="form[item.slug]"
+                                                        v-model="formCheck"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -231,6 +231,7 @@ export default {
         return {
             userStore: useUserStore(),
             customerId: 0,
+            formCheck: [],
         }
     },
     components: {
@@ -255,13 +256,15 @@ export default {
     props: ["category", "items", "step", "max_steps", "form"],
     methods: {
         submitForm() {
-            console.log(this.form)
+            console.log(this.form, this.formCheck)
+
+            const chosenItems = this.form.concat(this.formCheck);
 
             axios
                 .post("api/v1/configuration/", {
                     "name": `Configuration from ${this.userStore.username}`,
                     "customer": this.customerId,
-                    "configuration_items": this.form
+                    "configuration_items": chosenItems
                 })
                 .then((response) => {
                     console.log(response);
