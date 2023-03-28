@@ -153,7 +153,6 @@ export default {
         updateUser() {},
     },
     created() {
-        console.log("userid", this.userStore.userId);
         axios
             .get(`/api/v1/customer/${this.userStore.userId}`)
             .then(response => {
