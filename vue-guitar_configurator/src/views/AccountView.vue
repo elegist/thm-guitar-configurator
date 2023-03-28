@@ -187,7 +187,6 @@ export default {
         },
     },
     created() {
-        console.log("userid", this.userStore.userId);
         axios
             .get(`api/v1/user/${this.userStore.userId}`)
             .then(response => {

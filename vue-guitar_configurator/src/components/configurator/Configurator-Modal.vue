@@ -1,4 +1,7 @@
 <script setup>
+import axios, { AxiosError } from "axios";
+import { useCartStore } from "../../stores/cart";
+import { useUserStore } from "../../stores/user";
 import ConfiguratorContent from "./Configurator-Content.vue";
 </script>
 
@@ -65,6 +68,7 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                                         :name="`check-${item.slug}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
+                                                        v-model="formCheck"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -96,6 +100,7 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                                         :name="`radio-${category.id}`"
                                                         :value="`${item.id}`"
                                                         :data-price="`${item.price}`"
+                                                        v-model="form[step]"
                                                     />
                                                     <span class="config-btn">
                                                         <i
@@ -125,17 +130,18 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                     </div>
                                 </div>
                                 <button
-                                    
+                                    @click="submitForm"
                                     class="btn btn-info my-2"
-                                    type="submit"
+                                    type="button"
                                     name="save-and-quit"
                                 >
                                     Save configuration and quit
                                 </button>
                                 <button
                                     v-if="category.id == max_steps"
+                                    @click="addToCart"
                                     class="btn btn-success my-2"
-                                    type="submit"
+                                    type="button"
                                     name="add-to-cart"
                                 >
                                     Complete and add to cart
@@ -143,7 +149,7 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                 <button
                                     v-else
                                     class="btn btn-success my-2"
-                                    type="submit"
+                                    type="button"
                                     name="add-to-cart"
                                     disabled
                                 >
@@ -223,10 +229,65 @@ import ConfiguratorContent from "./Configurator-Content.vue";
 <script>
 export default {
     name: "ConfiguratorModal",
+    data() {
+        return {
+            userStore: useUserStore(),
+            cartStore: useCartStore(),
+            customerId: 0,
+            formCheck: [],
+        }
+    },
     components: {
         ConfiguratorContent,
     },
-    props: ["category", "items", "step", "max_steps"],
+    mounted() {
+        axios
+            .get(`api/v1/customer/${this.userStore.userId}`)
+            .then(response => {
+                this.customerId = response.data.id;
+            })
+            .catch(error => console.log(error))
+    },
+    updated() {
+        axios
+            .get(`api/v1/customer/${this.userStore.userId}`)
+            .then(response => {
+                this.customerId = response.data.id;
+            })
+            .catch(error => console.log(error))
+    },
+    props: ["category", "items", "step", "max_steps", "form"],
+    methods: {
+        submitForm() {
+            const chosenItems = this.form.concat(this.formCheck);
+
+            axios
+                .post("api/v1/configuration/", {
+                    "name": `Configuration from ${this.userStore.username}`,
+                    "customer": this.customerId,
+                    "configuration_items": chosenItems
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => console.log(error))
+        },
+        addToCart() {
+            const chosenItems = this.form.concat(this.formCheck);
+
+            axios
+                .post("api/v1/configuration/", {
+                    "name": `Configuration from ${this.userStore.username}`,
+                    "customer": this.customerId,
+                    "configuration_items": chosenItems
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    this.cartStore.addToCart(response.data)
+                })
+                .catch((error) => console.log(error))
+        }
+    }
 };
 </script>
 <style scoped></style>

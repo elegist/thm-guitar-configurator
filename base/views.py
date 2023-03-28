@@ -287,11 +287,19 @@ def orderItem_list(request, format=None):
     serializer = OrderItemSerializer(orderItems, many=True)
     return Response(serializer.data)
 
-@api_view(['GET']) ## filter for user configuratons
+@api_view(['GET', 'POST']) ## filter for user configuratons
 def configuration_list(request, format=None):
-    configurations = Configuration.objects.all()
-    serializer = ConfigurationSerializer(configurations, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        configurations = Configuration.objects.all()
+        serializer = ConfigurationSerializer(configurations, many=True)
+        return Response(serializer.data)
+    
+    if request.method == 'POST':
+        print(request.data)
+        serializer = ConfigurationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 def staff_pick_list(request, format=None):

@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import { useCartStore } from '../../stores/cart';
+</script>
 
 <template>
     <div class="container w-50 py-5 text-center">
@@ -10,10 +12,10 @@
 
                 <p class="text-color-success pt-3">{{ pick.total_price }}€</p>
                 <div class="d-grid gap-2 col-sm mx-auto">
-                    <a
-                        href="#add-to-cart"
+                    <button
+                        @click="addToCart"
                         class="btn btn-success shadow-sm mt-2 mt-md-0"
-                        >Add to cart</a
+                        >Add to cart</button
                     >
                 </div>
             </div>
@@ -41,6 +43,7 @@ export default {
         return {
             configurationItems: [],
             image: '',
+            cartStore: useCartStore(),
         };
     },
     created() {
@@ -54,5 +57,12 @@ export default {
 
         this.image = this.configurationItems[0][0].get_image
     },
+    methods: {
+        addToCart() {
+            const configuration = this.pick
+
+            this.cartStore.addToCart(configuration)
+        }
+    }
 };
 </script>

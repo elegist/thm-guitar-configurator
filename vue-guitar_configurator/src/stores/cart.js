@@ -22,7 +22,15 @@ export const useCartStore = defineStore('cart', {
         },
         //add items one by one or as one full configuration?
         addToCart(configuration) {
-            
+            const exists = this.cart.configurations.filter(i => i.id === configuration.id)
+
+            if (exists.length) {
+                exists[0].quantity = parseInt(exists[0].quantity) + parseInt(configuration.quantity)
+            } else {
+                this.cart.configurations.push(configuration)
+            }
+
+            localStorage.setItem('cart', JSON.stringify(this.cart))
         }
-    }
+    },
 })

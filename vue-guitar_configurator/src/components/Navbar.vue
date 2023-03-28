@@ -95,7 +95,7 @@ import {ref} from 'vue'
                         data-bs-target="#offcanvasCart"
                         aria-controls="offcanvasCart"
                     >
-                    <i class="bi bi-cart fs-1"></i>   
+                    <i class="bi bi-cart fs-1"></i> ({{ cartTotalLength }})
                     </a>
                 </li>
             </ul>
@@ -113,6 +113,7 @@ import {ref} from 'vue'
                 username: ''
             } 
         },
+        props: ["cart"],
         mounted() {
             if (this.userStore.isAuthenticated) {
                 axios
@@ -134,6 +135,17 @@ import {ref} from 'vue'
                 this.userStore.removeToken()
                 this.userStore.removeUser()
                 this.$router.push('/')
+            }
+        },
+        computed: {
+            cartTotalLength() {
+                let totalLength = 0;
+
+                for (let i; i < this.cart.length; i++) {
+                    totalLength += this.cart.configurations[i].quantity;
+                }
+
+                return totalLength;
             }
         }
     }
