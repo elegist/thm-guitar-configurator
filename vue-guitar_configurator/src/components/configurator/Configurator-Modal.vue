@@ -236,7 +236,15 @@ export default {
     components: {
         ConfiguratorContent,
     },
-    beforeMount() {
+    mounted() {
+        axios
+            .get(`api/v1/customer/${this.userStore.userId}`)
+            .then(response => {
+                this.customerId = response.data.id;
+            })
+            .catch(error => console.log(error))
+    },
+    updated() {
         axios
             .get(`api/v1/customer/${this.userStore.userId}`)
             .then(response => {
