@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AccountView from '../views/AccountView.vue'
+import CheckoutView from '../views/CheckoutView.vue'
 //import {useUserStore} from '../stores/user'
 
 
@@ -28,6 +29,14 @@ const router = createRouter({
       path: '/account',
       name: 'acount',
       component: AccountView,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/order-summary',
+      name: 'order-summary',
+      component: CheckoutView,
       meta: {
         requireLogin: true
       }
