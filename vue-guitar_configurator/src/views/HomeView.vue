@@ -20,7 +20,7 @@ import { getAPI } from "../axios";
 
     <Hero />
 
-    <StaffPicksCarousel :staffPicks="staffPicks" :items="items"/>
+    <StaffPicksCarousel :staffPicks="staffPicks"/>
 </template>
 
 <script>
@@ -34,6 +34,8 @@ export default {
             staffPicks: [],
             configurations: [], // get user configurations
             form: [],
+            test1: "",
+            test2: "",
         };
     },
     created() {

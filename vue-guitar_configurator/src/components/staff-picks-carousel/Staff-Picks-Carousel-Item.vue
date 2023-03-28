@@ -1,4 +1,5 @@
 <script setup>
+import axios from 'axios';
 import { useCartStore } from '../../stores/cart';
 </script>
 
@@ -26,7 +27,7 @@ import { useCartStore } from '../../stores/cart';
                         :key="item.id"
                         class="list-group-item list-group-item-dark"
                     >
-                        {{ item[0].name }}
+                        {{ item }}
                     </li>
                 </ul>
             </div>
@@ -47,15 +48,25 @@ export default {
         };
     },
     created() {
-        this.pick.configuration_items.forEach((configurationItem) => {
-            this.configurationItems.push(
-                this.items.filter((item) => {
-                    return item.id == configurationItem;
-                })
-            );
-        });
+        // this.pick.configuration_items.forEach((configurationItem) => {
+        //     this.configurationItems.push(
+        //         this.items.filter((item) => {
+        //             return item.id == configurationItem;
+        //         })
+        //     );
+        // });
 
-        this.image = this.configurationItems[0][0].get_image
+        axios
+            .get(`api/v1/configuration-items/${this.pick.id}`)
+            .then(response => {
+                console.log(response.data);
+                response.data.items.forEach((data) => {
+                    this.configurationItems.push(data)
+                })
+                this.image = response.data.images[0]
+            })
+
+        //this.image = this.configurationItems[0][0].get_image
     },
     methods: {
         addToCart() {

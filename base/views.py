@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
+from django.http import JsonResponse
 from .models import *
 from .forms import *
 from rest_framework.decorators import api_view
@@ -377,3 +379,25 @@ def configuration_detail(request, id, format=None):
 
     elif request.method == 'DELETE':        
         pass    
+
+@api_view(['GET'])
+def configuration_items(request, configuration_id, format=None):
+    configuration = Configuration.objects.get(id=configuration_id)
+    serializer = ConfigurationSerializer(configuration)
+    print(serializer.data["configuration_items"])
+    configuration_item_ids = serializer.data["configuration_items"]
+    response_data = {}
+    response_data["items"] = []
+    response_data["images"] = []
+
+    for configuration_item_id in configuration_item_ids:
+        configuration_item = Item.objects.filter(id=configuration_item_id)[0]
+        response_data["items"].append(configuration_item.name)
+        response_data["images"].append(configuration_item.get_image())
+        
+
+    #print(Item.objects.get(name="Stratocaster").get_image())
+    # for index, item in enumerate(configuration.configuration_items.all()):
+    #     response_data["items"].append(f'{item}')
+
+    return JsonResponse(response_data)
