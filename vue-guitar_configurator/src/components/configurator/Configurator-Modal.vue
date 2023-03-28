@@ -259,8 +259,6 @@ export default {
     props: ["category", "items", "step", "max_steps", "form"],
     methods: {
         submitForm() {
-            console.log(this.form, this.formCheck)
-
             const chosenItems = this.form.concat(this.formCheck);
 
             axios
