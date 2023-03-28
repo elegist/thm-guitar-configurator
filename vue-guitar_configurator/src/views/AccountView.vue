@@ -137,10 +137,8 @@ export default {
             userStore: useUserStore(),
             userConfigurations: [],
             items: [],
-            customerId: 0,
             username: "",
             email: "",
-            password: "",
             firstName: "",
             lastName: "",
             street: "",
@@ -150,14 +148,66 @@ export default {
         };
     },
     methods: {
-        updateUser() {},
+        updateUser(){
+
+            if (this.userStore.isAuthenticated){
+                const customerFormData = {
+                    first_name: this.firstName,
+                    last_name: this.lastName,
+                    street: this.street,
+                    city: this.city,
+                    state: this.state,
+                    zip_code: this.zipCode,
+                }
+
+                const userFormData = {
+                    username: this.username,
+                    email: this.email,
+                }
+
+                axios
+                    .put(`api/v1/customer/${this.userStore.userId}`, customerFormData)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+                axios
+                    .put(`api/v1/user/${this.userStore.userId}`, userFormData)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.userStore.setUser(this.username)        
+                }     
+        },
     },
     created() {
         console.log("userid", this.userStore.userId);
         axios
+            .get(`api/v1/user/${this.userStore.userId}`)
+            .then(response => {
+                this.username = response.data.username
+                this.email = response.data.email
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        axios
             .get(`/api/v1/customer/${this.userStore.userId}`)
             .then(response => {
                 console.log("customer", response.data.id)
+                this.firstName = response.data.first_name
+                this.lastName = response.data.last_name
+                this.street = response.data.street
+                this.city = response.data.city
+                this.state = response.data.state
+                this.zipCode = response.data.zip_code
                 return response.data.id;
             })
             .then(response => {
