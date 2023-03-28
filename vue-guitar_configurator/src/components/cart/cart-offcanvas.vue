@@ -39,6 +39,12 @@
                         </div>
                     </li>
                 </ol>
+                <div class="d-grid gap-2 mt-5">
+                    <span>Total: €</span>
+                    <router-link to="/order-summary" class="btn btn-warning btn-lg">
+                        Proceed to Checkout
+                    </router-link>
+                </div>
             </template>
             <template v-else>
                 <p class="fst-italic text-color-info">No items in cart</p>
@@ -69,8 +75,8 @@ export default {
     },
     computed: {
         getCartLength() {
-            return this.cartStore.cart.configurations.length
-        }
+            return this.cartStore.cart.configurations.length;
+        },
     },
 };
 </script>
