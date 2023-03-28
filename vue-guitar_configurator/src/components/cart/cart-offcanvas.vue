@@ -18,17 +18,49 @@
         ></button>
     </div>
     <div class="offcanvas-body">
-        <p class="fst-italic text-color-info">No items in cart</p>
-
-        <div class="d-grid gap-2 mt-5">
-            <button class="btn btn-success btn-lg" disabled>Order</button>
-        </div>
+        <template v-if="items.configurations">
+            <ol class="list-group">
+                <li v-for="item in items.configurations" class="list-group-item list-group-item-dark">
+                    <img src="" alt="Selected guitar shape" class="w-50">
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold">{{ item.name }}</div>
+                        <div class="d-flex gap-2">
+                            <a href="#"><i class="bi bi-dash-circle"></i></a>
+                            <div>{{ item.quantity }}</div>
+                            <a href="#"><i class="bi bi-plus-circle"></i></a>
+                        </div>
+                        <div class="fw-bold fst-italic text-success">€{{ item.total_price }}</div>
+                    </div>
+    
+                </li> 
+            </ol>
+        </template>
+        <template v-else>
+            <p class="fst-italic text-color-info">No items in cart</p>
+    
+            <div class="d-grid gap-2 mt-5">
+                <button class="btn btn-success btn-lg" disabled>Order</button>
+            </div>
+        </template>
     </div>
 </div>
 </template>
     
 <script>
-
+    import axios from 'axios';
+import { useCartStore } from '../../stores/cart';
+    export default {
+        name: 'CartOffCanvas',
+        data() {
+            return {
+                items: [],
+                cartStore: useCartStore(),
+            }
+        },
+        mounted() {
+            this.items = this.cartStore.cart;
+        },
+    }
 </script>
 <style scoped>
 
