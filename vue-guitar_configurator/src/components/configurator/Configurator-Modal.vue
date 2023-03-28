@@ -1,5 +1,6 @@
 <script setup>
 import axios, { AxiosError } from "axios";
+import { useCartStore } from "../../stores/cart";
 import { useUserStore } from "../../stores/user";
 import ConfiguratorContent from "./Configurator-Content.vue";
 </script>
@@ -138,6 +139,7 @@ import ConfiguratorContent from "./Configurator-Content.vue";
                                 </button>
                                 <button
                                     v-if="category.id == max_steps"
+                                    @click="addToCart"
                                     class="btn btn-success my-2"
                                     type="button"
                                     name="add-to-cart"
@@ -230,6 +232,7 @@ export default {
     data() {
         return {
             userStore: useUserStore(),
+            cartStore: useCartStore(),
             customerId: 0,
             formCheck: [],
         }
@@ -268,6 +271,21 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
+                })
+                .catch((error) => console.log(error))
+        },
+        addToCart() {
+            const chosenItems = this.form.concat(this.formCheck);
+
+            axios
+                .post("api/v1/configuration/", {
+                    "name": `Configuration from ${this.userStore.username}`,
+                    "customer": this.customerId,
+                    "configuration_items": chosenItems
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    this.cartStore.addToCart(response.data)
                 })
                 .catch((error) => console.log(error))
         }
