@@ -1,3 +1,6 @@
+Für die zweite Kombination: Django + Vue, wechseln Sie bitte auf Branch "Kombination2-DjangoVue".
+
+Es existiert ebenfalls ein Branch "Kombination1-Django", dieser ist identisch mit dem "main" Branch und muss daher nicht genutzt werden.
 # Gitarren Konfigurator Django
 Eine Webapp zum Erstellen einer benutzerdefinierten Gitarre.
 
