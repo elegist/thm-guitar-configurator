@@ -83,7 +83,7 @@ python manage.py runserver 8000
 ## Datenbank Setup
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
 
-Stellen Sie sicher das, dass die Apache und MySQL Module von XAMPP gestartet sind.
+Stellen Sie sicher, dass die Apache und MySQL Module von XAMPP gestartet sind.
 
 ## Installation der Django Abhängigkeiten
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
@@ -106,7 +106,7 @@ env\Scripts\python -m pip install -r requirements.txt
 
 Die bestehende "guitardb" Datenbank wird für die Token Authentication erweitert. <br>
 Fixtures müssen nicht erneut geladen werden. Bestehende Einträge in der Datenbank bleiben erhalten. <br>
-Führen Sie folgende Befehle in der aktivierten virtuellen Umgebung aus:
+Führen Sie folgenden Befehle in der aktivierten virtuellen Umgebung aus:
 
 ```
 python manage.py makemigrations
