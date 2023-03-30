@@ -1,14 +1,18 @@
-# Guitar Configurator Django
-Webapp that allows you to build your own custom guitar
+# Gitarren Konfigurator Django
+Eine Webapp zum Erstellen einer benutzerdefinierten Gitarre.
 
-# Database Setup
-Install XAMPP (8.2.0) and select the Apache and MySQL Modules.
-Start Apache and MySQL.
-Create a database with the name "guitardb".
+<br>
+# Django Setup
 
-# Installation
-When cloning this project you need to create your own virtual environment in which all the dependencies have to be installed. <br>
-Create the Virtual Environment in the projects directory:
+## Datenbank Setup
+Installieren Sie XAMPP (8.2.0) und wählen Sie die Apache und MySQL Module. <br>
+Starten Sie die Apache und MySQL Module. <br>
+Erstellen Sie eine Datenbank mit dem Namen "guitardb".
+
+## Installation
+Installieren Sie Python (3.x). <br>
+
+Erstellen Sie eine virtuelle Umgebung im Projektverzeichnis:
 
 *Linux / MacOS*
 ```
@@ -20,33 +24,21 @@ python3 -m venv env
 py -m venv env
 ```
 
-# Install dependencies 
-To install the dependencies run this command in the projects directory:
+## Installation der Abhängigkeiten 
+Führen Sie den folgenden Befehl im Projektverzeichnis aus, um die Abhängigkeiten zu installieren:
 
 *Linux / MacOS*
 ```
-pathToYourEnvironment/bin/python -m pip install -r requirements.txt
+env/bin/python -m pip install -r requirements.txt
 ```
 
 *Windows*
 ```
-pathToYourEnvironment\bin\python -m pip install -r requirements.txt
+env\Scripts\python -m pip install -r requirements.txt
 ```
 
-# Updating dependencies
-If the dependencies will change later, you need to update the requirements.txt by running this command in the projects directory:
-
-*Linux / MacOS*
-```
-pathToYourEnvironment/bin/python -m pip freeze > requirements.txt
-```
-
-*Windows*
-```
-pathToYourEnvironment\bin\python -m pip freeze > requirements.txt
-```
-
-# Activate the virtual environment
+## Virtuelle Umgebung starten
+Führen Sie den folgenden Befehl im Projektverzeichnis aus, um die virtuelle Umgebung zu starten:
 
 *Linux / MacOS*
 ```
@@ -58,7 +50,8 @@ source env/bin/activate
 .\env\Scripts\activate
 ```
 
-# Migrate the Django model and populate the database with a fixture
+## Migration der Django Models und Laden einer fixture
+Führen Sie folgende Befehle in der aktivierten virtuellen Umgebung aus:
 
 ```
 python manage.py makemigrations
@@ -68,14 +61,15 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Load the fixture:
+Laden Sie eine fixture, um die Datenbank mit initialen Daten zu füllen:
 ```
-python manage.py loaddata database.json
+python manage.py loaddata complete-database.json
 ```
 
-# Start the Django Application
+## Django Applikation starten
+Führen Sie den folgenden Befehl in der aktivierten virtuellen Umgebung aus:
 
 ```
 python manage.py runserver 8000
 ```
-Now visit http://127.0.0.1:8000/ 
+Öffnen Sie die Applikation: http://127.0.0.1:8000/
