@@ -85,9 +85,10 @@ python manage.py runserver 8000
 
 Stellen Sie sicher das, dass die Apache und MySQL Module von XAMPP gestartet sind.
 
-## Installation der Abhängigkeiten
+## Installation der Django Abhängigkeiten
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
 
+Die Django Abhängigkeiten wurden in dieser Kombination erweitert und müssen daher erneut ausgeführt werden. <br>
 Führen Sie den folgenden Befehl im Projektverzeichnis aus, um die Abhängigkeiten zu installieren:
 
 *Linux / MacOS*
@@ -103,6 +104,8 @@ env\Scripts\python -m pip install -r requirements.txt
 ## Migration der Django Models 
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
 
+Die bestehende "guitardb" Datenbank wird für die Token Authentication erweitert. <br>
+Fixtures müssen nicht erneut geladen werden. Bestehende Einträge in der Datenbank bleiben erhalten. <br>
 Führen Sie folgende Befehle in der aktivierten virtuellen Umgebung aus:
 
 ```
