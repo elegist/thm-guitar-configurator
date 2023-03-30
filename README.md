@@ -2,6 +2,7 @@
 Eine Webapp zum Erstellen einer benutzerdefinierten Gitarre.
 
 <br>
+
 # Django Setup
 
 ## Datenbank Setup
