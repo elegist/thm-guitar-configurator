@@ -82,10 +82,12 @@ python manage.py runserver 8000
 
 ## Datenbank Setup
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
+
 Stellen Sie sicher das, dass die Apache und MySQL Module von XAMPP gestartet sind.
 
 ## Installation der Abhängigkeiten
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
+
 Führen Sie den folgenden Befehl im Projektverzeichnis aus, um die Abhängigkeiten zu installieren:
 
 *Linux / MacOS*
@@ -113,6 +115,7 @@ python manage.py migrate
 
 ## Django Applikation starten
 *Überspringen Sie diesen Schritt, wenn Sie die Sektion "Django Setup" in diesem Branch bereits durchgeführt haben*
+
 Führen Sie den folgenden Befehl in der aktivierten virtuellen Umgebung aus:
 
 ```
