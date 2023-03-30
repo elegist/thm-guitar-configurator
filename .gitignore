@@ -121,3 +121,34 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Vue # 
+
+# Logs
+vue-guitar_configurator/logs
+vue-guitar_configurator/*.log
+vue-guitar_configurator/npm-debug.log*
+vue-guitar_configurator/yarn-debug.log*
+vue-guitar_configurator/yarn-error.log*
+vue-guitar_configurator/pnpm-debug.log*
+vue-guitar_configurator/lerna-debug.log*
+
+vue-guitar_configurator/node_modules
+vue-guitar_configurator/.DS_Store
+vue-guitar_configurator/dist
+vue-guitar_configurator/dist-ssr
+vue-guitar_configurator/coverage
+vue-guitar_configurator/*.local
+
+vue-guitar_configurator/cypress/videos/
+vue-guitar_configurator/cypress/screenshots/
+
+# Editor directories and files
+vue-guitar_configurator/.vscode/*
+vue-guitar_configurator/!.vscode/extensions.json
+vue-guitar_configurator/.idea
+vue-guitar_configurator/*.suo
+vue-guitar_configurator/*.ntvs*
+vue-guitar_configurator/*.njsproj
+vue-guitar_configurator/*.sln
+vue-guitar_configurator/*.sw?
