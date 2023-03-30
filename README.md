@@ -4,6 +4,7 @@ Eine Webapp zum Erstellen einer benutzerdefinierten Gitarre.
 
 *Überspringen Sie die Sektion "Django Setup" und beginnen Sie bei Sektion "Vue Setup", wenn Sie diesen Teil in der Django Version (Kombination 1) bereits durchgeführt haben.*
 <br>
+
 # Django Setup
 
 ## Datenbank Setup
@@ -76,6 +77,7 @@ python manage.py runserver 8000
 ```
 
 <br>
+
 # Vue Setup 
 
 ## Datenbank Setup
