@@ -77,3 +77,5 @@ Führen Sie den folgenden Befehl in der aktivierten virtuellen Umgebung aus:
 python manage.py runserver 8000
 ```
 Öffnen Sie die Applikation: http://127.0.0.1:8000/
+
+Hier ein akzeptiertes Passwort, sollte es Probleme bei der Registrierung geben: aMmjrp63Dnt9QsZ
