@@ -148,3 +148,5 @@ Führen Sie den folgenden Befehl im Vue Unterordner aus, um die Vue Applikation 
 npm run dev
 ```
 Öffnen Sie die Applikation: http://localhost:5173/
+
+Hier ein akzeptiertes Passwort, sollte es Probleme bei der Registrierung geben: aMmjrp63Dnt9QsZ
