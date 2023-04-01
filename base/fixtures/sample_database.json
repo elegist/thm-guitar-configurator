@@ -1,5 +1,20 @@
 [
 {
+    "model": "base.customer",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "first_name": "admin",
+        "last_name": "admin",
+        "street": "admin",
+        "city": "admin",
+        "state": "admin",
+        "zip_code": "123456",
+        "date_added": "2023-03-28T20:59:10.785Z",
+        "device": null
+    }
+},
+{
     "model": "base.category",
     "pk": 1,
     "fields": {
@@ -581,6 +596,89 @@
         "price": "59.99",
         "discount_percentage": null,
         "image": ""
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 2,
+    "fields": {
+        "name": "Staff Stratocaster",
+        "customer": 2,
+        "date_created": "2023-03-28T21:00:41.163Z",
+        "date_updated": "2023-03-28T21:03:47.243Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            1,
+            8,
+            11,
+            14,
+            30,
+            38,
+            41,
+            44
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 3,
+    "fields": {
+        "name": "Staff Telecaster",
+        "customer": 2,
+        "date_created": "2023-03-28T21:01:36.222Z",
+        "date_updated": "2023-03-28T21:03:35.517Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            2,
+            5,
+            12,
+            13,
+            34,
+            38,
+            43
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 4,
+    "fields": {
+        "name": "Staff Les Paul",
+        "customer": 2,
+        "date_created": "2023-03-28T21:02:14.595Z",
+        "date_updated": "2023-03-28T21:03:24.392Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            3,
+            7,
+            11,
+            14,
+            27,
+            37,
+            43
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 5,
+    "fields": {
+        "name": "Staff Flying V",
+        "customer": 2,
+        "date_created": "2023-03-28T21:02:46.791Z",
+        "date_updated": "2023-03-28T21:03:11.554Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            4,
+            9,
+            12,
+            14,
+            15,
+            36,
+            42,
+            43,
+            44
+        ]
     }
 }
 ]

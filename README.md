@@ -67,7 +67,7 @@ python manage.py migrate
 
 Laden Sie eine fixture, um die Datenbank mit initialen Daten zu füllen:
 ```
-python manage.py loaddata complete-database.json
+python manage.py loaddata sample_database.json
 ```
 
 ## Django Applikation starten
