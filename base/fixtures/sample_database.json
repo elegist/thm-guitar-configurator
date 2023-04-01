@@ -1,0 +1,684 @@
+[
+{
+    "model": "base.customer",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "first_name": "admin",
+        "last_name": "admin",
+        "street": "admin",
+        "city": "admin",
+        "state": "admin",
+        "zip_code": "123456",
+        "date_added": "2023-03-28T20:59:10.785Z",
+        "device": null
+    }
+},
+{
+    "model": "base.category",
+    "pk": 1,
+    "fields": {
+        "name": "Guitar Model",
+        "slug": "guitar-model"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 2,
+    "fields": {
+        "name": "Body Wood",
+        "slug": "body-wood"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 3,
+    "fields": {
+        "name": "Neck Wood",
+        "slug": "neck-wood"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 4,
+    "fields": {
+        "name": "Fretboard Wood",
+        "slug": "fretboard-wood"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 5,
+    "fields": {
+        "name": "Finish",
+        "slug": "finish"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 6,
+    "fields": {
+        "name": "Electronic",
+        "slug": "electronic"
+    }
+},
+{
+    "model": "base.category",
+    "pk": 7,
+    "fields": {
+        "name": "Miscellaneous",
+        "slug": "miscellaneous"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 1,
+    "fields": {
+        "name": "Stratocaster",
+        "slug": "stratocaster",
+        "category": 1,
+        "price": "599.99",
+        "discount_percentage": null,
+        "image": "items/strat.png"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 2,
+    "fields": {
+        "name": "Telecaster",
+        "slug": "telecaster",
+        "category": 1,
+        "price": "499.99",
+        "discount_percentage": null,
+        "image": "items/tele.png"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 3,
+    "fields": {
+        "name": "Les Paul",
+        "slug": "les-paul",
+        "category": 1,
+        "price": "799.99",
+        "discount_percentage": null,
+        "image": "items/paul.png"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 4,
+    "fields": {
+        "name": "Flying V",
+        "slug": "flying-v",
+        "category": 1,
+        "price": "699.99",
+        "discount_percentage": null,
+        "image": "items/v.png"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 5,
+    "fields": {
+        "name": "Ash",
+        "slug": "ash-body",
+        "category": 2,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/ash.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 6,
+    "fields": {
+        "name": "Birch",
+        "slug": "birch-body",
+        "category": 2,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/birch.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 7,
+    "fields": {
+        "name": "Koa",
+        "slug": "koa-body",
+        "category": 2,
+        "price": "299.99",
+        "discount_percentage": null,
+        "image": "items/koa.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 8,
+    "fields": {
+        "name": "Mahagony",
+        "slug": "mahagony-body",
+        "category": 2,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/mahagony.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 9,
+    "fields": {
+        "name": "Walnut",
+        "slug": "walnut-body",
+        "category": 2,
+        "price": "159.99",
+        "discount_percentage": null,
+        "image": "items/walnut.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 10,
+    "fields": {
+        "name": "Mahagony",
+        "slug": "mahagony-neck",
+        "category": 3,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/mahagony_mn3dqEy.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 11,
+    "fields": {
+        "name": "Maple",
+        "slug": "maple-neck",
+        "category": 3,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/maple.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 12,
+    "fields": {
+        "name": "Walnut",
+        "slug": "walnut-neck",
+        "category": 3,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/walnut_alK6nv6.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 13,
+    "fields": {
+        "name": "Birdseye Maple",
+        "slug": "birdseye-maple",
+        "category": 4,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/birdseye-maple.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 14,
+    "fields": {
+        "name": "Ebony",
+        "slug": "ebony-fretboard",
+        "category": 4,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/ebony.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 15,
+    "fields": {
+        "name": "Black",
+        "slug": "black",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/black.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 16,
+    "fields": {
+        "name": "Blood Red",
+        "slug": "blood-red",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/blood-red.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 17,
+    "fields": {
+        "name": "Cherry Sun Burst",
+        "slug": "cherry-sun-burst",
+        "category": 5,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/cherry-sun-burst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 18,
+    "fields": {
+        "name": "Dark Blue",
+        "slug": "dark-blue",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/dark-blue.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 19,
+    "fields": {
+        "name": "Ferrari Red",
+        "slug": "ferrari-red",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/ferrari-red.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 20,
+    "fields": {
+        "name": "Green",
+        "slug": "green",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/green.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 21,
+    "fields": {
+        "name": "Hot Pink",
+        "slug": "hot-pink",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/hot-pink.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 22,
+    "fields": {
+        "name": "Lavender",
+        "slug": "lavender",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/lavender.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 23,
+    "fields": {
+        "name": "Light Blue",
+        "slug": "light-blue",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/light-blue.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 24,
+    "fields": {
+        "name": "Light Pink",
+        "slug": "light-pink",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/light-pink.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 25,
+    "fields": {
+        "name": "Orange Burst",
+        "slug": "orange-burst",
+        "category": 5,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/orange-burst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 26,
+    "fields": {
+        "name": "Pink",
+        "slug": "pink",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/pink.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 27,
+    "fields": {
+        "name": "Pink Burst",
+        "slug": "pink-burst",
+        "category": 5,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/pink-burst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 28,
+    "fields": {
+        "name": "Purple",
+        "slug": "purple",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/purple.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 29,
+    "fields": {
+        "name": "Sky Blue",
+        "slug": "sky-blue",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/sky-blue.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 30,
+    "fields": {
+        "name": "Sunburst",
+        "slug": "sunburst",
+        "category": 5,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": "items/sunburst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 31,
+    "fields": {
+        "name": "Sunset Burst",
+        "slug": "sunset-burst",
+        "category": 5,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/sunset-burst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 32,
+    "fields": {
+        "name": "Tobacco Sun Burst",
+        "slug": "tobacco-sun-burst",
+        "category": 5,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": "items/tobacco-sun-burst.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 33,
+    "fields": {
+        "name": "White",
+        "slug": "white",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/white.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 34,
+    "fields": {
+        "name": "Yellow",
+        "slug": "yellow",
+        "category": 5,
+        "price": "9.99",
+        "discount_percentage": null,
+        "image": "items/yellow.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 35,
+    "fields": {
+        "name": "Natural (no finish)",
+        "slug": "natural",
+        "category": 5,
+        "price": "0.00",
+        "discount_percentage": null,
+        "image": "items/natural.jpg"
+    }
+},
+{
+    "model": "base.item",
+    "pk": 36,
+    "fields": {
+        "name": "Humbucker (Bridge)",
+        "slug": "humbucker-bridge",
+        "category": 6,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 37,
+    "fields": {
+        "name": "Humbucker-Humbucker (Bridge + Neck)",
+        "slug": "humbucker-humbucker",
+        "category": 6,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 38,
+    "fields": {
+        "name": "Singlecoil-Singlecoil-Singlecoil (Bridge, Middle, Neck)",
+        "slug": "singlecoil-singlecoil-singlecoil",
+        "category": 6,
+        "price": "129.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 39,
+    "fields": {
+        "name": "Humbucker-Singlecoil-Singlecoil (Bridge, Middle, Neck)",
+        "slug": "humbucker-singlecoil-singlecoil",
+        "category": 6,
+        "price": "109.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 40,
+    "fields": {
+        "name": "Humbucker-Singlecoil-Humbucker (Bridge, Middle, Neck)",
+        "slug": "humbucker-singlecoil-humbucker",
+        "category": 6,
+        "price": "139.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 41,
+    "fields": {
+        "name": "Tremolo Bridge",
+        "slug": "tremolo",
+        "category": 7,
+        "price": "99.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 42,
+    "fields": {
+        "name": "Swap black knobs with white knobs",
+        "slug": "white-knobs",
+        "category": 7,
+        "price": "0.00",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 43,
+    "fields": {
+        "name": "Gigbag",
+        "slug": "gigbag",
+        "category": 7,
+        "price": "29.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.item",
+    "pk": 44,
+    "fields": {
+        "name": "Hardshell Case",
+        "slug": "hardshell-case",
+        "category": 7,
+        "price": "59.99",
+        "discount_percentage": null,
+        "image": ""
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 2,
+    "fields": {
+        "name": "Staff Stratocaster",
+        "customer": 2,
+        "date_created": "2023-03-28T21:00:41.163Z",
+        "date_updated": "2023-03-28T21:03:47.243Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            1,
+            8,
+            11,
+            14,
+            30,
+            38,
+            41,
+            44
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 3,
+    "fields": {
+        "name": "Staff Telecaster",
+        "customer": 2,
+        "date_created": "2023-03-28T21:01:36.222Z",
+        "date_updated": "2023-03-28T21:03:35.517Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            2,
+            5,
+            12,
+            13,
+            34,
+            38,
+            43
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 4,
+    "fields": {
+        "name": "Staff Les Paul",
+        "customer": 2,
+        "date_created": "2023-03-28T21:02:14.595Z",
+        "date_updated": "2023-03-28T21:03:24.392Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            3,
+            7,
+            11,
+            14,
+            27,
+            37,
+            43
+        ]
+    }
+},
+{
+    "model": "base.configuration",
+    "pk": 5,
+    "fields": {
+        "name": "Staff Flying V",
+        "customer": 2,
+        "date_created": "2023-03-28T21:02:46.791Z",
+        "date_updated": "2023-03-28T21:03:11.554Z",
+        "is_staff_pick": true,
+        "configuration_items": [
+            4,
+            9,
+            12,
+            14,
+            15,
+            36,
+            42,
+            43,
+            44
+        ]
+    }
+}
+]
