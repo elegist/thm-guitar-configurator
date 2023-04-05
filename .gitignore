@@ -1,4 +1,6 @@
 # Django #
+/static-root/
+
 *.log
 *.pot
 *.pyc
