@@ -8,7 +8,6 @@ from .models import *
 from .forms import *
 
 def home(request):
-    print(request.POST.get("radio-1", ""))
     if request.method == 'POST':
         try:
             customer = request.user.customer
@@ -31,7 +30,6 @@ def home(request):
             return redirect('account')
         
         order = Order.objects.get(customer=customer, is_completed=False)
-        print(order)
     else:
         try:
             if request.user.is_authenticated:
@@ -106,19 +104,17 @@ def register(request):
             register_form = RegisterForm(request.POST)
             if register_form.is_valid():
                 user = register_form.save()
-                guest_customer = Customer.objects.filter(device=request.COOKIES['device'])
-                if guest_customer.exists():
-                    guest_customer.update(user=user)
-                else:
-                    Customer.objects.create(user=user)
+                # guest_customer = Customer.objects.filter(device=request.COOKIES['device'])
+                # if guest_customer.exists():
+                #     guest_customer.update(user=user)
+                # else:
+                Customer.objects.create(user=user)
                 user_name = register_form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + user_name)
                 return redirect('login')
         else:
             register_form = RegisterForm()
 
-    print(Customer.objects.filter(device=request.COOKIES['device']).exists())
-    
     context = {
         'register_form': register_form,
         'order': order
