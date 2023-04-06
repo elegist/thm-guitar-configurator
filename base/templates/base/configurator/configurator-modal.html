@@ -33,7 +33,7 @@
                                             {% if category.slug == "miscellaneous" %}
                                                 <label class="">
                                                     <input class="config-input" type="checkbox" name="check-{{item.slug}}" value="{{item.id}}" data-price="{{item.price}}" />
-                                                    <span class="config-btn">
+                                                    <span class="config-btn p-2">
                                                         <i class="bi bi-check-square"></i>
                                                         <div class="config-content">
                                                             <img src="{% static item.image_url %}" alt="" class="config-img" />
@@ -45,7 +45,7 @@
                                                 {% else %}
                                                 <label class="">
                                                     <input class="config-input" type="radio" name="radio-{{category.id}}" value="{{item.id}}" data-price="{{item.price}}" />
-                                                    <span class="config-btn">
+                                                    <span class="config-btn p-2">
                                                         <i class="bi bi-check-circle"></i>
                                                         <div class="config-content">
                                                             <img src="{% static item.image_url %}" alt="" class="config-img" />
