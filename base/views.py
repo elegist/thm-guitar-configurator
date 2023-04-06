@@ -15,7 +15,7 @@ def home(request):
             device = request.COOKIES['device']
             customer, created = Customer.objects.get_or_create(device=device)
 
-        configuration = Configuration.objects.create(customer=customer, name=f'Configuration {request.POST.get("radio-1", "")}')
+        configuration = Configuration.objects.create(customer=customer, name=f'My Configuration')
         if 'add-to-cart' in request.POST:
             for item in request.POST:
                 if item != 'csrfmiddlewaretoken' and item != 'add-to-cart' and item != 'save-and-quit':
