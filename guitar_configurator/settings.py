@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import json
-
-with open('/etc/config.json') as config_file:
-    config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,14 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config['SECRET_KEY']
+SECRET_KEY = 'django-insecure-ik^f7r(vx&unq4%4e#s_22=#-j+qvt92#*k26ph+k*nyi@woo1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-        'guitar-configurator.robinpatzak.com',
-        '212.227.12.133'
+    'localhost',
+    '127.0.0.1',
 ]
 
 
@@ -86,13 +82,13 @@ WSGI_APPLICATION = 'guitar_configurator.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'guitarconfigurator',
-        'USER': 'admin',
-        'PASSWORD': 'tb6&R22J',
+        'NAME': 'guitardb',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT' : '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO'",
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER'",
             'charset': 'utf8mb4',
             "autocommit": True,
         },
@@ -134,13 +130,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'static-root/'
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/',
+    BASE_DIR / 'static',
 ]
 
 MEDIA_URL = '/images/'
+
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # Default primary key field type

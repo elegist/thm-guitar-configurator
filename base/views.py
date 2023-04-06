@@ -128,6 +128,11 @@ def account(request):
     except:
         order = []
 
+    try:
+        completed_orders = Order.objects.filter(customer=request.user.customer, is_completed=True).order_by('-date_ordered')
+    except:
+        completed_orders = []
+
     configurations = Configuration.objects.filter(customer=request.user.customer)
 
     if request.method == 'POST':
@@ -147,7 +152,8 @@ def account(request):
         'update_user_form': update_user_form,
         'update_customer_form': update_customer_form,
         'configurations': configurations,
-        'order': order
+        'order': order,
+        'completed_orders': completed_orders,
     }
     return render(request, 'base/account/account.html', context)
 
@@ -210,3 +216,12 @@ def order_summary(request):
         'order_items': order_items
     }
     return render(request, 'base/cart/order-summary.html', context)
+
+@login_required(login_url='register')
+def confirm_order(request):
+    customer = request.user.customer
+    order = get_object_or_404(Order, customer=customer, is_completed=False)
+    order.is_completed = True
+    order.date_ordered = timezone.now()
+    order.save()
+    return redirect('home')

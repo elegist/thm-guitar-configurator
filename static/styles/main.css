@@ -264,7 +264,7 @@ form label {
 
 .btn-warning {
     background-color: var(--color-warning-400);
-    color: white;
+    color: black !important;
     border: none;
 }
 .btn-warning:is(:hover, :active) {
@@ -378,6 +378,11 @@ form label {
     min-height: 20rem;
     background-color: var(--color-dark-400) !important;
     color: white;
+}
+
+.card {
+    background-color: var(--color-dark-400) !important;
+    color: white; 
 }
 
 /* Modal */
